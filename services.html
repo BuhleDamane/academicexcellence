@@ -1,0 +1,668 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Our Services - Academic Excellence Hub</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+   
+</head>
+<body>
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <i class="fas fa-graduation-cap logo-icon"></i>
+                <span>AcademicExcel</span>
+            </div>
+            
+            <ul class="nav-menu" id="nav-menu">
+                <li class="nav-item"><a href="index.html" class="nav-link">Home</a></li>
+                <li class="nav-item"><a href="about.html" class="nav-link">About</a></li>
+                <li class="nav-item"><a href="services.html" class="nav-link active">Services</a></li>
+                <li class="nav-item"><a href="resources.html" class="nav-link">Resources</a></li>
+                <li class="nav-item"><a href="portfolio.html" class="nav-link">Portfolio</a></li>
+                <li class="nav-item"><a href="contact.html" class="nav-link">Contact</a></li>
+            </ul>
+            
+            <div class="nav-actions">
+                <div class="search-container">
+                    <button class="search-btn" id="search-btn">
+                        <i class="fas fa-search"></i>
+                    </button>
+                    <div class="search-dropdown" id="search-dropdown">
+                        <input type="text" placeholder="Search services, resources..." class="search-input" id="search-input">
+                        <button class="search-submit" id="search-submit">
+                            <i class="fas fa-search"></i>
+                        </button>
+                    </div>
+                </div>
+                <a href="login.html" class="login-btn">
+                    <i class="fas fa-user"></i>
+                    <span>Login</span>
+                </a>
+            </div>
+            
+            <div class="hamburger" id="hamburger">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </div>
+        </div>
+    </nav>
+
+    <section class="services-hero">
+        <div class="container">
+            <div class="hero-content">
+                <h1>Professional Academic Services</h1>
+                <p>Comprehensive support for your academic journey - from assignments to dissertations</p>
+                <div class="hero-stats">
+                    <div class="stat" data-target="500">
+                        <span class="stat-number">0</span>
+                        <span class="stat-label">Students Helped</span>
+                    </div>
+                    <div class="stat" data-target="95">
+                        <span class="stat-number">0</span>
+                        <span class="stat-label">Success Rate</span>
+                    </div>
+                    <div class="stat" data-target="24">
+                        <span class="stat-number">0</span>
+                        <span class="stat-label">24/7 Support</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="services-grid">
+        <div class="container">
+            <h2>Our Services</h2>
+            <p class="section-subtitle">Choose from our comprehensive range of academic support services</p>
+            
+            <div class="services-container">
+                <div class="service-card" data-service="assignment-review">
+                    <div class="service-icon">
+                        <i class="fas fa-file-alt"></i>
+                    </div>
+                    <h3>Assignment Review</h3>
+                    <p>Comprehensive review and feedback on your assignments to ensure quality and academic standards.</p>
+                    <div class="service-price">Starting from <span>R150</span></div>
+                    <ul class="service-features">
+                        <li>Detailed feedback</li>
+                        <li>Grammar and structure check</li>
+                        <li>Academic formatting</li>
+                        <li>Plagiarism check</li>
+                    </ul>
+                    <button class="select-service-btn" data-service="assignment-review" data-base-price="150">Select Service</button>
+                </div>
+
+                <div class="service-card" data-service="assignment-skeleton">
+                    <div class="service-icon">
+                        <i class="fas fa-sitemap"></i>
+                    </div>
+                    <h3>Assignment Skeletons</h3>
+                    <p>Structured outlines and frameworks to guide your assignment writing process.</p>
+                    <div class="service-price">Starting from <span>R200</span></div>
+                    <ul class="service-features">
+                        <li>Detailed outline</li>
+                        <li>Research guidance</li>
+                        <li>Section breakdowns</li>
+                        <li>Reference templates</li>
+                    </ul>
+                    <button class="select-service-btn" data-service="assignment-skeleton" data-base-price="200">Select Service</button>
+                </div>
+
+                <div class="service-card" data-service="proofreading">
+                    <div class="service-icon">
+                        <i class="fas fa-spell-check"></i>
+                    </div>
+                    <h3>Proofreading & Editing</h3>
+                    <p>Professional proofreading and editing services for all academic documents.</p>
+                    <div class="service-price">Starting from <span>R100</span></div>
+                    <ul class="service-features">
+                        <li>Grammar correction</li>
+                        <li>Style improvement</li>
+                        <li>Clarity enhancement</li>
+                        <li>Flow optimization</li>
+                    </ul>
+                    <button class="select-service-btn" data-service="proofreading" data-base-price="100">Select Service</button>
+                </div>
+
+                <div class="service-card featured" data-service="dissertation-skeleton">
+                    <div class="featured-badge">Most Popular</div>
+                    <div class="service-icon">
+                        <i class="fas fa-graduation-cap"></i>
+                    </div>
+                    <h3>Dissertation Skeletons</h3>
+                    <p>Comprehensive dissertation frameworks with detailed chapter outlines and research guidance.</p>
+                    <div class="service-price">Starting from <span>R800</span></div>
+                    <ul class="service-features">
+                        <li>Complete chapter outline</li>
+                        <li>Research methodology</li>
+                        <li>Literature review guide</li>
+                        <li>Citation framework</li>
+                    </ul>
+                    <button class="select-service-btn" data-service="dissertation-skeleton" data-base-price="800">Select Service</button>
+                </div>
+
+                <div class="service-card" data-service="tutoring">
+                    <div class="service-icon">
+                        <i class="fas fa-chalkboard-teacher"></i>
+                    </div>
+                    <h3>Module Tutoring</h3>
+                    <p>One-on-one tutoring sessions for specific academic modules and subjects.</p>
+                    <div class="service-price">Starting from <span>R300</span></div>
+                    <ul class="service-features">
+                        <li>Personalized sessions</li>
+                        <li>Concept clarification</li>
+                        <li>Exam preparation</li>
+                        <li>Progress tracking</li>
+                    </ul>
+                    <button class="select-service-btn" data-service="tutoring" data-base-price="300">Select Service</button>
+                </div>
+
+                <div class="service-card" data-service="dissertation-editing">
+                    <div class="service-icon">
+                        <i class="fas fa-edit"></i>
+                    </div>
+                    <h3>Dissertation Editing</h3>
+                    <p>Professional editing services for complete dissertations and thesis documents.</p>
+                    <div class="service-price">Starting from <span>R1200</span></div>
+                    <ul class="service-features">
+                        <li>Comprehensive editing</li>
+                        <li>Academic formatting</li>
+                        <li>Reference verification</li>
+                        <li>Quality assurance</li>
+                    </ul>
+                    <button class="select-service-btn" data-service="dissertation-editing" data-base-price="1200">Select Service</button>
+                </div>
+
+                <div class="service-card" data-service="assignment-mapping">
+                    <div class="service-icon">
+                        <i class="fas fa-map"></i>
+                    </div>
+                    <h3>Assignment Mapping</h3>
+                    <p>Strategic planning and mapping for complex assignments and projects.</p>
+                    <div class="service-price">Starting from <span>R250</span></div>
+                    <ul class="service-features">
+                        <li>Strategic planning</li>
+                        <li>Timeline creation</li>
+                        <li>Resource identification</li>
+                        <li>Milestone tracking</li>
+                    </ul>
+                    <button class="select-service-btn" data-service="assignment-mapping" data-base-price="250">Select Service</button>
+                </div>
+
+                <div class="service-card" data-service="consultation">
+                    <div class="service-icon">
+                        <i class="fas fa-comments"></i>
+                    </div>
+                    <h3>Academic Consultation</h3>
+                    <p>Professional consultation sessions to discuss your academic goals and challenges.</p>
+                    <div class="service-price">Starting from <span>R180</span></div>
+                    <ul class="service-features">
+                        <li>Goal assessment</li>
+                        <li>Strategy development</li>
+                        <li>Resource planning</li>
+                        <li>Progress review</li>
+                    </ul>
+                    <button class="select-service-btn" data-service="consultation" data-base-price="180">Select Service</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="cost-calculator">
+        <div class="container">
+            <div class="calculator-header">
+                <h2>Cost Calculator</h2>
+                <p>Get an estimate for your academic assistance needs</p>
+            </div>
+            
+            <div class="calculator-container">
+                <div class="calculator-form">
+                    <div class="selected-services">
+                        <h3>Selected Services</h3>
+                        <div id="selected-services-list">
+                            <p class="no-services">No services selected yet. Choose from the services above.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="service-details">
+                        <div class="detail-group">
+                            <label for="urgency">Urgency Level:</label>
+                            <select id="urgency">
+                                <option value="1">Standard (7+ days) - No extra charge</option>
+                                <option value="1.2">Urgent (3-6 days) - 20% extra</option>
+                                <option value="1.5">Very Urgent (1-2 days) - 50% extra</option>
+                                <option value="2">Emergency (Same day) - 100% extra</option>
+                            </select>
+                        </div>
+                        
+                        <div class="detail-group">
+                            <label for="complexity">Complexity Level:</label>
+                            <select id="complexity">
+                                <option value="1">Basic - No extra charge</option>
+                                <option value="1.3">Intermediate - 30% extra</option>
+                                <option value="1.6">Advanced - 60% extra</option>
+                                <option value="2">Expert Level - 100% extra</option>
+                            </select>
+                        </div>
+                        
+                        <div class="detail-group">
+                            <label for="word-count">Estimated Word Count:</label>
+                            <input type="number" id="word-count" placeholder="e.g., 2000" min="0">
+                            <small>Leave blank if not applicable</small>
+                        </div>
+                    </div>
+                    
+                    <button id="calculate-cost" class="calculate-btn">Calculate Total Cost</button>
+                </div>
+                
+                <div class="cost-breakdown">
+                    <h3>Cost Breakdown</h3>
+                    <div class="breakdown-item">
+                        <span>Consultation Fee:</span>
+                        <span id="consultation-fee">R50.00</span>
+                    </div>
+                    <div class="breakdown-item">
+                        <span>Services Subtotal:</span>
+                        <span id="services-subtotal">R0.00</span>
+                    </div>
+                    <div class="breakdown-item">
+                        <span>Adjustments:</span>
+                        <span id="adjustments">R0.00</span>
+                    </div>
+                    <div class="breakdown-item total">
+                        <span>Total Cost:</span>
+                        <span id="total-cost">R50.00</span>
+                    </div>
+                    <div class="breakdown-item deposit">
+                        <span>Required Deposit (30%):</span>
+                        <span id="deposit-amount">R15.00</span>
+                    </div>
+                    
+                    <div class="payment-actions">
+                        <button class="proceed-btn" id="proceed-payment">Proceed to Payment</button>
+                        <button class="contact-btn" id="contact-discuss">Discuss Requirements</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="why-choose-us">
+        <div class="container">
+            <h2>Why Choose Our Services?</h2>
+            <div class="benefits-grid">
+                <div class="benefit-item">
+                    <div class="benefit-icon">
+                        <i class="fas fa-user-graduate"></i>
+                    </div>
+                    <h3>Expert Guidance</h3>
+                    <p>Years of academic experience and proven track record in helping students succeed.</p>
+                </div>
+                <div class="benefit-item">
+                    <div class="benefit-icon">
+                        <i class="fas fa-clock"></i>
+                    </div>
+                    <h3>Timely Delivery</h3>
+                    <p>We respect deadlines and ensure all work is completed within the agreed timeframe.</p>
+                </div>
+                <div class="benefit-item">
+                    <div class="benefit-icon">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <h3>Quality Assurance</h3>
+                    <p>Multiple quality checks ensure the highest standard of academic work.</p>
+                </div>
+                <div class="benefit-item">
+                    <div class="benefit-icon">
+                        <i class="fas fa-headset"></i>
+                    </div>
+                    <h3>24/7 Support</h3>
+                    <p>Round-the-clock support to address your questions and concerns.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="testimonials ">
+        <div class="container">
+            <h2>What Our Students Say</h2>
+            <div class="testimonials-grid">
+                <div class="testimonial-card">
+                    <div class="testimonial-content">
+                        <p>"The dissertation skeleton service was a game-changer for my thesis. The detailed outline saved me months of work!"</p>
+                    </div>
+                    <div class="testimonial-author">
+                        <div class="author-info">
+                            <h4>Sarah M.</h4>
+                            <span>Masters Student</span>
+                        </div>
+                        <div class="rating">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="testimonial-card">
+                    <div class="testimonial-content">
+                        <p>"Professional tutoring helped me understand complex concepts. My grades improved significantly!"</p>
+                    </div>
+                    <div class="testimonial-author">
+                        <div class="author-info">
+                            <h4>John D.</h4>
+                            <span>Undergraduate</span>
+                        </div>
+                        <div class="rating">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="testimonial-card">
+                    <div class="testimonial-content">
+                        <p>"The assignment review service provided excellent feedback that helped me improve my writing skills."</p>
+                    </div>
+                    <div class="testimonial-author">
+                        <div class="author-info">
+                            <h4>Lisa K.</h4>
+                            <span>PhD Candidate</span>
+                        </div>
+                        <div class="rating">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="services-cta">
+        <div class="container">
+            <div class="cta-content">
+                <h2>Ready to Excel in Your Academic Journey?</h2>
+                <p>Get started today with our professional academic assistance services</p>
+                <div class="cta-buttons">
+                    <a href="login.html" class="btn-primary">Get Started Now</a>
+                    <a href="#contact" class="btn-secondary">Contact Us</a>
+                </div>
+            </div>
+        </div>
+    </section>
+   
+    <footer class="footer" id="contact">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <div class="footer-logo">
+                        <i class="fas fa-graduation-cap"></i>
+                        <span>AcademicExcel</span>
+                    </div>
+                    <p class="footer-desc">Empowering students to achieve academic excellence through personalized support and professional guidance.</p>
+                    
+                    <div class="social-links">
+                        <a href="#" class="social-link facebook" target="_blank">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a href="#" class="social-link twitter" target="_blank">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                        <a href="#" class="social-link instagram" target="_blank">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="#" class="social-link linkedin" target="_blank">
+                            <i class="fab fa-linkedin-in"></i>
+                        </a>
+                        <a href="#" class="social-link youtube" target="_blank">
+                            <i class="fab fa-youtube"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Quick Links</h3>
+                    <ul class="footer-links">
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="services.html">Our Services</a></li>
+                        <li><a href="portfolio.html">Portfolio</a></li>
+                        <li><a href="resources.html">Resources</a></li>
+                        <li><a href="#testimonials">Testimonials</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Services</h3>
+                    <ul class="footer-links">
+                        <li><a href="services.html">Assignment Review</a></li>
+                        <li><a href="services.html">Dissertation Support</a></li>
+                        <li><a href="services.html">Personal Tutoring</a></li>
+                        <li><a href="services.html">Proofreading</a></li>
+                        <li><a href="services.html">Professional Editing</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Contact Info</h3>
+                    <div class="contact-info">
+                        <div class="contact-item">
+                            <i class="fas fa-envelope"></i>
+                            <span>info@academicexcel.co.za</span>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fas fa-phone"></i>
+                            <span>+27 (0) 11 123 4567</span>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span>Johannesburg, South Africa</span>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fas fa-clock"></i>
+                            <span>Mon - Fri: 8:00 AM - 8:00 PM</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <div class="footer-bottom-content">
+                    <p>&copy; 2025 Academic Excellence Services. All rights reserved.</p>
+                    <div class="footer-bottom-links">
+                        <a href="#">Privacy Policy</a>
+                        <a href="#">Terms of Service</a>
+                        <a href="#">Sitemap</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <script>
+        function animateCounter(element, target, suffix = '') {
+            let current = 0;
+            const increment = target / 50;
+            const duration = 2000;
+            const stepTime = duration / 50;
+            const statCard = element.closest('.stat');
+            
+            statCard.classList.add('counting');
+            
+            const counter = setInterval(() => {
+                current += increment;
+                if (current >= target) {
+                    element.textContent = target + suffix;
+                    clearInterval(counter);
+                    statCard.classList.remove('counting');
+                } else {
+                    element.textContent = Math.floor(current) + suffix;
+                }
+            }, stepTime);
+        }
+
+        const statsObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting && !entry.target.classList.contains('animated')) {
+                    const target = parseInt(entry.target.dataset.target);
+                    const numberElement = entry.target.querySelector('.stat-number');
+                    
+                    if (entry.target.dataset.target === '24') {
+                        animateCounter(numberElement, target, '/7');
+                    } else if (entry.target.dataset.target === '95') {
+                        animateCounter(numberElement, target, '%');
+                    } else if (entry.target.dataset.target === '500') {
+                        animateCounter(numberElement, target, '+');
+                    }
+                    
+                    entry.target.classList.add('animated');
+                }
+            });
+        }, { threshold: 0.5 });
+
+        document.querySelectorAll('.services-hero .stat').forEach(stat => {
+            statsObserver.observe(stat);
+        });
+
+        let selectedServices = [];
+        let totalCost = 50; 
+
+        document.querySelectorAll('.select-service-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                const serviceName = this.dataset.service;
+                const basePrice = parseInt(this.dataset.basePrice);
+                const serviceCard = this.closest('.service-card');
+                const serviceTitle = serviceCard.querySelector('h3').textContent;
+
+                if (this.classList.contains('selected')) {
+                    this.classList.remove('selected');
+                    this.textContent = 'Select Service';
+                    serviceCard.classList.remove('selected');
+                    selectedServices = selectedServices.filter(s => s.name !== serviceName);
+                } else {
+                    this.classList.add('selected');
+                    this.textContent = 'Selected ✓';
+                    serviceCard.classList.add('selected');
+                    selectedServices.push({
+                        name: serviceName,
+                        title: serviceTitle,
+                        basePrice: basePrice
+                    });
+                }
+
+                updateSelectedServicesList();
+                calculateCost();
+            });
+        });
+
+        function updateSelectedServicesList() {
+            const listContainer = document.getElementById('selected-services-list');
+            
+            if (selectedServices.length === 0) {
+                listContainer.innerHTML = '<p class="no-services">No services selected yet. Choose from the services above.</p>';
+                return;
+            }
+
+            let html = '';
+            selectedServices.forEach(service => {
+                html += `
+                    <div class="selected-service-item">
+                        <span class="service-name">${service.title}</span>
+                        <span class="service-price">R${service.basePrice}</span>
+                    </div>
+                `;
+            });
+            listContainer.innerHTML = html;
+        }
+
+        function calculateCost() {
+            const urgencyMultiplier = parseFloat(document.getElementById('urgency').value);
+            const complexityMultiplier = parseFloat(document.getElementById('complexity').value);
+            const wordCount = parseInt(document.getElementById('word-count').value) || 0;
+
+            let servicesSubtotal = selectedServices.reduce((sum, service) => sum + service.basePrice, 0);
+            
+            const writingServices = ['assignment-skeleton', 'dissertation-skeleton', 'assignment-mapping'];
+            const hasWritingService = selectedServices.some(s => writingServices.includes(s.name));
+            if (hasWritingService && wordCount > 0) {
+                servicesSubtotal += wordCount * 0.5;
+            }
+
+            const adjustments = servicesSubtotal * (urgencyMultiplier - 1) + servicesSubtotal * (complexityMultiplier - 1);
+            const adjustedServicesTotal = servicesSubtotal + adjustments;
+            const totalCost = 50 + adjustedServicesTotal; 
+            const depositAmount = totalCost * 0.3;
+
+            document.getElementById('consultation-fee').textContent = `R50.00`;
+            document.getElementById('services-subtotal').textContent = `R${servicesSubtotal.toFixed(2)}`;
+            document.getElementById('adjustments').textContent = `R${adjustments.toFixed(2)}`;
+            document.getElementById('total-cost').textContent = `R${totalCost.toFixed(2)}`;
+            document.getElementById('deposit-amount').textContent = `R${depositAmount.toFixed(2)}`;
+        }
+
+        document.getElementById('calculate-cost').addEventListener('click', calculateCost);
+
+        document.getElementById('urgency').addEventListener('change', calculateCost);
+        document.getElementById('complexity').addEventListener('change', calculateCost);
+        document.getElementById('word-count').addEventListener('input', calculateCost);
+
+        document.getElementById('proceed-payment').addEventListener('click', function() {
+            if (selectedServices.length === 0) {
+                alert('Please select at least one service before proceeding.');
+                return;
+            }
+            window.location.href = 'login.html';
+        });
+
+        document.getElementById('contact-discuss').addEventListener('click', function() {
+            window.location.href = '#contact';
+        });
+
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('animate-in');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.service-card, .benefit-item, .testimonial-card').forEach(el => {
+            observer.observe(el);
+        });
+    </script>
+</body>
+</html>

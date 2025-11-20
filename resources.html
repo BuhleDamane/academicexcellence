@@ -1,0 +1,843 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resources - Academic Excellence Hub</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <i class="fas fa-graduation-cap logo-icon"></i>
+                <span>AcademicExcel</span>
+            </div>
+            
+            <ul class="nav-menu" id="nav-menu">
+                <li class="nav-item"><a href="index.html" class="nav-link ">Home</a></li>
+                <li class="nav-item"><a href="about.html" class="nav-link">About</a></li>
+                <li class="nav-item"><a href="services.html" class="nav-link">Services</a></li>
+                <li class="nav-item"><a href="resources.html" class="nav-link active">Resources</a></li>
+                <li class="nav-item"><a href="portfolio.html" class="nav-link">Portfolio</a></li>
+                <li class="nav-item"><a href="contact.html" class="nav-link">Contact</a></li>
+            </ul>
+            
+            <div class="nav-actions">
+                <div class="search-container">
+                    <button class="search-btn" id="search-btn">
+                        <i class="fas fa-search"></i>
+                    </button>
+                    <div class="search-dropdown" id="search-dropdown">
+                        <input type="text" placeholder="Search services, resources..." class="search-input" id="search-input">
+                        <button class="search-submit" id="search-submit">
+                            <i class="fas fa-search"></i>
+                        </button>
+                    </div>
+                </div>
+                <a href="login.html" class="login-btn">
+                    <i class="fas fa-user"></i>
+                    <span>Login</span>
+                </a>
+            </div>
+            
+            <div class="hamburger" id="hamburger">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </div>
+        </div>
+    </nav>
+
+    <main class="resources-main">
+        
+        <section class="resources-hero">
+            <div class="container">
+                <div class="hero-content">
+                    <h1 class="hero-title">Academic Resources Hub</h1>
+                    <p class="hero-subtitle">Comprehensive tools and guides to excel in your academic journey</p>
+                    <div class="hero-stats">
+                        <div class="stat-item">
+                            <span class="stat-number">500+</span>
+                            <span class="stat-label">Resources Available</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-number">15+</span>
+                            <span class="stat-label">Academic Fields</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-number">1000+</span>
+                            <span class="stat-label">Students Helped</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="quick-tools">
+            <div class="container">
+                <h2 class="section-title">Quick Access Tools</h2>
+                <div class="tools-grid">
+                    <div class="tool-card" data-tool="citation">
+                        <div class="tool-icon">
+                            <i class="fas fa-quote-right"></i>
+                        </div>
+                        <h3>Citation Generator</h3>
+                        <p>Generate APA, MLA, and Harvard citations instantly</p>
+                        <button class="tool-btn">Use Tool</button>
+                    </div>
+                    <div class="tool-card" data-tool="plagiarism">
+                        <div class="tool-icon">
+                            <i class="fas fa-search"></i>
+                        </div>
+                        <h3>Plagiarism Checker</h3>
+                        <p>Check your work for originality and proper citations</p>
+                        <button class="tool-btn">Check Now</button>
+                    </div>
+                    <div class="tool-card" data-tool="grammar">
+                        <div class="tool-icon">
+                            <i class="fas fa-spell-check"></i>
+                        </div>
+                        <h3>Grammar Assistant</h3>
+                        <p>Improve your writing with advanced grammar checking</p>
+                        <button class="tool-btn">Start Checking</button>
+                    </div>
+                    <div class="tool-card" data-tool="calculator">
+                        <div class="tool-icon">
+                            <i class="fas fa-calculator"></i>
+                        </div>
+                        <h3>GPA Calculator</h3>
+                        <p>Calculate your current GPA and plan improvements</p>
+                        <button class="tool-btn">Calculate</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="resource-categories">
+            <div class="container">
+                <h2 class="section-title">Browse Resources by Category</h2>
+                <div class="category-tabs">
+                    <button class="tab-btn active" data-category="writing">Writing Guides</button>
+                    <button class="tab-btn" data-category="research">Research Methods</button>
+                    <button class="tab-btn" data-category="templates">Templates</button>
+                    <button class="tab-btn" data-category="study">Study Techniques</button>
+                    <button class="tab-btn" data-category="math">Math & Science</button>
+                </div>
+
+                <div class="category-content">
+                    <div class="category-panel active" id="writing">
+                        <div class="resources-grid">
+                            <div class="resource-item">
+                                <div class="resource-icon">
+                                    <i class="fas fa-pen-alt"></i>
+                                </div>
+                                <h3>Essay Writing Fundamentals</h3>
+                                <p>Master the basics of academic essay writing with structure, flow, and argumentation.</p>
+                                <div class="resource-meta">
+                                    <span class="resource-type">Guide</span>
+                                    <span class="resource-duration">15 min read</span>
+                                </div>
+                                <button class="resource-btn">Access Resource</button>
+                            </div>
+                            <div class="resource-item">
+                                <div class="resource-icon">
+                                    <i class="fas fa-book-open"></i>
+                                </div>
+                                <h3>Dissertation Structure Guide</h3>
+                                <p>Comprehensive guide to structuring and organizing your dissertation for maximum impact.</p>
+                                <div class="resource-meta">
+                                    <span class="resource-type">PDF</span>
+                                    <span class="resource-duration">45 pages</span>
+                                </div>
+                                <button class="resource-btn">Download PDF</button>
+                            </div>
+                            <div class="resource-item">
+                                <div class="resource-icon">
+                                    <i class="fas fa-edit"></i>
+                                </div>
+                                <h3>Proofreading Checklist</h3>
+                                <p>Step-by-step checklist to ensure your work is polished and error-free.</p>
+                                <div class="resource-meta">
+                                    <span class="resource-type">Checklist</span>
+                                    <span class="resource-duration">Interactive</span>
+                                </div>
+                                <button class="resource-btn">Use Checklist</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="category-panel" id="research">
+                        <div class="resources-grid">
+                            <div class="resource-item">
+                                <div class="resource-icon">
+                                    <i class="fas fa-microscope"></i>
+                                </div>
+                                <h3>Research Methodology Basics</h3>
+                                <p>Learn fundamental research methods for academic projects and dissertations.</p>
+                                <div class="resource-meta">
+                                    <span class="resource-type">Course</span>
+                                    <span class="resource-duration">2 hours</span>
+                                </div>
+                                <button class="resource-btn">Start Course</button>
+                            </div>
+                            <div class="resource-item">
+                                <div class="resource-icon">
+                                    <i class="fas fa-database"></i>
+                                </div>
+                                <h3>Academic Database Guide</h3>
+                                <p>Navigate academic databases effectively to find credible sources for your research.</p>
+                                <div class="resource-meta">
+                                    <span class="resource-type">Tutorial</span>
+                                    <span class="resource-duration">30 min</span>
+                                </div>
+                                <button class="resource-btn">Watch Tutorial</button>
+                            </div>
+                            <div class="resource-item">
+                                <div class="resource-icon">
+                                    <i class="fas fa-chart-line"></i>
+                                </div>
+                                <h3>Data Analysis Tools</h3>
+                                <p>Introduction to statistical software and data analysis techniques for research.</p>
+                                <div class="resource-meta">
+                                    <span class="resource-type">Workshop</span>
+                                    <span class="resource-duration">Live Session</span>
+                                </div>
+                                <button class="resource-btn">Join Workshop</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="category-panel" id="templates">
+                        <div class="resources-grid">
+                            <div class="resource-item">
+                                <div class="resource-icon">
+                                    <i class="fas fa-file-alt"></i>
+                                </div>
+                                <h3>Assignment Templates</h3>
+                                <p>Professional templates for various assignment types and academic levels.</p>
+                                <div class="resource-meta">
+                                    <span class="resource-type">Template Pack</span>
+                                    <span class="resource-duration">20 templates</span>
+                                </div>
+                                <button class="resource-btn">Download Pack</button>
+                            </div>
+                            <div class="resource-item">
+                                <div class="resource-icon">
+                                    <i class="fas fa-graduation-cap"></i>
+                                </div>
+                                <h3>Thesis Proposal Template</h3>
+                                <p>Structured template for writing compelling thesis and dissertation proposals.</p>
+                                <div class="resource-meta">
+                                    <span class="resource-type">Word Doc</span>
+                                    <span class="resource-duration">Editable</span>
+                                </div>
+                                <button class="resource-btn">Get Template</button>
+                            </div>
+                            <div class="resource-item">
+                                <div class="resource-icon">
+                                    <i class="fas fa-presentation-screen"></i>
+                                </div>
+                                <h3>Presentation Templates</h3>
+                                <p>Professional PowerPoint templates for academic presentations and defenses.</p>
+                                <div class="resource-meta">
+                                    <span class="resource-type">PPT Pack</span>
+                                    <span class="resource-duration">15 designs</span>
+                                </div>
+                                <button class="resource-btn">Download Now</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="category-panel" id="study">
+                        <div class="resources-grid">
+                            <div class="resource-item">
+                                <div class="resource-icon">
+                                    <i class="fas fa-brain"></i>
+                                </div>
+                                <h3>Memory Techniques</h3>
+                                <p>Proven methods to improve memory retention and recall for exams.</p>
+                                <div class="resource-meta">
+                                    <span class="resource-type">Video Series</span>
+                                    <span class="resource-duration">5 episodes</span>
+                                </div>
+                                <button class="resource-btn">Watch Series</button>
+                            </div>
+                            <div class="resource-item">
+                                <div class="resource-icon">
+                                    <i class="fas fa-clock"></i>
+                                </div>
+                                <h3>Time Management Guide</h3>
+                                <p>Effective strategies for managing time and balancing academic workload.</p>
+                                <div class="resource-meta">
+                                    <span class="resource-type">eBook</span>
+                                    <span class="resource-duration">50 pages</span>
+                                </div>
+                                <button class="resource-btn">Read eBook</button>
+                            </div>
+                            <div class="resource-item">
+                                <div class="resource-icon">
+                                    <i class="fas fa-target"></i>
+                                </div>
+                                <h3>Goal Setting Framework</h3>
+                                <p>Set and achieve academic goals with our proven framework and tracking tools.</p>
+                                <div class="resource-meta">
+                                    <span class="resource-type">Interactive</span>
+                                    <span class="resource-duration">Self-paced</span>
+                                </div>
+                                <button class="resource-btn">Start Planning</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="category-panel" id="math">
+                        <div class="resources-grid">
+                            <div class="resource-item">
+                                <div class="resource-icon">
+                                    <i class="fas fa-square-root-alt"></i>
+                                </div>
+                                <h3>Mathematical Formulas</h3>
+                                <p>Comprehensive collection of essential mathematical formulas and equations.</p>
+                                <div class="resource-meta">
+                                    <span class="resource-type">Reference</span>
+                                    <span class="resource-duration">Quick Access</span>
+                                </div>
+                                <button class="resource-btn">Browse Formulas</button>
+                            </div>
+                            <div class="resource-item">
+                                <div class="resource-icon">
+                                    <i class="fas fa-atom"></i>
+                                </div>
+                                <h3>Science Lab Reports</h3>
+                                <p>Templates and guides for writing professional scientific lab reports.</p>
+                                <div class="resource-meta">
+                                    <span class="resource-type">Guide + Template</span>
+                                    <span class="resource-duration">Complete Kit</span>
+                                </div>
+                                <button class="resource-btn">Get Kit</button>
+                            </div>
+                            <div class="resource-item">
+                                <div class="resource-icon">
+                                    <i class="fas fa-chart-pie"></i>
+                                </div>
+                                <h3>Statistics Helper</h3>
+                                <p>Interactive tools and guides for understanding and applying statistical concepts.</p>
+                                <div class="resource-meta">
+                                    <span class="resource-type">Tool Suite</span>
+                                    <span class="resource-duration">Multiple Tools</span>
+                                </div>
+                                <button class="resource-btn">Access Tools</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="featured-downloads">
+            <div class="container">
+                <h2 class="section-title">Featured Downloads</h2>
+                <div class="downloads-grid">
+                    <div class="download-card featured">
+                        <div class="download-header">
+                            <div class="download-icon">
+                                <i class="fas fa-star"></i>
+                            </div>
+                            <span class="featured-badge">Most Popular</span>
+                        </div>
+                        <h3>Complete Academic Writing Bundle</h3>
+                        <p>Everything you need for academic success: templates, guides, checklists, and examples.</p>
+                        <div class="download-stats">
+                            <span><i class="fas fa-download"></i> 2,847 downloads</span>
+                            <span><i class="fas fa-star"></i> 4.9/5 rating</span>
+                        </div>
+                        <button class="download-btn primary">Download Free</button>
+                    </div>
+                    <div class="download-card">
+                        <div class="download-header">
+                            <div class="download-icon">
+                                <i class="fas fa-book"></i>
+                            </div>
+                        </div>
+                        <h3>Research Methodology Handbook</h3>
+                        <p>Comprehensive guide covering qualitative and quantitative research methods.</p>
+                        <div class="download-stats">
+                            <span><i class="fas fa-download"></i> 1,523 downloads</span>
+                            <span><i class="fas fa-star"></i> 4.7/5 rating</span>
+                        </div>
+                        <button class="download-btn">Download</button>
+                    </div>
+                    <div class="download-card">
+                        <div class="download-header">
+                            <div class="download-icon">
+                                <i class="fas fa-graduation-cap"></i>
+                            </div>
+                        </div>
+                        <h3>Dissertation Planning Kit</h3>
+                        <p>Timeline templates, milestone trackers, and planning tools for dissertation success.</p>
+                        <div class="download-stats">
+                            <span><i class="fas fa-download"></i> 956 downloads</span>
+                            <span><i class="fas fa-star"></i> 4.8/5 rating</span>
+                        </div>
+                        <button class="download-btn">Download</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="video-tutorials">
+            <div class="container">
+                <h2 class="section-title">Video Tutorials</h2>
+                <div class="videos-grid">
+                    <div class="video-card">
+                        <div class="video-thumbnail">
+                            <img src="https://via.placeholder.com/300x180/0057A0/FFFFFF?text=Writing+Excellence" alt="Writing Tutorial">
+                            <div class="play-button">
+                                <i class="fas fa-play"></i>
+                            </div>
+                            <span class="video-duration">12:45</span>
+                        </div>
+                        <div class="video-info">
+                            <h3>Mastering Academic Writing</h3>
+                            <p>Learn the fundamentals of clear, concise academic writing.</p>
+                            <div class="video-meta">
+                                <span><i class="fas fa-eye"></i> 15.2K views</span>
+                                <span><i class="fas fa-thumbs-up"></i> 98%</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="video-card">
+                        <div class="video-thumbnail">
+                            <img src="https://via.placeholder.com/300x180/0057A0/FFFFFF?text=Research+Methods" alt="Research Tutorial">
+                            <div class="play-button">
+                                <i class="fas fa-play"></i>
+                            </div>
+                            <span class="video-duration">18:30</span>
+                        </div>
+                        <div class="video-info">
+                            <h3>Research Methodology Explained</h3>
+                            <p>Comprehensive overview of research methods for academic projects.</p>
+                            <div class="video-meta">
+                                <span><i class="fas fa-eye"></i> 8.7K views</span>
+                                <span><i class="fas fa-thumbs-up"></i> 95%</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="video-card">
+                        <div class="video-thumbnail">
+                            <img src="https://via.placeholder.com/300x180/0057A0/FFFFFF?text=Citation+Guide" alt="Citation Tutorial">
+                            <div class="play-button">
+                                <i class="fas fa-play"></i>
+                            </div>
+                            <span class="video-duration">9:15</span>
+                        </div>
+                        <div class="video-info">
+                            <h3>Citation Styles Made Easy</h3>
+                            <p>Master APA, MLA, and Harvard citation styles with practical examples.</p>
+                            <div class="video-meta">
+                                <span><i class="fas fa-eye"></i> 12.1K views</span>
+                                <span><i class="fas fa-thumbs-up"></i> 97%</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+      <section class="newsletter" id="newsletter">
+    <div class="newsletter-container">
+        <div class="newsletter-content">
+            <div class="newsletter-text">
+                <h2>Subscribe to My Newsletter</h2>
+                <p>Stay updated with my latest posts and insights</p>
+            </div>
+            
+            <form class="newsletter-form" id="newsletter-form">
+                <div class="form-group">
+                    <input type="email" placeholder="Enter your email" class="newsletter-input" id="email-input" required>
+                    <button type="submit" class="newsletter-btn">Subscribe</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</section>
+    </main>
+    
+    <footer class="footer" id="contact">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <div class="footer-logo">
+                        <i class="fas fa-graduation-cap"></i>
+                        <span>AcademicExcel</span>
+                    </div>
+                    <p class="footer-desc">Empowering students to achieve academic excellence through personalized support and professional guidance.</p>
+                    
+                    <div class="social-links">
+                        <a href="#" class="social-link facebook" target="_blank">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a href="#" class="social-link twitter" target="_blank">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                        <a href="#" class="social-link instagram" target="_blank">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="#" class="social-link linkedin" target="_blank">
+                            <i class="fab fa-linkedin-in"></i>
+                        </a>
+                        <a href="#" class="social-link youtube" target="_blank">
+                            <i class="fab fa-youtube"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Quick Links</h3>
+                    <ul class="footer-links">
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="services.html">Our Services</a></li>
+                        <li><a href="portfolio.html">Portfolio</a></li>
+                        <li><a href="resources.html">Resources</a></li>
+                        <li><a href="#testimonials">Testimonials</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Services</h3>
+                    <ul class="footer-links">
+                        <li><a href="services.html">Assignment Review</a></li>
+                        <li><a href="services.html">Dissertation Support</a></li>
+                        <li><a href="services.html">Personal Tutoring</a></li>
+                        <li><a href="services.html">Proofreading</a></li>
+                        <li><a href="services.html">Professional Editing</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Contact Info</h3>
+                    <div class="contact-info">
+                        <div class="contact-item">
+                            <i class="fas fa-envelope"></i>
+                            <span>info@academicexcel.co.za</span>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fas fa-phone"></i>
+                            <span>+27 (0) 11 123 4567</span>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span>Johannesburg, South Africa</span>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fas fa-clock"></i>
+                            <span>Mon - Fri: 8:00 AM - 8:00 PM</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <div class="footer-bottom-content">
+                    <p>&copy; 2025 Academic Excellence Services. All rights reserved.</p>
+                    <div class="footer-bottom-links">
+                        <a href="#">Privacy Policy</a>
+                        <a href="#">Terms of Service</a>
+                        <a href="#">Sitemap</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <script src="script.js"></script>
+    
+
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        
+        const tabButtons = document.querySelectorAll('.tab-btn');
+        const categoryPanels = document.querySelectorAll('.category-panel');
+        
+        tabButtons.forEach(button => {
+            button.addEventListener('click', function() {
+                const targetCategory = this.getAttribute('data-category');
+                
+                tabButtons.forEach(btn => btn.classList.remove('active'));
+                categoryPanels.forEach(panel => panel.classList.remove('active'));
+                
+                this.classList.add('active');
+                document.getElementById(targetCategory).classList.add('active');
+                
+                const activePanel = document.getElementById(targetCategory);
+                activePanel.style.opacity = '0';
+                activePanel.style.transform = 'translateY(20px)';
+                
+                setTimeout(() => {
+                    activePanel.style.opacity = '1';
+                    activePanel.style.transform = 'translateY(0)';
+                }, 50);
+            });
+        });
+        
+        const toolCards = document.querySelectorAll('.tool-card');
+        toolCards.forEach(card => {
+            card.addEventListener('click', function() {
+                const toolType = this.getAttribute('data-tool');
+                handleToolClick(toolType);
+            });
+        });
+        
+        function handleToolClick(toolType) {
+            const button = event.target.closest('.tool-card').querySelector('.tool-btn');
+            const originalText = button.textContent;
+            
+            button.classList.add('loading');
+            button.textContent = 'Loading...';
+            
+            setTimeout(() => {
+                button.classList.remove('loading');
+                button.classList.add('success');
+                button.textContent = 'Opened!';
+                
+                setTimeout(() => {
+                    button.classList.remove('success');
+                    button.textContent = originalText;
+                }, 2000);
+            }, 1500);
+            
+            switch(toolType) {
+                case 'citation':
+                    console.log('Opening Citation Generator...');
+                    break;
+                case 'plagiarism':
+                    console.log('Opening Plagiarism Checker...');
+                    break;
+                case 'grammar':
+                    console.log('Opening Grammar Assistant...');
+                    break;
+                case 'calculator':
+                    console.log('Opening GPA Calculator...');
+                    break;
+            }
+        }
+        
+        const resourceButtons = document.querySelectorAll('.resource-btn');
+        resourceButtons.forEach(button => {
+            button.addEventListener('click', function() {
+                const originalText = this.textContent;
+                
+                this.classList.add('loading');
+                this.textContent = 'Loading...';
+                
+                setTimeout(() => {
+                    this.classList.remove('loading');
+                    this.classList.add('success');
+                    this.textContent = 'Accessed!';
+                    
+                    setTimeout(() => {
+                        this.classList.remove('success');
+                        this.textContent = originalText;
+                    }, 2000);
+                }, 1000);
+            });
+        });
+        
+        const downloadButtons = document.querySelectorAll('.download-btn');
+        downloadButtons.forEach(button => {
+            button.addEventListener('click', function() {
+                const originalText = this.textContent;
+                
+                this.classList.add('loading');
+                this.textContent = 'Preparing...';
+                
+                setTimeout(() => {
+                    this.classList.remove('loading');
+                    this.classList.add('success');
+                    this.textContent = 'Downloaded!';
+                    
+                    setTimeout(() => {
+                        this.classList.remove('success');
+                        this.textContent = originalText;
+                    }, 3000);
+                }, 1500);
+            });
+        });
+        
+        const videoCards = document.querySelectorAll('.video-card');
+        videoCards.forEach(card => {
+            card.addEventListener('click', function() {
+                const videoTitle = this.querySelector('h3').textContent;
+                console.log(`Playing video: ${videoTitle}`);
+                
+                const playButton = this.querySelector('.play-button');
+                playButton.style.transform = 'translate(-50%, -50%) scale(1.2)';
+                playButton.innerHTML = '<i class="fas fa-pause"></i>';
+                
+                setTimeout(() => {
+                    playButton.style.transform = 'translate(-50%, -50%) scale(1)';
+                    playButton.innerHTML = '<i class="fas fa-play"></i>';
+                }, 1000);
+            });
+        });
+        
+        const newsletterForm = document.getElementById('newsletter-form');
+        newsletterForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const email = this.querySelector('input[type="email"]').value;
+            const checkbox = this.querySelector('input[type="checkbox"]').checked;
+            const submitButton = this.querySelector('button[type="submit"]');
+            
+            if (!email || !checkbox) {
+                alert('Please fill in all fields and accept the terms.');
+                return;
+            }
+            
+            submitButton.classList.add('loading');
+            submitButton.textContent = 'Subscribing...';
+            
+            setTimeout(() => {
+                submitButton.classList.remove('loading');
+                submitButton.classList.add('success');
+                submitButton.textContent = 'Subscribed!';
+                
+                this.querySelector('input[type="email"]').value = '';
+                this.querySelector('input[type="checkbox"]').checked = false;
+                
+                setTimeout(() => {
+                    submitButton.classList.remove('success');
+                    submitButton.textContent = 'Subscribe';
+                }, 3000);
+            }, 2000);
+        });
+        
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+        
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('fade-in');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, observerOptions);
+        
+        const animateElements = document.querySelectorAll('.tool-card, .resource-item, .download-card, .video-card');
+        animateElements.forEach(el => observer.observe(el));
+        
+        function animateCounters() {
+            const counters = document.querySelectorAll('.stat-number');
+            
+            counters.forEach(counter => {
+                const target = parseInt(counter.textContent.replace(/\D/g, ''));
+                const increment = target / 100;
+                let current = 0;
+                
+                const timer = setInterval(() => {
+                    current += increment;
+                    if (current >= target) {
+                        counter.textContent = counter.textContent.replace(/\d+/, target);
+                        clearInterval(timer);
+                    } else {
+                        const value = Math.floor(current);
+                        counter.textContent = counter.textContent.replace(/\d+/, value);
+                    }
+                }, 20);
+            });
+        }
+        
+        const heroObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    animateCounters();
+                    heroObserver.unobserve(entry.target);
+                }
+            });
+        });
+        
+        const heroSection = document.querySelector('.resources-hero');
+        if (heroSection) {
+            heroObserver.observe(heroSection);
+        }
+        
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Tab') {
+                document.body.classList.add('keyboard-navigation');
+            }
+        });
+        
+        document.addEventListener('mousedown', function() {
+            document.body.classList.remove('keyboard-navigation');
+        });
+        
+        function handleSearch(query) {
+            const searchableElements = document.querySelectorAll('.resource-item, .tool-card, .download-card');
+            
+            searchableElements.forEach(element => {
+                const text = element.textContent.toLowerCase();
+                const matches = text.includes(query.toLowerCase());
+                
+                if (matches || query === '') {
+                    element.style.display = 'block';
+                    element.classList.add('fade-in');
+                } else {
+                    element.style.display = 'none';
+                }
+            });
+        }
+        
+        function addScrollToTop() {
+            const scrollButton = document.createElement('button');
+            scrollButton.innerHTML = '<i class="fas fa-arrow-up"></i>';
+            scrollButton.className = 'scroll-to-top';
+            scrollButton.style.cssText = `
+                position: fixed;
+                bottom: 20px;
+                right: 20px;
+                width: 50px;
+                height: 50px;
+                background: #0057A0;
+                color: #FFFFFF;
+                border: none;
+                border-radius: 50%;
+                cursor: pointer;
+                display: none;
+                z-index: 1000;
+                transition: all 0.3s ease;
+                box-shadow: 0 4px 15px rgba(0,87,160,0.3);
+            `;
+            
+            document.body.appendChild(scrollButton);
+            
+            window.addEventListener('scroll', () => {
+                if (window.pageYOffset > 300) {
+                    scrollButton.style.display = 'flex';
+                    scrollButton.style.alignItems = 'center';
+                    scrollButton.style.justifyContent = 'center';
+                } else {
+                    scrollButton.style.display = 'none';
+                }
+            });
+            
+            scrollButton.addEventListener('click', () => {
+                window.scrollTo({
+                    top: 0,
+                    behavior: 'smooth'
+                });
+            });
+        }
+        
+        addScrollToTop();
+        
+        console.log('Resources page initialized successfully!');
+    });
+    </script>
+</body>
+</html>

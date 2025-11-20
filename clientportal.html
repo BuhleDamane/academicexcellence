@@ -1,0 +1,520 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Client Portal - Academic Support Services</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="portal-container">
+        <header class="portal-header">
+            <div class="header-left">
+                <h1>Client Portal</h1>
+                <span id="welcomeMessage">Welcome, Client!</span>
+            </div>
+            <div class="header-right">
+                <div class="notification-icon" id="notificationIcon">
+                    <span class="notification-badge">3</span>
+                    🔔
+                </div>
+                <div class="user-menu">
+                    <button id="accountSettings">⚙️ Settings</button>
+                    <button id="logoutBtn">🚪 Logout</button>
+                </div>
+            </div>
+        </header>
+
+        <div class="portal-main">
+
+            <aside class="portal-sidebar">
+                <nav class="sidebar-nav">
+                    <button class="nav-item active" data-section="dashboard">📊 Dashboard</button>
+                    <button class="nav-item" data-section="progress">📈 Progress Tracker</button>
+                    <button class="nav-item" data-section="calendar">📅 Calendar</button>
+                    <button class="nav-item" data-section="chat">💬 Chat</button>
+                    <button class="nav-item" data-section="payment">💳 Payment</button>
+                    <button class="nav-item" data-section="documents">📁 Documents</button>
+                </nav>
+            </aside>
+
+            <main class="portal-content">
+
+                <section id="dashboard" class="content-section active">
+                    <h2>Dashboard Overview</h2>
+                    <div class="dashboard-cards">
+                        <div class="dashboard-card">
+                            <h3>Active Projects</h3>
+                            <div class="card-number">3</div>
+                        </div>
+                        <div class="dashboard-card">
+                            <h3>Upcoming Deadlines</h3>
+                            <div class="card-number">2</div>
+                        </div>
+                        <div class="dashboard-card">
+                            <h3>Completed Tasks</h3>
+                            <div class="card-number">8</div>
+                        </div>
+                        <div class="dashboard-card">
+                            <h3>Total Spent</h3>
+                            <div class="card-number">R1,250</div>
+                        </div>
+                    </div>
+                    
+                    <div class="recent-activity">
+                        <h3>Recent Activity</h3>
+                        <div class="activity-item">
+                            <span class="activity-time">2 hours ago</span>
+                            <span class="activity-text">Assignment review completed</span>
+                        </div>
+                        <div class="activity-item">
+                            <span class="activity-time">1 day ago</span>
+                            <span class="activity-text">New message from tutor</span>
+                        </div>
+                        <div class="activity-item">
+                            <span class="activity-time">3 days ago</span>
+                            <span class="activity-text">Payment processed successfully</span>
+                        </div>
+                    </div>
+                </section>
+
+                <section id="progress" class="content-section">
+                    <h2>Progress Tracker</h2>
+                    <div class="progress-container">
+                        <div class="project-progress">
+                            <h3>Research Paper - Psychology</h3>
+                            <div class="progress-bar">
+                                <div class="progress-fill" style="width: 75%"></div>
+                            </div>
+                            <span class="progress-text">75% Complete</span>
+                            <p class="progress-status">Status: Review in progress</p>
+                        </div>
+                        
+                        <div class="project-progress">
+                            <h3>Dissertation Skeleton - Business</h3>
+                            <div class="progress-bar">
+                                <div class="progress-fill" style="width: 40%"></div>
+                            </div>
+                            <span class="progress-text">40% Complete</span>
+                            <p class="progress-status">Status: Awaiting feedback</p>
+                        </div>
+                        
+                        <div class="project-progress">
+                            <h3>Assignment Proofreading - Literature</h3>
+                            <div class="progress-bar">
+                                <div class="progress-fill" style="width: 100%"></div>
+                            </div>
+                            <span class="progress-text">100% Complete</span>
+                            <p class="progress-status">Status: Ready for collection</p>
+                        </div>
+                    </div>
+                </section>
+
+                <section id="calendar" class="content-section">
+                    <h2>Calendar & Deadlines</h2>
+                    <div class="calendar-container">
+                        <div class="calendar-header">
+                            <button id="prevMonth">‹</button>
+                            <h3 id="currentMonth">August 2025</h3>
+                            <button id="nextMonth">›</button>
+                        </div>
+                        <div class="calendar-grid" id="calendarGrid">
+
+                        </div>
+                        <div class="calendar-events">
+                            <h4>Upcoming Events</h4>
+                            <div class="event-item">
+                                <span class="event-date">Aug 15</span>
+                                <span class="event-text">Submit revised draft</span>
+                            </div>
+                            <div class="event-item">
+                                <span class="event-date">Aug 20</span>
+                                <span class="event-text">Consultation meeting</span>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <section id="chat" class="content-section">
+                    <h2>Chat with Tutor</h2>
+                    <div class="chat-container">
+                        <div class="chat-messages" id="chatMessages">
+                            <div class="message tutor-message">
+                                <div class="message-header">
+                                    <strong>Tutor</strong>
+                                    <span class="message-time">10:30 AM</span>
+                                </div>
+                                <div class="message-content">Hi! I've reviewed your assignment. Overall structure is good, but I have some suggestions for the conclusion.</div>
+                            </div>
+                            <div class="message client-message">
+                                <div class="message-header">
+                                    <strong>You</strong>
+                                    <span class="message-time">10:35 AM</span>
+                                </div>
+                                <div class="message-content">Thank you! I'd love to hear your suggestions.</div>
+                            </div>
+                        </div>
+                        <div class="chat-input-container">
+                            <div class="chat-input-area">
+                                <input type="text" id="chatInput" placeholder="Type your message...">
+                                <input type="file" id="fileInput" style="display: none;" multiple accept=".pdf,.doc,.docx,.jpg,.png,.gif">
+                                <button id="attachBtn" title="Attach files">📎</button>
+                                <button id="sendBtn">Send</button>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <section id="payment" class="content-section">
+                    <h2>Payment Center</h2>
+                    <div class="payment-container">
+                        <div class="payment-summary">
+                            <h3>Account Summary</h3>
+                            <div class="summary-item">
+                                <span>Current Balance:</span>
+                                <span class="amount">R0.00</span>
+                            </div>
+                            <div class="summary-item">
+                                <span>Pending Charges:</span>
+                                <span class="amount">R450.00</span>
+                            </div>
+                            <div class="summary-item total">
+                                <span>Total Due:</span>
+                                <span class="amount">R450.00</span>
+                            </div>
+                        </div>
+                        
+                        <div class="payment-form">
+                            <h3>Make Payment</h3>
+                            <form id="paymentForm">
+                                <div class="form-group">
+                                    <label for="paymentAmount">Amount (R)</label>
+                                    <input type="number" id="paymentAmount" placeholder="450.00" step="0.01">
+                                </div>
+                                <div class="form-group">
+                                    <label for="paymentMethod">Payment Method</label>
+                                    <select id="paymentMethod">
+                                        <option value="card">Credit/Debit Card</option>
+                                        <option value="eft">EFT</option>
+                                        <option value="paypal">PayPal</option>
+                                    </select>
+                                </div>
+                                <button type="submit" class="btn-primary">Process Payment</button>
+                            </form>
+                        </div>
+                        
+                        <div class="payment-history">
+                            <h3>Payment History</h3>
+                            <div class="payment-item">
+                                <span class="payment-date">July 28, 2025</span>
+                                <span class="payment-desc">Assignment Review</span>
+                                <span class="payment-amount">R300.00</span>
+                            </div>
+                            <div class="payment-item">
+                                <span class="payment-date">July 15, 2025</span>
+                                <span class="payment-desc">Consultation Fee</span>
+                                <span class="payment-amount">R150.00</span>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <section id="documents" class="content-section">
+                    <h2>Document Management</h2>
+                    <div class="documents-container">
+                        <div class="upload-area">
+                            <h3>Upload Documents</h3>
+                            <div class="upload-zone" id="uploadZone">
+                                <p>Drag and drop files here or click to browse</p>
+                                <input type="file" id="documentUpload" multiple accept=".pdf,.doc,.docx,.txt">
+                            </div>
+                        </div>
+                        
+                        <div class="documents-list">
+                            <h3>Your Documents</h3>
+                            <div class="document-item">
+                                <span class="doc-icon">📄</span>
+                                <span class="doc-name">Research_Paper_Draft.pdf</span>
+                                <span class="doc-date">Aug 1, 2025</span>
+                                <button class="doc-action">Download</button>
+                            </div>
+                            <div class="document-item">
+                                <span class="doc-icon">📄</span>
+                                <span class="doc-name">Assignment_Guidelines.docx</span>
+                                <span class="doc-date">July 28, 2025</span>
+                                <button class="doc-action">Download</button>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </main>
+        </div>
+
+        <div id="settingsModal" class="modal">
+            <div class="modal-content">
+                <span class="close">&times;</span>
+                <h2>Account Settings</h2>
+                <form id="settingsForm">
+                    <div class="form-group">
+                        <label for="profileName">Full Name</label>
+                        <input type="text" id="profileName" value="Client User">
+                    </div>
+                    <div class="form-group">
+                        <label for="profileEmail">Email</label>
+                        <input type="email" id="profileEmail" value="client@demo.com">
+                    </div>
+                    <div class="form-group">
+                        <label for="profilePhone">Phone</label>
+                        <input type="tel" id="profilePhone" value="+27 123 456 789">
+                    </div>
+                    <button type="submit" class="btn-primary">Save Changes</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script>
+
+        const currentUser = JSON.parse(localStorage.getItem('currentUser') || '{}');
+        if (!currentUser.isLoggedIn || currentUser.userType !== 'client') {
+            window.location.href = 'login.html';
+        }
+
+        document.getElementById('welcomeMessage').textContent = `Welcome, ${currentUser.name}!`;
+
+        document.querySelectorAll('.nav-item').forEach(item => {
+            item.addEventListener('click', () => {
+
+                document.querySelectorAll('.nav-item').forEach(nav => nav.classList.remove('active'));
+                document.querySelectorAll('.content-section').forEach(section => section.classList.remove('active'));
+                
+                item.classList.add('active');
+                
+                const sectionId = item.getAttribute('data-section');
+                document.getElementById(sectionId).classList.add('active');
+            });
+        });
+
+        document.getElementById('logoutBtn').addEventListener('click', () => {
+            localStorage.removeItem('currentUser');
+            window.location.href = 'login.html';
+        });
+
+        const settingsModal = document.getElementById('settingsModal');
+        const settingsBtn = document.getElementById('accountSettings');
+        const closeModal = document.querySelector('.close');
+
+        settingsBtn.addEventListener('click', () => {
+            settingsModal.style.display = 'block';
+        });
+
+        closeModal.addEventListener('click', () => {
+            settingsModal.style.display = 'none';
+        });
+
+        window.addEventListener('click', (e) => {
+            if (e.target === settingsModal) {
+                settingsModal.style.display = 'none';
+            }
+        });
+
+        const chatInput = document.getElementById('chatInput');
+        const sendBtn = document.getElementById('sendBtn');
+        const chatMessages = document.getElementById('chatMessages');
+        const attachBtn = document.getElementById('attachBtn');
+        const fileInput = document.getElementById('fileInput');
+
+        sendBtn.addEventListener('click', sendMessage);
+        chatInput.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') sendMessage();
+        });
+
+        attachBtn.addEventListener('click', () => {
+            fileInput.click();
+        });
+
+        fileInput.addEventListener('change', (e) => {
+            const files = Array.from(e.target.files);
+            files.forEach(file => {
+                addFileMessage(file.name);
+            });
+        });
+
+        function sendMessage() {
+            const message = chatInput.value.trim();
+            if (message) {
+                addMessage(message, 'client');
+                chatInput.value = '';
+                
+                setTimeout(() => {
+                    const responses = [
+                        "Thank you for your message. I'll review this and get back to you shortly.",
+                        "Great question! Let me provide some guidance on that.",
+                        "I've received your document. I'll review it and provide feedback soon."
+                    ];
+                    const randomResponse = responses[Math.floor(Math.random() * responses.length)];
+                    addMessage(randomResponse, 'tutor');
+                }, 1000);
+            }
+        }
+
+        function addMessage(content, sender) {
+            const messageDiv = document.createElement('div');
+            messageDiv.className = `message ${sender}-message`;
+            const now = new Date();
+            const time = now.toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'});
+            
+            messageDiv.innerHTML = `
+                <div class="message-header">
+                    <strong>${sender === 'client' ? 'You' : 'Tutor'}</strong>
+                    <span class="message-time">${time}</span>
+                </div>
+                <div class="message-content">${content}</div>
+            `;
+            
+            chatMessages.appendChild(messageDiv);
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+        }
+
+        function addFileMessage(fileName) {
+            const messageDiv = document.createElement('div');
+            messageDiv.className = 'message client-message';
+            const now = new Date();
+            const time = now.toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'});
+            
+            messageDiv.innerHTML = `
+                <div class="message-header">
+                    <strong>You</strong>
+                    <span class="message-time">${time}</span>
+                </div>
+                <div class="message-content">📎 Sent file: ${fileName}</div>
+            `;
+            
+            chatMessages.appendChild(messageDiv);
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+        }
+
+        let currentDate = new Date();
+        
+        function generateCalendar(date) {
+            const year = date.getFullYear();
+            const month = date.getMonth();
+            const firstDay = new Date(year, month, 1);
+            const lastDay = new Date(year, month + 1, 0);
+            const startingDayOfWeek = firstDay.getDay();
+            const daysInMonth = lastDay.getDate();
+            
+            const monthNames = ["January", "February", "March", "April", "May", "June",
+                "July", "August", "September", "October", "November", "December"];
+            
+            document.getElementById('currentMonth').textContent = `${monthNames[month]} ${year}`;
+            
+            const calendarGrid = document.getElementById('calendarGrid');
+            calendarGrid.innerHTML = '';
+            
+            const dayHeaders = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+            dayHeaders.forEach(day => {
+                const dayHeader = document.createElement('div');
+                dayHeader.className = 'calendar-day-header';
+                dayHeader.textContent = day;
+                calendarGrid.appendChild(dayHeader);
+            });
+            
+            for (let i = 0; i < startingDayOfWeek; i++) {
+                const emptyDay = document.createElement('div');
+                emptyDay.className = 'calendar-day empty';
+                calendarGrid.appendChild(emptyDay);
+            }
+            
+            for (let day = 1; day <= daysInMonth; day++) {
+                const dayElement = document.createElement('div');
+                dayElement.className = 'calendar-day';
+                dayElement.textContent = day;
+                
+                const today = new Date();
+                if (year === today.getFullYear() && month === today.getMonth() && day === today.getDate()) {
+                    dayElement.classList.add('today');
+                }
+                
+                if (day === 15 || day === 20) {
+                    dayElement.classList.add('has-event');
+                }
+                
+                calendarGrid.appendChild(dayElement);
+            }
+        }
+        
+        document.getElementById('prevMonth').addEventListener('click', () => {
+            currentDate.setMonth(currentDate.getMonth() - 1);
+            generateCalendar(currentDate);
+        });
+        
+        document.getElementById('nextMonth').addEventListener('click', () => {
+            currentDate.setMonth(currentDate.getMonth() + 1);
+            generateCalendar(currentDate);
+        });
+        
+        generateCalendar(currentDate);
+
+        document.getElementById('paymentForm').addEventListener('submit', (e) => {
+            e.preventDefault();
+            const amount = document.getElementById('paymentAmount').value;
+            const method = document.getElementById('paymentMethod').value;
+            
+            if (amount && method) {
+                alert(`Payment of R${amount} via ${method} processed successfully!`);
+         
+                document.getElementById('paymentForm').reset();
+            }
+        });
+
+        const uploadZone = document.getElementById('uploadZone');
+        const documentUpload = document.getElementById('documentUpload');
+
+        uploadZone.addEventListener('click', () => {
+            documentUpload.click();
+        });
+
+        uploadZone.addEventListener('dragover', (e) => {
+            e.preventDefault();
+            uploadZone.classList.add('drag-over');
+        });
+
+        uploadZone.addEventListener('dragleave', () => {
+            uploadZone.classList.remove('drag-over');
+        });
+
+        uploadZone.addEventListener('drop', (e) => {
+            e.preventDefault();
+            uploadZone.classList.remove('drag-over');
+            const files = Array.from(e.dataTransfer.files);
+            handleFileUpload(files);
+        });
+
+        documentUpload.addEventListener('change', (e) => {
+            const files = Array.from(e.target.files);
+            handleFileUpload(files);
+        });
+
+        function handleFileUpload(files) {
+            files.forEach(file => {
+                console.log(`Uploading: ${file.name}`);
+                alert(`File "${file.name}" uploaded successfully!`);
+            });
+        }
+
+        document.getElementById('settingsForm').addEventListener('submit', (e) => {
+            e.preventDefault();
+            alert('Settings saved successfully!');
+            settingsModal.style.display = 'none';
+        });
+
+        document.getElementById('notificationIcon').addEventListener('click', () => {
+            alert('Notifications:\n• Assignment review completed\n• New message from tutor\n• Payment reminder');
+        });
+    </script>
+</body>
+</html>

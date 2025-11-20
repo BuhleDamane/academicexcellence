@@ -1,0 +1,856 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us - Academic Excellence Services</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+     <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <i class="fas fa-graduation-cap logo-icon"></i>
+                <span>AcademicExcel</span>
+            </div>
+            
+            <ul class="nav-menu" id="nav-menu">
+                <li class="nav-item"><a href="index.html" class="nav-link ">Home</a></li>
+                <li class="nav-item"><a href="about.html" class="nav-link">About</a></li>
+                <li class="nav-item"><a href="services.html" class="nav-link">Services</a></li>
+                <li class="nav-item"><a href="resources.html" class="nav-link">Resources</a></li>
+                <li class="nav-item"><a href="portfolio.html" class="nav-link">Portfolio</a></li>
+                <li class="nav-item"><a href="contact.html" class="nav-link active">Contact</a></li>
+            </ul>
+            
+            <div class="nav-actions">
+                <div class="search-container">
+                    <button class="search-btn" id="search-btn">
+                        <i class="fas fa-search"></i>
+                    </button>
+                    <div class="search-dropdown" id="search-dropdown">
+                        <input type="text" placeholder="Search services, resources..." class="search-input" id="search-input">
+                        <button class="search-submit" id="search-submit">
+                            <i class="fas fa-search"></i>
+                        </button>
+                    </div>
+                </div>
+                <a href="login.html" class="login-btn">
+                    <i class="fas fa-user"></i>
+                    <span>Login</span>
+                </a>
+            </div>
+            
+            <div class="hamburger" id="hamburger">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </div>
+        </div>
+    </nav>
+
+    <section class="contact-hero">
+        <div class="container">
+            <div class="hero-content">
+                <h1 class="hero-title">Get In Touch</h1>
+                <p class="hero-subtitle">Ready to excel in your academic journey? Let's discuss how we can help you achieve your goals.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="contact-main">
+        <div class="container">
+            <div class="contact-grid">
+
+                <div class="contact-form-container">
+                    <div class="form-header">
+                        <h2>Send us a Message</h2>
+                        <p>Fill out the form below and we'll get back to you within 24 hours.</p>
+                    </div>
+                    
+                    <form class="contact-form" id="contactForm">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="firstName">First Name *</label>
+                                <input type="text" id="firstName" name="firstName" required>
+                                <span class="error-message"></span>
+                            </div>
+                            <div class="form-group">
+                                <label for="lastName">Last Name *</label>
+                                <input type="text" id="lastName" name="lastName" required>
+                                <span class="error-message"></span>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="email">Email Address *</label>
+                            <input type="email" id="email" name="email" required>
+                            <span class="error-message"></span>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="phone">Phone Number</label>
+                            <input type="tel" id="phone" name="phone">
+                            <span class="error-message"></span>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="subject">Subject *</label>
+                            <select id="subject" name="subject" required>
+                                <option value="">Select a subject</option>
+                                <option value="assignment-review">Assignment Review</option>
+                                <option value="dissertation-help">Dissertation Assistance</option>
+                                <option value="tutoring">Tutoring Services</option>
+                                <option value="proofreading">Proofreading & Editing</option>
+                                <option value="consultation">Consultation</option>
+                                <option value="other">Other</option>
+                            </select>
+                            <span class="error-message"></span>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="urgency">Urgency Level</label>
+                            <select id="urgency" name="urgency">
+                                <option value="">Select urgency</option>
+                                <option value="low">Low - More than 2 weeks</option>
+                                <option value="medium">Medium - 1-2 weeks</option>
+                                <option value="high">High - Less than 1 week</option>
+                                <option value="urgent">Urgent - Within 48 hours</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="message">Message *</label>
+                            <textarea id="message" name="message" rows="6" placeholder="Please provide details about your requirements, academic level, word count, deadline, and any specific instructions..." required></textarea>
+                            <span class="error-message"></span>
+                            <div class="character-count">
+                                <span id="charCount">0</span>/1000 characters
+                            </div>
+                        </div>
+
+                        <div class="form-group checkbox-group">
+                            <label class="checkbox-label">
+                                <input type="checkbox" id="terms" name="terms" required>
+                                <span class="checkmark"></span>
+                                I agree to the <a href="#" class="terms-link">Terms & Conditions</a> and <a href="#" class="privacy-link">Privacy Policy</a> *
+                            </label>
+                            <span class="error-message"></span>
+                        </div>
+
+                        <div class="form-group checkbox-group">
+                            <label class="checkbox-label">
+                                <input type="checkbox" id="newsletter" name="newsletter">
+                                <span class="checkmark"></span>
+                                Subscribe to our newsletter for academic tips and updates
+                            </label>
+                        </div>
+
+                        <button type="submit" class="submit-btn" id="submitBtn">
+                            <span class="btn-text">Send Message</span>
+                            <span class="btn-loader" style="display: none;">
+                                <i class="fas fa-spinner fa-spin"></i> Sending...
+                            </span>
+                        </button>
+                    </form>
+                </div>
+
+               
+                    
+    </section>
+
+    <section class="faq-section">
+        <div class="container">
+            <div class="section-header">
+                <h2>Frequently Asked Questions</h2>
+                <p>Find answers to common questions about our services</p>
+            </div>
+            
+            <div class="faq-container">
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <h4>How quickly can you review my assignment?</h4>
+                        <span class="faq-toggle"><i class="fas fa-plus"></i></span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Our standard turnaround time is 24-48 hours for most assignments. For urgent requests, we offer same-day service with an additional rush fee. The exact timeframe depends on the length and complexity of your work.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <h4>What payment methods do you accept?</h4>
+                        <span class="faq-toggle"><i class="fas fa-plus"></i></span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>We accept EFT, credit cards, and mobile payments. A consultation fee and deposit are required upfront, with the balance due upon completion of your project.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <h4>Do you provide revision services?</h4>
+                        <span class="faq-toggle"><i class="fas fa-plus"></i></span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Yes, we offer one free revision within 7 days of delivery if the work doesn't meet the original specifications. Additional revisions may incur extra charges.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <h4>Is my work kept confidential?</h4>
+                        <span class="faq-toggle"><i class="fas fa-plus"></i></span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Absolutely. We maintain strict confidentiality for all client work. Your documents and personal information are never shared with third parties and are securely stored.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div id="successModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <div class="success-icon">
+                    <i class="fas fa-check-circle"></i>
+                </div>
+                <h3>Message Sent Successfully!</h3>
+            </div>
+            <div class="modal-body">
+                <p>Thank you for contacting us. We've received your message and will get back to you within 24 hours.</p>
+                <p>For urgent matters, please contact us directly via WhatsApp or phone.</p>
+            </div>
+            <div class="modal-footer">
+                <button class="modal-close-btn" onclick="closeModal()">Close</button>
+            </div>
+        </div>
+    </div>
+    
+    <footer class="footer" id="contact">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <div class="footer-logo">
+                        <i class="fas fa-graduation-cap"></i>
+                        <span>AcademicExcel</span>
+                    </div>
+                    <p class="footer-desc">Empowering students to achieve academic excellence through personalized support and professional guidance.</p>
+                    
+                    <div class="social-links">
+                        <a href="#" class="social-link facebook" target="_blank">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a href="#" class="social-link twitter" target="_blank">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                        <a href="#" class="social-link instagram" target="_blank">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="#" class="social-link linkedin" target="_blank">
+                            <i class="fab fa-linkedin-in"></i>
+                        </a>
+                        <a href="#" class="social-link youtube" target="_blank">
+                            <i class="fab fa-youtube"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Quick Links</h3>
+                    <ul class="footer-links">
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="services.html">Our Services</a></li>
+                        <li><a href="portfolio.html">Portfolio</a></li>
+                        <li><a href="resources.html">Resources</a></li>
+                        <li><a href="#testimonials">Testimonials</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Services</h3>
+                    <ul class="footer-links">
+                        <li><a href="services.html">Assignment Review</a></li>
+                        <li><a href="services.html">Dissertation Support</a></li>
+                        <li><a href="services.html">Personal Tutoring</a></li>
+                        <li><a href="services.html">Proofreading</a></li>
+                        <li><a href="services.html">Professional Editing</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Contact Info</h3>
+                    <div class="contact-info">
+                        <div class="contact-item">
+                            <i class="fas fa-envelope"></i>
+                            <span>info@academicexcel.co.za</span>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fas fa-phone"></i>
+                            <span>+27 (0) 11 123 4567</span>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span>Johannesburg, South Africa</span>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fas fa-clock"></i>
+                            <span>Mon - Fri: 8:00 AM - 8:00 PM</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <div class="footer-bottom-content">
+                    <p>&copy; 2025 Academic Excellence Services. All rights reserved.</p>
+                    <div class="footer-bottom-links">
+                        <a href="#">Privacy Policy</a>
+                        <a href="#">Terms of Service</a>
+                        <a href="#">Sitemap</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+<script>
+
+document.addEventListener('DOMContentLoaded', function() {
+    initializeContactPage();
+});
+
+function initializeContactPage() {
+
+    if (!document.getElementById('contactForm')) return;
+    
+    initializeFormValidation();
+    initializeQuickCalculator();
+    initializeFAQ();
+    initializeCharacterCounter();
+    initializeFormSubmission();
+}
+
+function initializeFormValidation() {
+    const form = document.getElementById('contactForm');
+    const inputs = form.querySelectorAll('input, select, textarea');
+    
+    inputs.forEach(input => {
+        input.addEventListener('blur', validateField);
+        input.addEventListener('input', clearFieldError);
+    });
+    
+    const emailInput = document.getElementById('email');
+    if (emailInput) {
+        emailInput.addEventListener('input', validateEmailRealTime);
+    }
+    
+    const phoneInput = document.getElementById('phone');
+    if (phoneInput) {
+        phoneInput.addEventListener('input', formatPhoneNumber);
+    }
+}
+
+function validateField(event) {
+    const field = event.target;
+    const fieldName = field.name;
+    const value = field.value.trim();
+    
+    clearFieldError(event);
+    
+    switch (fieldName) {
+        case 'firstName':
+        case 'lastName':
+            if (!value) {
+                showFieldError(field, 'This field is required');
+                return false;
+            }
+            if (value.length < 2) {
+                showFieldError(field, 'Must be at least 2 characters');
+                return false;
+            }
+            if (!/^[a-zA-Z\s'-]+$/.test(value)) {
+                showFieldError(field, 'Only letters, spaces, hyphens and apostrophes allowed');
+                return false;
+            }
+            break;
+            
+        case 'email':
+            if (!value) {
+                showFieldError(field, 'Email is required');
+                return false;
+            }
+            if (!isValidEmail(value)) {
+                showFieldError(field, 'Please enter a valid email address');
+                return false;
+            }
+            break;
+            
+        case 'phone':
+            if (value && !isValidPhone(value)) {
+                showFieldError(field, 'Please enter a valid phone number');
+                return false;
+            }
+            break;
+            
+        case 'subject':
+            if (!value) {
+                showFieldError(field, 'Please select a subject');
+                return false;
+            }
+            break;
+            
+        case 'message':
+            if (!value) {
+                showFieldError(field, 'Message is required');
+                return false;
+            }
+            if (value.length < 10) {
+                showFieldError(field, 'Message must be at least 10 characters');
+                return false;
+            }
+            if (value.length > 1000) {
+                showFieldError(field, 'Message must be less than 1000 characters');
+                return false;
+            }
+            break;
+            
+        case 'terms':
+            if (!field.checked) {
+                showFieldError(field, 'You must agree to the terms and conditions');
+                return false;
+            }
+            break;
+    }
+    
+    return true;
+}
+
+function clearFieldError(event) {
+    const field = event.target;
+    field.classList.remove('error');
+    const errorMessage = field.parentNode.querySelector('.error-message');
+    if (errorMessage) {
+        errorMessage.textContent = '';
+        errorMessage.classList.remove('show');
+    }
+}
+
+function showFieldError(field, message) {
+    field.classList.add('error');
+    const errorMessage = field.parentNode.querySelector('.error-message');
+    if (errorMessage) {
+        errorMessage.textContent = message;
+        errorMessage.classList.add('show');
+    }
+}
+
+function validateEmailRealTime(event) {
+    const email = event.target.value;
+    const field = event.target;
+    
+    if (email.length > 0 && !isValidEmail(email)) {
+        field.style.borderColor = '#e74c3c';
+    } else if (email.length > 0) {
+        field.style.borderColor = '#27ae60';
+    } else {
+        field.style.borderColor = '#EDEDED';
+    }
+}
+
+function isValidEmail(email) {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(email);
+}
+
+function formatPhoneNumber(event) {
+    let value = event.target.value.replace(/\D/g, '');
+    
+    if (value.startsWith('27')) {
+        value = value.substring(2);
+    } else if (value.startsWith('0')) {
+        value = value.substring(1);
+    }
+    
+    if (value.length >= 9) {
+        value = value.substring(0, 9);
+        value = value.replace(/(\d{2})(\d{3})(\d{4})/, '$1 $2 $3');
+        event.target.value = '+27 ' + value;
+    } else {
+        event.target.value = value;
+    }
+}
+
+function isValidPhone(phone) {
+    const phoneRegex = /^(\+27|0)\s?\d{2}\s?\d{3}\s?\d{4}$/;
+    return phoneRegex.test(phone.replace(/\s/g, ''));
+}
+
+function initializeCharacterCounter() {
+    const messageField = document.getElementById('message');
+    const charCount = document.getElementById('charCount');
+    
+    if (messageField && charCount) {
+        messageField.addEventListener('input', function() {
+            const count = this.value.length;
+            charCount.textContent = count;
+            
+            if (count > 1000) {
+                charCount.style.color = '#e74c3c';
+            } else if (count > 800) {
+                charCount.style.color = '#f39c12';
+            } else {
+                charCount.style.color = '#27ae60';
+            }
+        });
+    }
+}
+
+function initializeQuickCalculator() {
+    const serviceType = document.getElementById('serviceType');
+    const quantity = document.getElementById('quantity');
+    
+    if (serviceType && quantity) {
+        serviceType.addEventListener('change', calculateEstimate);
+        quantity.addEventListener('input', calculateEstimate);
+    }
+}
+
+function calculateEstimate() {
+    const serviceType = document.getElementById('serviceType');
+    const quantity = document.getElementById('quantity');
+    const serviceCost = document.getElementById('serviceCost');
+    const depositAmount = document.getElementById('depositAmount');
+    const totalEstimate = document.getElementById('totalEstimate');
+    
+    if (!serviceType.value || !quantity.value || quantity.value <= 0) {
+        serviceCost.textContent = 'R0';
+        depositAmount.textContent = 'R0';
+        totalEstimate.textContent = 'R100';
+        return;
+    }
+    
+    const rate = parseInt(serviceType.selectedOptions[0].dataset.rate);
+    const qty = parseInt(quantity.value);
+    const consultationFee = 100;
+    
+    const cost = rate * qty;
+    const deposit = Math.round(cost * 0.3);
+    const total = cost + consultationFee;
+    
+    serviceCost.textContent = `R${cost.toLocaleString()}`;
+    depositAmount.textContent = `R${deposit.toLocaleString()}`;
+    totalEstimate.textContent = `R${total.toLocaleString()}`;
+}
+
+function initializeFAQ() {
+    const faqItems = document.querySelectorAll('.faq-item');
+    
+    faqItems.forEach(item => {
+        const question = item.querySelector('.faq-question');
+        question.addEventListener('click', function() {
+            const isActive = item.classList.contains('active');
+            
+            faqItems.forEach(faq => faq.classList.remove('active'));
+            
+            if (!isActive) {
+                item.classList.add('active');
+            }
+        });
+    });
+}
+
+function initializeFormSubmission() {
+    const form = document.getElementById('contactForm');
+    
+    if (form) {
+        form.addEventListener('submit', handleFormSubmission);
+    }
+}
+
+async function handleFormSubmission(event) {
+    event.preventDefault();
+    
+    const form = event.target;
+    const submitBtn = document.getElementById('submitBtn');
+    const btnText = submitBtn.querySelector('.btn-text');
+    const btnLoader = submitBtn.querySelector('.btn-loader');
+    
+    if (!validateAllFields(form)) {
+        showNotification('Please correct the errors in the form', 'error');
+        return;
+    }
+    
+    submitBtn.disabled = true;
+    btnText.style.display = 'none';
+    btnLoader.style.display = 'flex';
+    form.classList.add('loading');
+    
+    try {
+        await simulateFormSubmission(new FormData(form));
+        
+        showSuccessModal();
+        
+        form.reset();
+        resetFormState();
+        
+        document.getElementById('serviceCost').textContent = 'R0';
+        document.getElementById('depositAmount').textContent = 'R0';
+        document.getElementById('totalEstimate').textContent = 'R100';
+        
+    } catch (error) {
+        console.error('Form submission error:', error);
+        showNotification('There was an error sending your message. Please try again.', 'error');
+    } finally {
+        submitBtn.disabled = false;
+        btnText.style.display = 'inline';
+        btnLoader.style.display = 'none';
+        form.classList.remove('loading');
+    }
+}
+
+function validateAllFields(form) {
+    const inputs = form.querySelectorAll('input[required], select[required], textarea[required]');
+    let isValid = true;
+    
+    inputs.forEach(input => {
+        const event = { target: input };
+        if (!validateField(event)) {
+            isValid = false;
+        }
+    });
+    
+    return isValid;
+}
+
+function resetFormState() {
+    const inputs = document.querySelectorAll('#contactForm input, #contactForm select, #contactForm textarea');
+    inputs.forEach(input => {
+        input.classList.remove('error');
+        input.style.borderColor = '';
+        const errorMessage = input.parentNode.querySelector('.error-message');
+        if (errorMessage) {
+            errorMessage.textContent = '';
+            errorMessage.classList.remove('show');
+        }
+    });
+    
+    const charCount = document.getElementById('charCount');
+    if (charCount) {
+        charCount.textContent = '0';
+        charCount.style.color = '#666';
+    }
+}
+
+function simulateFormSubmission(formData) {
+    return new Promise((resolve, reject) => {
+        setTimeout(() => {
+       
+            if (Math.random() > 0.1) { 
+                resolve({ success: true, message: 'Form submitted successfully' });
+            } else {
+                reject(new Error('Simulated network error'));
+            }
+        }, 2000);
+    });
+}
+
+function showSuccessModal() {
+    const modal = document.getElementById('successModal');
+    if (modal) {
+        modal.style.display = 'block';
+        document.body.style.overflow = 'hidden';
+        
+        setTimeout(() => {
+            closeModal();
+        }, 5000);
+    }
+}
+
+function closeModal() {
+    const modal = document.getElementById('successModal');
+    if (modal) {
+        modal.style.display = 'none';
+        document.body.style.overflow = '';
+    }
+}
+
+window.addEventListener('click', function(event) {
+    const modal = document.getElementById('successModal');
+    if (event.target === modal) {
+        closeModal();
+    }
+});
+
+function showNotification(message, type = 'info') {
+
+    const notification = document.createElement('div');
+    notification.className = `notification notification-${type}`;
+    notification.innerHTML = `
+        <div class="notification-content">
+            <i class="fas fa-${type === 'error' ? 'exclamation-circle' : 'info-circle'}"></i>
+            <span>${message}</span>
+        </div>
+        <button class="notification-close" onclick="this.parentElement.remove()">
+            <i class="fas fa-times"></i>
+        </button>
+    `;
+    
+    if (!document.querySelector('#notification-styles')) {
+        const styles = document.createElement('style');
+        styles.id = 'notification-styles';
+        styles.textContent = `
+            .notification {
+                position: fixed;
+                top: 20px;
+                right: 20px;
+                background: #FFFFFF;
+                border-radius: 8px;
+                box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+                padding: 15px 20px;
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                gap: 15px;
+                z-index: 1001;
+                min-width: 300px;
+                max-width: 500px;
+                animation: slideInRight 0.3s ease-out;
+            }
+            .notification-error {
+                border-left: 4px solid #e74c3c;
+            }
+            .notification-success {
+                border-left: 4px solid #27ae60;
+            }
+            .notification-content {
+                display: flex;
+                align-items: center;
+                gap: 10px;
+                flex: 1;
+            }
+            .notification-content i {
+                font-size: 1.2rem;
+            }
+            .notification-error .notification-content i {
+                color: #e74c3c;
+            }
+            .notification-success .notification-content i {
+                color: #27ae60;
+            }
+            .notification-close {
+                background: none;
+                border: none;
+                cursor: pointer;
+                padding: 5px;
+                color: #666;
+                font-size: 1rem;
+            }
+            .notification-close:hover {
+                color: #333;
+            }
+            @keyframes slideInRight {
+                from {
+                    transform: translateX(100%);
+                    opacity: 0;
+                }
+                to {
+                    transform: translateX(0);
+                    opacity: 1;
+                }
+            }
+        `;
+        document.head.appendChild(styles);
+    }
+    
+    document.body.appendChild(notification);
+    
+    setTimeout(() => {
+        if (notification.parentElement) {
+            notification.remove();
+        }
+    }, 5000);
+}
+
+document.addEventListener('click', function(event) {
+    if (event.target.matches('a[href^="#"]')) {
+        event.preventDefault();
+        const targetId = event.target.getAttribute('href').substring(1);
+        const targetElement = document.getElementById(targetId);
+        
+        if (targetElement) {
+            targetElement.scrollIntoView({
+                behavior: 'smooth',
+                block: 'start'
+            });
+        }
+    }
+});
+document.addEventListener('DOMContentLoaded', function() {
+    const formGroups = document.querySelectorAll('.form-group');
+    
+    formGroups.forEach(group => {
+        const input = group.querySelector('input, select, textarea');
+        if (input) {
+            input.addEventListener('focus', function() {
+                group.classList.add('focused');
+            });
+            
+            input.addEventListener('blur', function() {
+                group.classList.remove('focused');
+                if (!this.value) {
+                    group.classList.remove('filled');
+                } else {
+                    group.classList.add('filled');
+                }
+            });
+            if (input.value) {
+                group.classList.add('filled');
+            }
+        }
+    });
+});
+
+document.addEventListener('keydown', function(event) {
+
+    if (event.key === 'Escape') {
+        const modal = document.getElementById('successModal');
+        if (modal && modal.style.display === 'block') {
+            closeModal();
+        }
+    }
+    
+    if (event.target.classList.contains('faq-question')) {
+        if (event.key === 'Enter' || event.key === ' ') {
+            event.preventDefault();
+            event.target.click();
+        }
+    }
+});
+
+document.addEventListener('DOMContentLoaded', function() {
+    const getQuoteBtn = document.querySelector('.get-quote-btn');
+    if (getQuoteBtn) {
+        getQuoteBtn.addEventListener('click', function() {
+            const serviceType = document.getElementById('serviceType');
+            const quantity = document.getElementById('quantity');
+            
+            if (!serviceType.value || !quantity.value) {
+                showNotification('Please select a service and enter quantity first', 'error');
+                return;
+            }
+            
+            showNotification('Redirecting to detailed quote form...', 'success');
+            setTimeout(() => {
+                window.location.href = 'services.html?service=' + serviceType.value + '&quantity=' + quantity.value;
+            }, 1500);
+        });
+    }
+});
+</script>
+    <script src="script.js"></script>
+</body>
+</html>

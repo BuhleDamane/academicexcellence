@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - Academic Support Services</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="login-container">
+        <div class="login-card">
+            <div id="loginForm" class="auth-form active">
+                <div class="logo-section">
+                    <h1>Academic Support</h1>
+                    <p>Your academic success partner</p>
+                </div>
+                
+                <h2>Welcome Back</h2>
+                <p class="subtitle">Sign in to your account</p>
+                
+                <form id="loginFormElement">
+                    <div class="form-group">
+                        <label for="loginEmail">Email Address</label>
+                        <input type="email" id="loginEmail" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="loginPassword">Password</label>
+                        <input type="password" id="loginPassword" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="userType">Login as:</label>
+                        <select id="userType" required>
+                            <option value="">Select User Type</option>
+                            <option value="client">Client</option>
+                            <option value="admin">Admin</option>
+                        </select>
+                    </div>
+                    
+                    <div class="demo-credentials">
+                        <h4>Demo Credentials:</h4>
+                        <p><strong>Client:</strong> client@demo.com / password123</p>
+                        <p><strong>Admin:</strong> admin@demo.com / admin123</p>
+                    </div>
+                    
+                    <button type="submit" class="btn-primary">Sign In</button>
+                </form>
+                
+                <div class="auth-switch">
+                    <p>Don't have an account? <a href="#" id="showSignup">Sign Up</a></p>
+                    <p><a href="index.html">← Back to Home</a></p>
+                </div>
+            </div>
+            
+            <div id="signupForm" class="auth-form">
+                <div class="logo-section">
+                    <h1>Academic Support</h1>
+                    <p>Your academic success partner</p>
+                </div>
+                
+                <h2>Create Account</h2>
+                <p class="subtitle">Join our academic community</p>
+                
+                <form id="signupFormElement">
+                    <div class="form-group">
+                        <label for="signupName">Full Name</label>
+                        <input type="text" id="signupName" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="signupEmail">Email Address</label>
+                        <input type="email" id="signupEmail" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="signupPhone">Phone Number</label>
+                        <input type="tel" id="signupPhone" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="signupPassword">Password</label>
+                        <input type="password" id="signupPassword" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="confirmPassword">Confirm Password</label>
+                        <input type="password" id="confirmPassword" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="accountType">Account Type:</label>
+                        <select id="accountType" required>
+                            <option value="">Select Account Type</option>
+                            <option value="client">Client</option>
+                        </select>
+                    </div>
+                    
+                    <button type="submit" class="btn-primary">Create Account</button>
+                </form>
+                
+                <div class="auth-switch">
+                    <p>Already have an account? <a href="#" id="showLogin">Sign In</a></p>
+                    <p><a href="index.html">← Back to Home</a></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const loginForm = document.getElementById('loginForm');
+        const signupForm = document.getElementById('signupForm');
+        const showSignup = document.getElementById('showSignup');
+        const showLogin = document.getElementById('showLogin');
+        
+        showSignup.addEventListener('click', (e) => {
+            e.preventDefault();
+            loginForm.classList.remove('active');
+            signupForm.classList.add('active');
+        });
+        
+        showLogin.addEventListener('click', (e) => {
+            e.preventDefault();
+            signupForm.classList.remove('active');
+            loginForm.classList.add('active');
+        });
+        
+        document.getElementById('loginFormElement').addEventListener('submit', (e) => {
+            e.preventDefault();
+            
+            const email = document.getElementById('loginEmail').value;
+            const password = document.getElementById('loginPassword').value;
+            const userType = document.getElementById('userType').value;
+            
+            if ((email === 'client@demo.com' && password === 'password123' && userType === 'client') ||
+                (email === 'admin@demo.com' && password === 'admin123' && userType === 'admin')) {
+                
+                localStorage.setItem('currentUser', JSON.stringify({
+                    email: email,
+                    userType: userType,
+                    name: userType === 'admin' ? 'Admin User' : 'Client User',
+                    isLoggedIn: true
+                }));
+                
+                if (userType === 'client') {
+                    window.location.href = 'clientportal.html';
+                } else {
+                    window.location.href = 'adminportal.html';
+                }
+            } else {
+                alert('Invalid credentials. Please use the demo credentials provided.');
+            }
+        });
+        
+        document.getElementById('signupFormElement').addEventListener('submit', (e) => {
+            e.preventDefault();
+            
+            const name = document.getElementById('signupName').value;
+            const email = document.getElementById('signupEmail').value;
+            const phone = document.getElementById('signupPhone').value;
+            const password = document.getElementById('signupPassword').value;
+            const confirmPassword = document.getElementById('confirmPassword').value;
+            const accountType = document.getElementById('accountType').value;
+            
+            if (password !== confirmPassword) {
+                alert('Passwords do not match!');
+                return;
+            }
+            
+            alert('Account created successfully! You can now sign in with your credentials.');
+            
+            signupForm.classList.remove('active');
+            loginForm.classList.add('active');
+            
+            document.getElementById('signupFormElement').reset();
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,1001 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio - Academic Excellence Delivered</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+     <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <i class="fas fa-graduation-cap logo-icon"></i>
+                <span>AcademicExcel</span>
+            </div>
+            
+            <ul class="nav-menu" id="nav-menu">
+                <li class="nav-item"><a href="index.html" class="nav-link ">Home</a></li>
+                <li class="nav-item"><a href="about.html" class="nav-link">About</a></li>
+                <li class="nav-item"><a href="services.html" class="nav-link">Services</a></li>
+                <li class="nav-item"><a href="resources.html" class="nav-link">Resources</a></li>
+                <li class="nav-item"><a href="portfolio.html" class="nav-link active">Portfolio</a></li>
+                <li class="nav-item"><a href="contact.html" class="nav-link">Contact</a></li>
+            </ul>
+            
+            <div class="nav-actions">
+                <div class="search-container">
+                    <button class="search-btn" id="search-btn">
+                        <i class="fas fa-search"></i>
+                    </button>
+                    <div class="search-dropdown" id="search-dropdown">
+                        <input type="text" placeholder="Search services, resources..." class="search-input" id="search-input">
+                        <button class="search-submit" id="search-submit">
+                            <i class="fas fa-search"></i>
+                        </button>
+                    </div>
+                </div>
+                <a href="login.html" class="login-btn">
+                    <i class="fas fa-user"></i>
+                    <span>Login</span>
+                </a>
+            </div>
+            
+            <div class="hamburger" id="hamburger">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </div>
+        </div>
+    </nav>
+    <section class="portfolio-hero">
+        <div class="container">
+            <div class="hero-content">
+                <h1 class="hero-title">Portfolio of Excellence</h1>
+                <p class="hero-description">Showcasing successful academic transformations and achievements</p>
+              <div class="stats-grid">
+                <div class="stat-item">
+                    <h3 data-target="500">0+</h3>
+                    <p>Students Helped</p>
+                </div>
+                <div class="stat-item">
+                    <h3 data-target="95">0%</h3>
+                    <p>Success Rate</p>
+                </div>
+                <div class="stat-item">
+                    <h3 data-target="24">0/7</h3>
+                    <p>Support Available</p>
+                </div>
+            </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="portfolio-filters">
+        <div class="container">
+            <div class="filter-buttons">
+                <button class="filter-btn active" data-filter="all">All Projects</button>
+                <button class="filter-btn" data-filter="dissertations">Dissertations</button>
+                <button class="filter-btn" data-filter="assignments">Assignments</button>
+                <button class="filter-btn" data-filter="proofreading">Proofreading</button>
+                <button class="filter-btn" data-filter="tutoring">Tutoring</button>
+            </div>
+        </div>
+    </section>
+
+    <section class="portfolio-grid-section">
+        <div class="container">
+            <div class="portfolio-grid">
+                <div class="portfolio-item" data-category="dissertations">
+                    <div class="portfolio-card">
+                        <div class="card-image">
+                            <div class="placeholder-image dissertation-bg">
+                                <i class="fas fa-graduation-cap"></i>
+                            </div>
+                            <div class="overlay">
+                                <button class="view-btn" onclick="openModal('dissertation1')">View Details</button>
+                            </div>
+                        </div>
+                        <div class="card-content">
+                            <h3>Master's Dissertation in Psychology</h3>
+                            <p class="service-type">Dissertation Writing & Research</p>
+                            <div class="project-details">
+                                <span class="grade">Grade: A+</span>
+                                <span class="duration">Duration: 3 months</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="portfolio-item" data-category="dissertations">
+                    <div class="portfolio-card">
+                        <div class="card-image">
+                            <div class="placeholder-image dissertation-bg">
+                                <i class="fas fa-book"></i>
+                            </div>
+                            <div class="overlay">
+                                <button class="view-btn" onclick="openModal('dissertation2')">View Details</button>
+                            </div>
+                        </div>
+                        <div class="card-content">
+                            <h3>PhD Thesis in Computer Science</h3>
+                            <p class="service-type">Thesis Structure & Editing</p>
+                            <div class="project-details">
+                                <span class="grade">Grade: Distinction</span>
+                                <span class="duration">Duration: 6 months</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="portfolio-item" data-category="assignments">
+                    <div class="portfolio-card">
+                        <div class="card-image">
+                            <div class="placeholder-image assignment-bg">
+                                <i class="fas fa-file-alt"></i>
+                            </div>
+                            <div class="overlay">
+                                <button class="view-btn" onclick="openModal('assignment1')">View Details</button>
+                            </div>
+                        </div>
+                        <div class="card-content">
+                            <h3>Business Strategy Analysis</h3>
+                            <p class="service-type">Assignment Review & Enhancement</p>
+                            <div class="project-details">
+                                <span class="grade">Grade: A</span>
+                                <span class="duration">Duration: 2 weeks</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="portfolio-item" data-category="assignments">
+                    <div class="portfolio-card">
+                        <div class="card-image">
+                            <div class="placeholder-image assignment-bg">
+                                <i class="fas fa-chart-line"></i>
+                            </div>
+                            <div class="overlay">
+                                <button class="view-btn" onclick="openModal('assignment2')">View Details</button>
+                            </div>
+                        </div>
+                        <div class="card-content">
+                            <h3>Financial Modeling Project</h3>
+                            <p class="service-type">Complete Assignment Structure</p>
+                            <div class="project-details">
+                                <span class="grade">Grade: A+</span>
+                                <span class="duration">Duration: 3 weeks</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="portfolio-item" data-category="proofreading">
+                    <div class="portfolio-card">
+                        <div class="card-image">
+                            <div class="placeholder-image proofreading-bg">
+                                <i class="fas fa-spell-check"></i>
+                            </div>
+                            <div class="overlay">
+                                <button class="view-btn" onclick="openModal('proofreading1')">View Details</button>
+                            </div>
+                        </div>
+                        <div class="card-content">
+                            <h3>Research Paper Enhancement</h3>
+                            <p class="service-type">Comprehensive Proofreading</p>
+                            <div class="project-details">
+                                <span class="grade">Published</span>
+                                <span class="duration">Duration: 1 week</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="portfolio-item" data-category="proofreading">
+                    <div class="portfolio-card">
+                        <div class="card-image">
+                            <div class="placeholder-image proofreading-bg">
+                                <i class="fas fa-edit"></i>
+                            </div>
+                            <div class="overlay">
+                                <button class="view-btn" onclick="openModal('proofreading2')">View Details</button>
+                            </div>
+                        </div>
+                        <div class="card-content">
+                            <h3>Academic Journal Article</h3>
+                            <p class="service-type">Editorial Services</p>
+                            <div class="project-details">
+                                <span class="grade">Accepted</span>
+                                <span class="duration">Duration: 5 days</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="portfolio-item" data-category="tutoring">
+                    <div class="portfolio-card">
+                        <div class="card-image">
+                            <div class="placeholder-image tutoring-bg">
+                                <i class="fas fa-chalkboard-teacher"></i>
+                            </div>
+                            <div class="overlay">
+                                <button class="view-btn" onclick="openModal('tutoring1')">View Details</button>
+                            </div>
+                        </div>
+                        <div class="card-content">
+                            <h3>Statistics Module Tutoring</h3>
+                            <p class="service-type">One-on-One Tutoring</p>
+                            <div class="project-details">
+                                <span class="grade">From D to A</span>
+                                <span class="duration">Duration: 2 months</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="portfolio-item" data-category="tutoring">
+                    <div class="portfolio-card">
+                        <div class="card-image">
+                            <div class="placeholder-image tutoring-bg">
+                                <i class="fas fa-user-graduate"></i>
+                            </div>
+                            <div class="overlay">
+                                <button class="view-btn" onclick="openModal('tutoring2')">View Details</button>
+                            </div>
+                        </div>
+                        <div class="card-content">
+                            <h3>Research Methods Workshop</h3>
+                            <p class="service-type">Group Tutoring Session</p>
+                            <div class="project-details">
+                                <span class="grade">100% Pass Rate</span>
+                                <span class="duration">Duration: 1 month</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="success-stories">
+        <div class="container">
+            <h2 class="section-title">Success Stories</h2>
+            <div class="testimonials-grid">
+                <div class="testimonial-card">
+                    <div class="testimonial-content">
+                        <div class="quote-icon">
+                            <i class="fas fa-quote-left"></i>
+                        </div>
+                        <p>"Thanks to the expert guidance, my dissertation went from a rough draft to a distinction-worthy piece. The structured approach and attention to detail made all the difference."</p>
+                        <div class="testimonial-author">
+                            <div class="author-info">
+                                <h4>Sarah M.</h4>
+                                <span>Master's in Education</span>
+                            </div>
+                            <div class="rating">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="testimonial-card">
+                    <div class="testimonial-content">
+                        <div class="quote-icon">
+                            <i class="fas fa-quote-left"></i>
+                        </div>
+                        <p>"The statistics tutoring sessions transformed my understanding completely. I went from struggling with basic concepts to confidently tackling complex analyses."</p>
+                        <div class="testimonial-author">
+                            <div class="author-info">
+                                <h4>James K.</h4>
+                                <span>Psychology Undergraduate</span>
+                            </div>
+                            <div class="rating">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="testimonial-card">
+                    <div class="testimonial-content">
+                        <div class="quote-icon">
+                            <i class="fas fa-quote-left"></i>
+                        </div>
+                        <p>"Professional, timely, and incredibly thorough. The proofreading service caught issues I never would have noticed and elevated my research paper significantly."</p>
+                        <div class="testimonial-author">
+                            <div class="author-info">
+                                <h4>Dr. Lisa R.</h4>
+                                <span>Research Fellow</span>
+                            </div>
+                            <div class="rating">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="process-section">
+        <div class="container">
+            <h2 class="section-title">Our Proven Process</h2>
+            <div class="process-steps">
+                <div class="step">
+                    <div class="step-number">1</div>
+                    <div class="step-content">
+                        <h3>Initial Consultation</h3>
+                        <p>We assess your needs and create a tailored plan for success</p>
+                    </div>
+                </div>
+                <div class="step">
+                    <div class="step-number">2</div>
+                    <div class="step-content">
+                        <h3>Strategic Planning</h3>
+                        <p>Develop a comprehensive roadmap with clear milestones</p>
+                    </div>
+                </div>
+                <div class="step">
+                    <div class="step-number">3</div>
+                    <div class="step-content">
+                        <h3>Expert Execution</h3>
+                        <p>Apply proven methodologies and best practices</p>
+                    </div>
+                </div>
+                <div class="step">
+                    <div class="step-number">4</div>
+                    <div class="step-content">
+                        <h3>Quality Assurance</h3>
+                        <p>Rigorous review and refinement for excellence</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="portfolio-cta">
+        <div class="container">
+            <div class="cta-content">
+                <h2>Ready to Transform Your Academic Journey?</h2>
+                <p>Join hundreds of successful students who have achieved their academic goals with our expert guidance.</p>
+                <div class="cta-buttons">
+                    <a href="services.html" class="btn btn-primary">View Our Services</a>
+                    <a href="#" class="btn btn-secondary" onclick="openContactModal()">Get Free Consultation</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div id="portfolioModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal()">&times;</span>
+            <div id="modalBody">
+            </div>
+        </div>
+    </div>
+
+    <div id="contactModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeContactModal()">&times;</span>
+            <div class="contact-modal-body">
+                <h3>Get Your Free Consultation</h3>
+                <form class="contact-form">
+                    <div class="form-group">
+                        <input type="text" placeholder="Full Name" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="email" placeholder="Email Address" required>
+                    </div>
+                    <div class="form-group">
+                        <select required>
+                            <option value="">Select Service Type</option>
+                            <option value="dissertation">Dissertation Writing</option>
+                            <option value="assignment">Assignment Help</option>
+                            <option value="proofreading">Proofreading</option>
+                            <option value="tutoring">Tutoring</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <textarea placeholder="Describe your academic needs..." rows="4" required></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Schedule Consultation</button>
+                </form>
+            </div>
+        </div>
+    </div>
+   
+    <footer class="footer" id="contact">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <div class="footer-logo">
+                        <i class="fas fa-graduation-cap"></i>
+                        <span>AcademicExcel</span>
+                    </div>
+                    <p class="footer-desc">Empowering students to achieve academic excellence through personalized support and professional guidance.</p>
+                    
+                    <div class="social-links">
+                        <a href="#" class="social-link facebook" target="_blank">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a href="#" class="social-link twitter" target="_blank">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                        <a href="#" class="social-link instagram" target="_blank">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="#" class="social-link linkedin" target="_blank">
+                            <i class="fab fa-linkedin-in"></i>
+                        </a>
+                        <a href="#" class="social-link youtube" target="_blank">
+                            <i class="fab fa-youtube"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Quick Links</h3>
+                    <ul class="footer-links">
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="services.html">Our Services</a></li>
+                        <li><a href="portfolio.html">Portfolio</a></li>
+                        <li><a href="resources.html">Resources</a></li>
+                        <li><a href="#testimonials">Testimonials</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Services</h3>
+                    <ul class="footer-links">
+                        <li><a href="services.html">Assignment Review</a></li>
+                        <li><a href="services.html">Dissertation Support</a></li>
+                        <li><a href="services.html">Personal Tutoring</a></li>
+                        <li><a href="services.html">Proofreading</a></li>
+                        <li><a href="services.html">Professional Editing</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Contact Info</h3>
+                    <div class="contact-info">
+                        <div class="contact-item">
+                            <i class="fas fa-envelope"></i>
+                            <span>info@academicexcel.co.za</span>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fas fa-phone"></i>
+                            <span>+27 (0) 11 123 4567</span>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span>Johannesburg, South Africa</span>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fas fa-clock"></i>
+                            <span>Mon - Fri: 8:00 AM - 8:00 PM</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <div class="footer-bottom-content">
+                    <p>&copy; 2025 Academic Excellence Services. All rights reserved.</p>
+                    <div class="footer-bottom-links">
+                        <a href="#">Privacy Policy</a>
+                        <a href="#">Terms of Service</a>
+                        <a href="#">Sitemap</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+<script>
+const portfolioData = {
+    dissertation1: {
+        title: "Master's Dissertation in Psychology",
+        category: "Dissertation Writing & Research",
+        grade: "A+",
+        duration: "3 months",
+        client: "Sarah M.",
+        wordCount: "15,000 words",
+        description: "A comprehensive research study examining the impact of social media on adolescent mental health. The project involved extensive literature review, primary data collection through surveys and interviews, statistical analysis using SPSS, and presentation of findings in a structured academic format.",
+        highlights: [
+            "Conducted comprehensive literature review of 50+ academic sources",
+            "Designed and implemented mixed-methods research methodology",
+            "Collected and analyzed data from 200+ participants",
+            "Applied advanced statistical analysis techniques",
+            "Structured dissertation following university guidelines",
+            "Provided continuous feedback and revision support"
+        ],
+        outcome: "Achieved distinction grade and recommended for publication"
+    },
+    dissertation2: {
+        title: "PhD Thesis in Computer Science",
+        category: "Thesis Structure & Editing",
+        grade: "Distinction",
+        duration: "6 months",
+        client: "Dr. James K.",
+        wordCount: "80,000 words",
+        description: "An advanced research thesis focusing on machine learning applications in cybersecurity. The project required extensive restructuring, technical editing, and ensuring adherence to rigorous academic standards while maintaining the technical integrity of complex algorithms and methodologies.",
+        highlights: [
+            "Restructured 80,000-word thesis for improved flow",
+            "Technical editing of complex algorithms and code",
+            "Standardized citation format across 200+ references",
+            "Enhanced clarity of technical explanations",
+            "Improved visual presentation of data and results",
+            "Ensured compliance with university thesis guidelines"
+        ],
+        outcome: "Thesis accepted with distinction and led to multiple publication opportunities"
+    },
+    assignment1: {
+        title: "Business Strategy Analysis",
+        category: "Assignment Review & Enhancement",
+        grade: "A",
+        duration: "2 weeks",
+        client: "Michael R.",
+        wordCount: "3,500 words",
+        description: "A strategic analysis of competitive positioning in the tech industry. The assignment required critical evaluation of business models, market analysis, and strategic recommendations. Enhanced the original work through improved structure, stronger argumentation, and comprehensive research integration.",
+        highlights: [
+            "Restructured assignment for logical flow",
+            "Enhanced critical analysis and argumentation",
+            "Integrated additional relevant research sources",
+            "Improved business terminology and academic language",
+            "Strengthened conclusion and recommendations",
+            "Ensured proper Harvard referencing throughout"
+        ],
+        outcome: "Grade improved from C+ to A, with positive feedback on analytical depth"
+    },
+    assignment2: {
+        title: "Financial Modeling Project",
+        category: "Complete Assignment Structure",
+        grade: "A+",
+        duration: "3 weeks",
+        client: "Emma L.",
+        wordCount: "4,200 words",
+        description: "A comprehensive financial modeling assignment involving DCF analysis, sensitivity testing, and investment recommendations. Developed from initial concept through to final submission, including Excel modeling, written analysis, and presentation of findings.",
+        highlights: [
+            "Built comprehensive Excel financial model",
+            "Conducted DCF and sensitivity analysis",
+            "Created professional presentation materials",
+            "Developed clear investment recommendations",
+            "Ensured mathematical accuracy throughout",
+            "Provided detailed methodology explanation"
+        ],
+        outcome: "Top assignment in class, used as example for future students"
+    },
+    proofreading1: {
+        title: "Research Paper Enhancement",
+        category: "Comprehensive Proofreading",
+        grade: "Published",
+        duration: "1 week",
+        client: "Dr. Lisa R.",
+        wordCount: "8,000 words",
+        description: "Professional proofreading and editing of a research paper for journal submission. Enhanced clarity, corrected grammatical errors, improved academic tone, and ensured compliance with journal submission guidelines while maintaining the author's voice and research integrity.",
+        highlights: [
+            "Comprehensive grammar and style editing",
+            "Enhanced academic tone and clarity",
+            "Corrected citation format for journal standards",
+            "Improved abstract and conclusion sections",
+            "Maintained author's original voice and intent",
+            "Ensured compliance with journal guidelines"
+        ],
+        outcome: "Paper accepted for publication in peer-reviewed journal"
+    },
+    proofreading2: {
+        title: "Academic Journal Article",
+        category: "Editorial Services",
+        grade: "Accepted",
+        duration: "5 days",
+        client: "Prof. David M.",
+        wordCount: "6,500 words",
+        description: "Editorial enhancement of a complex academic article dealing with environmental policy. Required careful attention to technical terminology, statistical presentation, and policy analysis while ensuring the research findings were presented clearly and persuasively.",
+        highlights: [
+            "Enhanced technical terminology consistency",
+            "Improved statistical data presentation",
+            "Strengthened policy analysis sections",
+            "Corrected complex citation requirements",
+            "Enhanced readability without losing academic rigor",
+            "Expedited turnaround for submission deadline"
+        ],
+        outcome: "Article accepted by top-tier journal with minimal revision requests"
+    },
+    tutoring1: {
+        title: "Statistics Module Tutoring",
+        category: "One-on-One Tutoring",
+        grade: "From D to A",
+        duration: "2 months",
+        client: "Rachel K.",
+        sessions: "16 sessions",
+        description: "Intensive statistics tutoring for an undergraduate psychology student struggling with quantitative analysis. Provided structured learning plan, practice exercises, and continuous assessment to build confidence and competency in statistical methods.",
+        highlights: [
+            "Developed personalized learning plan",
+            "Provided step-by-step problem-solving strategies",
+            "Created custom practice exercises",
+            "Explained complex concepts using simple analogies",
+            "Built confidence through progressive difficulty",
+            "Prepared student for exam success"
+        ],
+        outcome: "Student achieved A grade and gained confidence in quantitative methods"
+    },
+    tutoring2: {
+        title: "Research Methods Workshop",
+        category: "Group Tutoring Session",
+        grade: "100% Pass Rate",
+        duration: "1 month",
+        client: "University Cohort",
+        sessions: "8 group sessions",
+        description: "Intensive workshop series for postgraduate students covering research methodology, data collection techniques, and analysis methods. Designed interactive sessions to engage students and provide practical skills for their dissertation research.",
+        highlights: [
+            "Designed interactive workshop curriculum",
+            "Covered qualitative and quantitative methods",
+            "Provided hands-on practice with analysis software",
+            "Created comprehensive resource materials",
+            "Facilitated peer learning and discussion",
+            "Offered individual consultation sessions"
+        ],
+        outcome: "All participants passed their research methods module with improved confidence"
+    }
+};
+
+document.addEventListener('DOMContentLoaded', function() {
+    console.log('DOM loaded, initializing...');
+    initializePortfolio();
+    initializeAnimations();
+    initializeModals();
+    
+    setTimeout(() => {
+        startStatsCounter();
+    }, 500);
+});
+
+function initializePortfolio() {
+    const filterButtons = document.querySelectorAll('.filter-btn');
+    const portfolioItems = document.querySelectorAll('.portfolio-item');
+    
+    filterButtons.forEach(button => {
+        button.addEventListener('click', function() {
+            const filter = this.getAttribute('data-filter');
+            
+            filterButtons.forEach(btn => btn.classList.remove('active'));
+            this.classList.add('active');
+            
+            filterPortfolioItems(portfolioItems, filter);
+        });
+    });
+    
+    initializeFormHandling();
+}
+
+function startStatsCounter() {
+    const statNumbers = document.querySelectorAll('.portfolio-hero .stat-item h3');
+    
+    console.log('Found stats:', statNumbers.length);
+    
+    statNumbers.forEach((statNumber, index) => {
+        setTimeout(() => {
+            animateStatNumber(statNumber);
+        }, index * 200);
+    });
+}
+
+function animateStatNumber(statNumber) {
+    const target = parseInt(statNumber.getAttribute('data-target'));
+    const text = statNumber.textContent.trim();
+    
+    console.log('Animating:', target, text);
+    
+    let suffix = '';
+    if (text.includes('+')) suffix = '+';
+    else if (text.includes('%')) suffix = '%';
+    else if (text.includes('/')) suffix = '/7';
+    
+    const duration = 2000;
+    const startTime = Date.now();
+    
+    function update() {
+        const elapsed = Date.now() - startTime;
+        const progress = Math.min(elapsed / duration, 1);
+        
+        const easeOutQuad = 1 - Math.pow(1 - progress, 3);
+        const current = Math.floor(target * easeOutQuad);
+        
+        statNumber.textContent = current + suffix;
+        
+        if (progress < 1) {
+            requestAnimationFrame(update);
+        } else {
+            statNumber.textContent = target + suffix;
+            statNumber.setAttribute('data-animated', 'true');
+        }
+    }
+    
+    requestAnimationFrame(update);
+}
+
+function filterPortfolioItems(items, filter) {
+    items.forEach(item => {
+        const category = item.getAttribute('data-category');
+        
+        if (filter === 'all' || category === filter) {
+            item.classList.remove('hidden');
+            item.style.display = 'block';
+            item.offsetHeight;
+            item.classList.add('fade-in');
+        } else {
+            item.classList.add('hidden');
+            setTimeout(() => {
+                if (item.classList.contains('hidden')) {
+                    item.style.display = 'none';
+                }
+            }, 500);
+        }
+    });
+}
+
+function initializeAnimations() {
+    const observerOptions = {
+        threshold: 0.1,
+        rootMargin: '0px 0px -50px 0px'
+    };
+    
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('slide-up');
+            }
+        });
+    }, observerOptions);
+    
+    const animateElements = document.querySelectorAll('.portfolio-card, .testimonial-card, .step');
+    animateElements.forEach(el => observer.observe(el));
+}
+
+function initializeModals() {
+    window.addEventListener('click', function(event) {
+        const modals = document.querySelectorAll('.modal');
+        modals.forEach(modal => {
+            if (event.target === modal) {
+                modal.style.display = 'none';
+            }
+        });
+    });
+    
+    document.addEventListener('keydown', function(event) {
+        if (event.key === 'Escape') {
+            const modals = document.querySelectorAll('.modal');
+            modals.forEach(modal => {
+                if (modal.style.display === 'block') {
+                    modal.style.display = 'none';
+                }
+            });
+        }
+    });
+}
+
+function openModal(projectId) {
+    const modal = document.getElementById('portfolioModal');
+    const modalBody = document.getElementById('modalBody');
+    const project = portfolioData[projectId];
+    
+    if (!project) {
+        console.error('Project not found:', projectId);
+        return;
+    }
+    
+    const modalContent = generateModalContent(project);
+    modalBody.innerHTML = modalContent;
+    
+    modal.style.display = 'block';
+    
+    const modalContentEl = modal.querySelector('.modal-content');
+    modalContentEl.style.animation = 'modalSlideIn 0.3s ease';
+}
+
+function generateModalContent(project) {
+    return `
+        <div class="modal-detail">
+            <h2>${project.title}</h2>
+            <div class="project-meta">
+                <div class="meta-item">
+                    <strong>Category</strong>
+                    <span>${project.category}</span>
+                </div>
+                <div class="meta-item">
+                    <strong>Grade/Result</strong>
+                    <span>${project.grade}</span>
+                </div>
+                <div class="meta-item">
+                    <strong>Duration</strong>
+                    <span>${project.duration}</span>
+                </div>
+                <div class="meta-item">
+                    <strong>${project.wordCount ? 'Word Count' : 'Sessions'}</strong>
+                    <span>${project.wordCount || project.sessions}</span>
+                </div>
+            </div>
+            
+            <div class="project-description">
+                <p>${project.description}</p>
+            </div>
+            
+            <div class="project-highlights">
+                <h4>Key Achievements</h4>
+                <ul class="highlights-list">
+                    ${project.highlights.map(highlight => `<li>${highlight}</li>`).join('')}
+                </ul>
+            </div>
+            
+            <div class="project-outcome">
+                <h4>Final Outcome</h4>
+                <p>${project.outcome}</p>
+            </div>
+        </div>
+    `;
+}
+
+function closeModal() {
+    const modal = document.getElementById('portfolioModal');
+    modal.style.display = 'none';
+}
+
+function openContactModal() {
+    const modal = document.getElementById('contactModal');
+    modal.style.display = 'block';
+    
+    setTimeout(() => {
+        const firstInput = modal.querySelector('input');
+        if (firstInput) firstInput.focus();
+    }, 100);
+}
+
+function closeContactModal() {
+    const modal = document.getElementById('contactModal');
+    modal.style.display = 'none';
+}
+
+function initializeFormHandling() {
+    const contactForm = document.querySelector('.contact-form');
+    
+    if (contactForm) {
+        contactForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            handleContactSubmission(this);
+        });
+    }
+}
+
+function handleContactSubmission(form) {
+    const submitBtn = form.querySelector('button[type="submit"]');
+    const originalText = submitBtn.textContent;
+    
+    submitBtn.innerHTML = '<span class="loading"></span> Sending...';
+    submitBtn.disabled = true;
+    
+    setTimeout(() => {
+        submitBtn.innerHTML = '✓ Consultation Scheduled!';
+        submitBtn.style.background = '#28a745';
+        
+        showNotification('Thank you! We will contact you within 24 hours to schedule your free consultation.', 'success');
+        
+        form.reset();
+        
+        setTimeout(() => {
+            closeContactModal();
+            
+            setTimeout(() => {
+                submitBtn.textContent = originalText;
+                submitBtn.disabled = false;
+                submitBtn.style.background = '';
+            }, 500);
+        }, 2000);
+        
+    }, 2000);
+}
+
+function showNotification(message, type = 'info') {
+    const notification = document.createElement('div');
+    notification.className = `notification notification-${type}`;
+    notification.innerHTML = `
+        <div class="notification-content">
+            <span class="notification-message">${message}</span>
+            <button class="notification-close" onclick="this.parentElement.parentElement.remove()">×</button>
+        </div>
+    `;
+    
+    notification.style.cssText = `
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        background: ${type === 'success' ? '#28a745' : '#0057A0'};
+        color: white;
+        padding: 1rem;
+        border-radius: 8px;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+        z-index: 1001;
+        max-width: 400px;
+        animation: slideInRight 0.3s ease;
+    `;
+    
+    document.body.appendChild(notification);
+    
+    setTimeout(() => {
+        if (notification.parentElement) {
+            notification.style.animation = 'slideOutRight 0.3s ease';
+            setTimeout(() => notification.remove(), 300);
+        }
+    }, 5000);
+}
+
+const style = document.createElement('style');
+style.textContent = `
+    @keyframes slideInRight {
+        from {
+            transform: translateX(100%);
+            opacity: 0;
+        }
+        to {
+            transform: translateX(0);
+            opacity: 1;
+        }
+    }
+    
+    @keyframes slideOutRight {
+        from {
+            transform: translateX(0);
+            opacity: 1;
+        }
+        to {
+            transform: translateX(100%);
+            opacity: 0;
+        }
+    }
+    
+    .notification-content {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 1rem;
+    }
+    
+    .notification-close {
+        background: none;
+        border: none;
+        color: white;
+        font-size: 1.2rem;
+        cursor: pointer;
+        padding: 0;
+        width: 20px;
+        height: 20px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    
+    .notification-close:hover {
+        opacity: 0.8;
+    }
+`;
+
+document.head.appendChild(style);
+</script>
+    <script src="script.js"></script>
+</body>
+</html>
