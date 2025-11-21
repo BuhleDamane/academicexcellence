@@ -9,7 +9,6 @@
   --light-blue: rgba(0, 87, 160, 0.1);
   --gradient-primary: linear-gradient(135deg, var(--primary-blue), #0066B8);
   
-  --font-primary: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
   --font-weight-light: 300;
   --font-weight-regular: 400;
   --font-weight-medium: 500;
@@ -56,7 +55,6 @@ html {
 }
 
 body {
-  font-family: var(--font-primary);
   line-height: 1.6;
   color: var(--dark-gray);
   background-color: var(--white);
@@ -68,11 +66,36 @@ img {
   height: auto;
   display: block;
 }
+h1{
 
+ font-family: "Ubuntu", sans-serif !important;
+}
+
+h2{
+font-family: "Roboto", sans-serif !important;
+    
+}
+
+h3{
+
+font-family: "Open Sans", sans-serif !important;
+}
+
+h4{
+font-family: "Open Sans", sans-serif !important;
+
+}
+
+p{
+
+  font-family: "Montserrat", sans-serif !important;
+}
 a {
+    font-family: "Montserrat", sans-serif !important;
   text-decoration: none;
   color: inherit;
   transition: var(--transition-medium);
+ font-size: 13px;
 }
 
 button {
@@ -1110,15 +1133,16 @@ ul {
   flex-wrap: wrap;
   gap: var(--spacing-sm);
 }
-
 .footer-bottom-links {
   display: flex;
   gap: var(--spacing-md);
 }
-
+.footer-bottom-content p{
+    font-size: 12px;
+}
 .footer-bottom-links a {
   color: rgba(255, 255, 255, 0.6);
-  font-size: 0.9rem;
+  font-size: 12px;
   transition: var(--transition-medium);
 }
 
