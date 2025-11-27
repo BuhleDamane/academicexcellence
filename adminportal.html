@@ -7,11 +7,1128 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link rel="stylesheet" href="styles.css">
 </head>
+<style>
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Roboto', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    background: #F5F5F5;
+    color: #333;
+}
+
+.portal-container {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.admin-header {
+    background: linear-gradient(135deg, #1a237e, #0d47a1);
+    color: #FFFFFF;
+    padding: 1rem 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 4px 15px rgba(26, 35, 126, 0.3);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.header-left h1 {
+    font-size: 1.6rem;
+    margin-bottom: 0.25rem;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+#welcomeMessage {
+    font-size: 0.9rem;
+    opacity: 0.9;
+}
+
+.header-right {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.notification-icon {
+    position: relative;
+    font-size: 1.5rem;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+}
+
+.notification-icon:hover {
+    transform: scale(1.1);
+}
+
+.notification-badge {
+    position: absolute;
+    top: -5px;
+    right: -5px;
+    background: #ff4444;
+    color: #FFFFFF;
+    font-size: 0.7rem;
+    padding: 2px 6px;
+    border-radius: 10px;
+    font-weight: bold;
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0%, 100% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.1);
+    }
+}
+
+.user-menu {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.user-menu button {
+    background: rgba(255, 255, 255, 0.2);
+    color: #FFFFFF;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    transition: all 0.3s ease;
+}
+
+.user-menu button:hover {
+    background: rgba(255, 255, 255, 0.3);
+    transform: translateY(-2px);
+}
+
+.portal-main {
+    display: flex;
+    flex: 1;
+    overflow: hidden;
+}
+
+.portal-sidebar {
+    width: 260px;
+    background: #FFFFFF;
+    box-shadow: 2px 0 15px rgba(0, 0, 0, 0.08);
+    overflow-y: auto;
+}
+
+.sidebar-nav {
+    padding: 1rem 0;
+}
+
+.nav-item {
+    display: block;
+    width: 100%;
+    padding: 1rem 1.5rem;
+    background: none;
+    border: none;
+    border-left: 4px solid transparent;
+    text-align: left;
+    cursor: pointer;
+    font-size: 1rem;
+    color: #666;
+    transition: all 0.3s ease;
+}
+
+.nav-item:hover {
+    background: #F0F4FF;
+    color: #1a237e;
+}
+
+.nav-item.active {
+    background: #E8EAF6;
+    color: #1a237e;
+    border-left-color: #1a237e;
+    font-weight: 600;
+}
+
+.portal-content {
+    flex: 1;
+    padding: 2rem;
+    overflow-y: auto;
+    background: #F5F5F5;
+}
+
+.content-section {
+    display: none;
+    animation: fadeInUp 0.3s ease;
+}
+
+.content-section.active {
+    display: block;
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.content-section h2 {
+    color: #1a237e;
+    margin-bottom: 1.5rem;
+    font-size: 2rem;
+}
+
+.dashboard-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+}
+
+.dashboard-card {
+    background: linear-gradient(135deg, #FFFFFF, #F5F7FA);
+    padding: 1.5rem;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+    border-left: 4px solid #1a237e;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.dashboard-card.admin-card::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    right: -50%;
+    width: 200%;
+    height: 200%;
+    background: linear-gradient(45deg, transparent, rgba(26, 35, 126, 0.05), transparent);
+    transform: rotate(45deg);
+    transition: all 0.6s ease;
+}
+
+.dashboard-card.admin-card:hover::before {
+    animation: shimmer 1.5s infinite;
+}
+
+@keyframes shimmer {
+    0% {
+        transform: translateX(-100%) rotate(45deg);
+    }
+    100% {
+        transform: translateX(100%) rotate(45deg);
+    }
+}
+
+.dashboard-card.admin-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 8px 25px rgba(26, 35, 126, 0.15);
+}
+
+.dashboard-card h3 {
+    color: #666;
+    font-size: 0.9rem;
+    margin-bottom: 0.5rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    position: relative;
+    z-index: 1;
+}
+
+.card-number {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: #1a237e;
+    position: relative;
+    z-index: 1;
+}
+
+.admin-quick-actions {
+    background: #FFFFFF;
+    padding: 1.5rem;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+    margin-bottom: 2rem;
+}
+
+.admin-quick-actions h3 {
+    color: #1a237e;
+    margin-bottom: 1rem;
+}
+
+.quick-actions-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1rem;
+}
+
+.quick-action-btn {
+    padding: 1rem 1.5rem;
+    background: #FFFFFF;
+    border: 2px solid #1a237e;
+    color: #1a237e;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    font-size: 0.95rem;
+}
+
+.quick-action-btn:hover {
+    background: #1a237e;
+    color: #FFFFFF;
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(26, 35, 126, 0.3);
+}
+
+.recent-activity {
+    background: #FFFFFF;
+    padding: 1.5rem;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+}
+
+.recent-activity h3 {
+    color: #1a237e;
+    margin-bottom: 1rem;
+}
+
+.activity-item {
+    display: flex;
+    gap: 1rem;
+    padding: 0.75rem 0;
+    border-bottom: 1px solid #F0F0F0;
+}
+
+.activity-item:last-child {
+    border-bottom: none;
+}
+
+.activity-time {
+    color: #999;
+    font-size: 0.85rem;
+    min-width: 100px;
+}
+
+.activity-text {
+    color: #333;
+}
+
+.no-activity {
+    text-align: center;
+    color: #999;
+    padding: 2rem;
+    font-style: italic;
+}
+
+.clients-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.5rem;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+#clientSearch {
+    padding: 0.75rem 1rem;
+    border: 2px solid #E0E0E0;
+    border-radius: 8px;
+    font-size: 0.95rem;
+    min-width: 300px;
+    outline: none;
+    transition: border-color 0.3s ease;
+}
+
+#clientSearch:focus {
+    border-color: #1a237e;
+}
+
+.clients-table {
+    background: #FFFFFF;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+    overflow: hidden;
+}
+
+.clients-table table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.clients-table thead {
+    background: linear-gradient(135deg, #1a237e, #0d47a1);
+    color: #FFFFFF;
+}
+
+.clients-table th {
+    padding: 1rem;
+    text-align: left;
+    font-weight: 600;
+    text-transform: uppercase;
+    font-size: 0.85rem;
+    letter-spacing: 0.5px;
+}
+
+.clients-table td {
+    padding: 1rem;
+    border-bottom: 1px solid #F0F0F0;
+}
+
+.clients-table tbody tr {
+    transition: background-color 0.3s ease;
+}
+
+.clients-table tbody tr:hover {
+    background-color: #F5F7FA;
+}
+
+.loading-cell {
+    text-align: center;
+    padding: 3rem;
+    color: #999;
+    font-style: italic;
+}
+
+.no-clients {
+    text-align: center;
+    padding: 3rem;
+    color: #999;
+    font-style: italic;
+}
+
+.btn-small {
+    padding: 0.4rem 0.8rem;
+    background: #1a237e;
+    color: #FFFFFF;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 0.85rem;
+    margin-right: 0.5rem;
+    transition: all 0.3s ease;
+}
+
+.btn-small:hover {
+    background: #0d47a1;
+    transform: translateY(-2px);
+}
+
+.status-active {
+    padding: 0.3rem 0.8rem;
+    background: #4caf50;
+    color: #FFFFFF;
+    border-radius: 12px;
+    font-size: 0.85rem;
+    font-weight: 600;
+}
+
+.status-inactive {
+    padding: 0.3rem 0.8rem;
+    background: #f44336;
+    color: #FFFFFF;
+    border-radius: 12px;
+    font-size: 0.85rem;
+    font-weight: 600;
+}
+
+.progress-management {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.client-selector {
+    background: #FFFFFF;
+    padding: 1.5rem;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+}
+
+.client-selector label {
+    display: block;
+    margin-bottom: 0.5rem;
+    color: #1a237e;
+    font-weight: 600;
+}
+
+.client-selector select {
+    width: 100%;
+    padding: 0.75rem;
+    border: 2px solid #E0E0E0;
+    border-radius: 8px;
+    font-size: 0.95rem;
+    outline: none;
+    transition: border-color 0.3s ease;
+}
+
+.client-selector select:focus {
+    border-color: #1a237e;
+}
+
+.client-projects {
+    background: #FFFFFF;
+    padding: 1.5rem;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+}
+
+.client-projects h3 {
+    color: #1a237e;
+    margin-bottom: 1rem;
+}
+
+.project-item {
+    background: #F5F7FA;
+    padding: 1.5rem;
+    border-radius: 10px;
+    margin-bottom: 1rem;
+    border-left: 4px solid #1a237e;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: all 0.3s ease;
+}
+
+.project-item:hover {
+    box-shadow: 0 5px 15px rgba(26, 35, 126, 0.1);
+    transform: translateX(5px);
+}
+
+.project-info {
+    flex: 1;
+}
+
+.project-info h4 {
+    color: #1a237e;
+    margin-bottom: 0.75rem;
+}
+
+.progress-bar {
+    width: 100%;
+    height: 12px;
+    background: #E0E0E0;
+    border-radius: 6px;
+    overflow: hidden;
+    margin: 0.75rem 0;
+}
+
+.progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, #1a237e, #0d47a1);
+    border-radius: 6px;
+    transition: width 0.5s ease;
+}
+
+.progress-text {
+    font-size: 0.9rem;
+    color: #666;
+    font-weight: 600;
+}
+
+.project-notes {
+    margin-top: 0.75rem;
+    padding: 0.75rem;
+    background: #FFFFFF;
+    border-radius: 5px;
+    font-size: 0.9rem;
+    color: #666;
+}
+
+.no-projects,
+.no-selection {
+    text-align: center;
+    color: #999;
+    padding: 2rem;
+    font-style: italic;
+}
+
+.progress-update-form {
+    background: #FFFFFF;
+    padding: 1.5rem;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+}
+
+.progress-update-form h3 {
+    color: #1a237e;
+    margin-bottom: 1.5rem;
+}
+
+.form-group {
+    margin-bottom: 1.5rem;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 0.5rem;
+    color: #333;
+    font-weight: 600;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+    width: 100%;
+    padding: 0.75rem;
+    border: 2px solid #E0E0E0;
+    border-radius: 8px;
+    font-size: 0.95rem;
+    outline: none;
+    transition: border-color 0.3s ease;
+    font-family: inherit;
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+    border-color: #1a237e;
+}
+
+.form-group input[readonly] {
+    background: #F5F5F5;
+    cursor: not-allowed;
+}
+
+.form-group input[type="range"] {
+    padding: 0;
+}
+
+.form-group small {
+    display: block;
+    margin-top: 0.25rem;
+    color: #666;
+    font-size: 0.85rem;
+}
+
+#progressValue {
+    display: inline-block;
+    margin-left: 1rem;
+    font-weight: 700;
+    color: #1a237e;
+    font-size: 1.1rem;
+}
+
+.form-group textarea {
+    min-height: 100px;
+    resize: vertical;
+}
+
+.btn-primary {
+    width: 100%;
+    padding: 0.9rem;
+    background: linear-gradient(135deg, #1a237e, #0d47a1);
+    color: #FFFFFF;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 10px rgba(26, 35, 126, 0.3);
+}
+
+.btn-primary:hover {
+    background: linear-gradient(135deg, #0d47a1, #1a237e);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 15px rgba(26, 35, 126, 0.4);
+}
+
+.btn-primary:active {
+    transform: translateY(0);
+}
+
+.calendar-container {
+    background: #FFFFFF;
+    padding: 1.5rem;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+}
+
+.calendar-controls {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.5rem;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+.calendar-header {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.calendar-header button {
+    background: #1a237e;
+    color: #FFFFFF;
+    border: none;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 1.2rem;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.calendar-header button:hover {
+    background: #0d47a1;
+    transform: scale(1.1);
+}
+
+.calendar-header h3 {
+    color: #1a237e;
+    font-size: 1.3rem;
+}
+
+.calendar-grid {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 8px;
+    margin-bottom: 1.5rem;
+}
+
+.calendar-day-header {
+    padding: 0.75rem;
+    text-align: center;
+    font-weight: 600;
+    color: #1a237e;
+    background: #F5F7FA;
+    border-radius: 5px;
+    font-size: 0.9rem;
+}
+
+.calendar-day {
+    padding: 0.75rem;
+    text-align: center;
+    border: 1px solid #E0E0E0;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    min-height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.calendar-day:hover {
+    background: #F5F7FA;
+    border-color: #1a237e;
+}
+
+.calendar-day.today {
+    background: #1a237e;
+    color: #FFFFFF;
+    font-weight: 700;
+}
+
+.calendar-day.empty {
+    background: transparent;
+    border: none;
+    cursor: default;
+}
+
+.calendar-events h4 {
+    color: #1a237e;
+    margin-bottom: 1rem;
+}
+
+.event-item {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 0.75rem;
+    background: #F5F7FA;
+    border-radius: 8px;
+    margin-bottom: 0.75rem;
+    border-left: 4px solid #1a237e;
+    transition: all 0.3s ease;
+}
+
+.event-item:hover {
+    background: #E8EAF6;
+    transform: translateX(5px);
+}
+
+.event-date {
+    font-weight: 700;
+    color: #1a237e;
+    min-width: 70px;
+}
+
+.event-text {
+    flex: 1;
+    color: #333;
+}
+
+.event-edit,
+.event-delete {
+    padding: 0.4rem 0.8rem;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 0.85rem;
+    transition: all 0.3s ease;
+}
+
+.event-edit {
+    background: #1a237e;
+    color: #FFFFFF;
+}
+
+.event-edit:hover {
+    background: #0d47a1;
+}
+
+.event-delete {
+    background: #f44336;
+    color: #FFFFFF;
+}
+
+.event-delete:hover {
+    background: #d32f2f;
+}
+
+.no-events {
+    text-align: center;
+    color: #999;
+    padding: 2rem;
+    font-style: italic;
+}
+
+.chat-layout {
+    display: grid;
+    grid-template-columns: 320px 1fr;
+    gap: 1.5rem;
+    height: 650px;
+}
+
+.chat-sidebar {
+    background: #FFFFFF;
+    border-radius: 12px;
+    padding: 1rem;
+    overflow-y: auto;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+}
+
+.chat-sidebar h3 {
+    color: #1a237e;
+    margin-bottom: 1rem;
+}
+
+.chat-search {
+    width: 100%;
+    padding: 0.75rem;
+    border: 2px solid #E0E0E0;
+    border-radius: 8px;
+    margin-bottom: 1rem;
+    outline: none;
+    transition: border-color 0.3s ease;
+}
+
+.chat-search:focus {
+    border-color: #1a237e;
+}
+
+.chat-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.chat-item {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.75rem;
+    background: #F5F7FA;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.chat-item:hover,
+.chat-item.active {
+    background: #1a237e;
+    color: #FFFFFF;
+}
+
+.chat-item:hover .chat-name,
+.chat-item:hover .chat-preview,
+.chat-item.active .chat-name,
+.chat-item.active .chat-preview {
+    color: #FFFFFF;
+}
+
+.chat-avatar {
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #1a237e, #0d47a1);
+    color: #FFFFFF;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 1rem;
+    flex-shrink: 0;
+}
+
+.chat-info {
+    flex: 1;
+    min-width: 0;
+}
+
+.chat-name {
+    font-weight: 600;
+    margin-bottom: 0.25rem;
+    color: #333;
+}
+
+.chat-preview {
+    font-size: 0.85rem;
+    color: #666;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.chat-badge {
+    width: 12px;
+    height: 12px;
+    background: #ff4444;
+    border-radius: 50%;
+    flex-shrink: 0;
+}
+
+.no-chats {
+    text-align: center;
+    color: #999;
+    padding: 2rem;
+    font-style: italic;
+}
+
+.chat-main {
+    display: flex;
+    flex-direction: column;
+    background: #FFFFFF;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+    overflow: hidden;
+}
+
+.chat-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 1.5rem;
+    background: linear-gradient(135deg, #1a237e, #0d47a1);
+    color: #FFFFFF;
+}
+
+.chat-header h3 {
+    margin: 0;
+    font-size: 1.2rem;
+}
+
+.chat-status {
+    font-size: 0.85rem;
+    color: #4caf50;
+    background: rgba(255, 255, 255, 0.2);
+    padding: 0.25rem 0.75rem;
+    border-radius: 12px;
+}
+
+.chat-messages {
+    flex: 1;
+    overflow-y: auto;
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    background: #FAFAFA;
+}
+
+.chat-welcome {
+    text-align: center;
+    color: #999;
+    padding: 3rem;
+}
+
+.message {
+    max-width: 70%;
+    padding: 0.9rem 1.2rem;
+    border-radius: 12px;
+    animation: messageSlide 0.3s ease;
+}
+
+@keyframes messageSlide {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.admin-message {
+    align-self: flex-end;
+    background: linear-gradient(135deg, #1a237e, #0d47a1);
+    color: #FFFFFF;
+}
+
+.client-message {
+    align-self: flex-start;
+    background: #FFFFFF;
+    border: 1px solid #E0E0E0;
+    color: #333;
+}
+
+.message-header {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 0.5rem;
+    font-size: 0.85rem;
+    font-weight: 600;
+}
+
+.message-time {
+    opacity: 0.7;
+    font-size: 0.75rem;
+    font-weight: 400;
+}
+
+.message-content {
+    line-height: 1.5;
+}
+
+.message-attachment {
+    margin-top: 0.5rem;
+    padding-top: 0.5rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.client-message .message-attachment {
+    border-top-color: #E0E0E0;
+}
+
+.message-attachment a {
+    color: inherit;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.chat-input-container {
+    padding: 1rem 1.5rem;
+    background: #F5F5F5;
+    border-top: 2px solid #E0E0E0;
+}
+
+.chat-input-area {
+    display: flex;
+    gap: 0.75rem;
+    align-items: center;
+}
+
+.chat-input-area input[type="text"] {
+    flex: 1;
+    padding: 0.9rem 1.2rem;
+    border: 2px solid #E0E0E0;
+    border-radius: 25px;
+    outline: none;
+    font-size: 0.95rem;
+    transition: border-color 0.3s ease;
+}
+
+.chat-input-area input[type="text"]:focus {
+    border-color: #1a237e;
+}
+
+.chat-input-area button {
+    padding: 0.9rem 1.8rem;
+    background: linear-gradient(135deg, #1a237e, #0d47a1);
+    color: #FFFFFF;
+    border: none;
+    border-radius: 25px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+.chat-input-area button:hover {
+    background: linear-gradient(135deg, #0d47a1, #1a237e);
+    transform: scale(1.05);
+}
+
+#adminAttachBtn {
+    background: transparent;
+    color: #1a237e;
+    font-size: 1.3rem;
+    padding: 0.5rem;
+}
+
+#adminAttachBtn:hover {
+    background: #E8EAF6;
+    transform: scale(1.1);
+}
+
+.typing-indicator {
+    display: flex;
+    gap: 5px;
+    align-items: center;
+    padding: 0.75rem 0 0;
+    font-size: 0.85rem;
+    color: #666;
+}
+
+.typing-indicator span {
+    width: 8px;
+    height: 8px;
+    background: #1a237e;
+    border-radius: 50%;
+    animation: typingBounce 1.4s infinite;
+}
+
+.typing-indicator span:nth-child(2) {
+    animation-delay: 0.2s;
+}
+
+.typing-indicator span:nth-child(3) {
+    animation-delay: 0.4s;
+}
+
+@keyframes typingBounce {
+    0%, 80%, 100% {
+        transform: translateY(0);
+    }
+    40% {
+        transform: translateY(-6px);
+    }
+}
+</style>
 <body>
     <div class="portal-container">
-
         <header class="portal-header admin-header">
             <div class="header-left">
                 <h1>Admin Portal</h1>
@@ -19,7 +1136,7 @@
             </div>
             <div class="header-right">
                 <div class="notification-icon" id="notificationIcon">
-                    <span class="notification-badge">5</span>
+                    <span class="notification-badge" id="notificationBadge">0</span>
                     🔔
                 </div>
                 <div class="user-menu">
@@ -30,7 +1147,6 @@
         </header>
 
         <div class="portal-main">
-
             <aside class="portal-sidebar">
                 <nav class="sidebar-nav">
                     <button class="nav-item active" data-section="dashboard">📊 Dashboard</button>
@@ -43,25 +1159,24 @@
             </aside>
 
             <main class="portal-content">
-
                 <section id="dashboard" class="content-section active">
                     <h2>Admin Dashboard</h2>
                     <div class="dashboard-cards">
                         <div class="dashboard-card admin-card">
                             <h3>Active Clients</h3>
-                            <div class="card-number">12</div>
+                            <div class="card-number" id="activeClientsCount">0</div>
                         </div>
                         <div class="dashboard-card admin-card">
                             <h3>Pending Reviews</h3>
-                            <div class="card-number">8</div>
+                            <div class="card-number" id="pendingReviewsCount">0</div>
                         </div>
                         <div class="dashboard-card admin-card">
                             <h3>Completed Projects</h3>
-                            <div class="card-number">45</div>
+                            <div class="card-number" id="completedProjectsCount">0</div>
                         </div>
                         <div class="dashboard-card admin-card">
                             <h3>Monthly Revenue</h3>
-                            <div class="card-number">R18,500</div>
+                            <div class="card-number" id="monthlyRevenue">R0</div>
                         </div>
                     </div>
                     
@@ -77,17 +1192,8 @@
                     
                     <div class="recent-activity">
                         <h3>Recent Activity</h3>
-                        <div class="activity-item">
-                            <span class="activity-time">30 min ago</span>
-                            <span class="activity-text">Completed review for John Doe's assignment</span>
-                        </div>
-                        <div class="activity-item">
-                            <span class="activity-time">2 hours ago</span>
-                            <span class="activity-text">New client registration: Jane Smith</span>
-                        </div>
-                        <div class="activity-item">
-                            <span class="activity-time">4 hours ago</span>
-                            <span class="activity-text">Payment received from Mike Johnson</span>
+                        <div id="adminRecentActivity">
+                            <p class="no-activity">No recent activity</p>
                         </div>
                     </div>
                 </section>
@@ -105,6 +1211,7 @@
                                 <tr>
                                     <th>Name</th>
                                     <th>Email</th>
+                                    <th>Phone</th>
                                     <th>Active Projects</th>
                                     <th>Status</th>
                                     <th>Actions</th>
@@ -112,34 +1219,7 @@
                             </thead>
                             <tbody id="clientsTableBody">
                                 <tr>
-                                    <td>John Doe</td>
-                                    <td>john@email.com</td>
-                                    <td>2</td>
-                                    <td><span class="status-active">Active</span></td>
-                                    <td>
-                                        <button class="btn-small" onclick="viewClient('john')">View</button>
-                                        <button class="btn-small" onclick="editClient('john')">Edit</button>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>Jane Smith</td>
-                                    <td>jane@email.com</td>
-                                    <td>1</td>
-                                    <td><span class="status-active">Active</span></td>
-                                    <td>
-                                        <button class="btn-small" onclick="viewClient('jane')">View</button>
-                                        <button class="btn-small" onclick="editClient('jane')">Edit</button>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>Mike Johnson</td>
-                                    <td>mike@email.com</td>
-                                    <td>0</td>
-                                    <td><span class="status-inactive">Inactive</span></td>
-                                    <td>
-                                        <button class="btn-small" onclick="viewClient('mike')">View</button>
-                                        <button class="btn-small" onclick="editClient('mike')">Edit</button>
-                                    </td>
+                                    <td colspan="6" class="loading-cell">Loading clients...</td>
                                 </tr>
                             </tbody>
                         </table>
@@ -153,28 +1233,29 @@
                             <label for="progressClient">Select Client:</label>
                             <select id="progressClient">
                                 <option value="">Choose a client</option>
-                                <option value="john">John Doe</option>
-                                <option value="jane">Jane Smith</option>
-                                <option value="mike">Mike Johnson</option>
                             </select>
                         </div>
                         
                         <div id="clientProjects" class="client-projects">
-                        
+                            <p class="no-selection">Please select a client to view their projects</p>
                         </div>
                         
                         <div class="progress-update-form" id="progressUpdateForm" style="display: none;">
                             <h3>Update Progress</h3>
                             <form id="progressForm">
+                                <input type="hidden" id="selectedProjectId">
+                                
                                 <div class="form-group">
                                     <label for="projectTitle">Project Title</label>
                                     <input type="text" id="projectTitle" readonly>
                                 </div>
+                                
                                 <div class="form-group">
                                     <label for="progressPercentage">Progress (%)</label>
                                     <input type="range" id="progressPercentage" min="0" max="100" value="0">
                                     <span id="progressValue">0%</span>
                                 </div>
+                                
                                 <div class="form-group">
                                     <label for="progressStatus">Status</label>
                                     <select id="progressStatus">
@@ -186,10 +1267,12 @@
                                         <option value="Ready for Collection">Ready for Collection</option>
                                     </select>
                                 </div>
+                                
                                 <div class="form-group">
                                     <label for="progressNotes">Progress Notes</label>
                                     <textarea id="progressNotes" placeholder="Add any notes about the progress..."></textarea>
                                 </div>
+                                
                                 <button type="submit" class="btn-primary">Update Progress</button>
                             </form>
                         </div>
@@ -202,27 +1285,18 @@
                         <div class="calendar-controls">
                             <div class="calendar-header">
                                 <button id="prevMonth">‹</button>
-                                <h3 id="currentMonth">August 2025</h3>
+                                <h3 id="currentMonth">Loading...</h3>
                                 <button id="nextMonth">›</button>
                             </div>
                             <button id="addEventBtn" class="btn-primary">+ Add Event</button>
                         </div>
                         
-                        <div class="calendar-grid" id="calendarGrid">
-                     
-                        </div>
+                        <div class="calendar-grid" id="calendarGrid"></div>
                         
                         <div class="calendar-events">
                             <h4>Upcoming Events</h4>
-                            <div class="event-item admin-event">
-                                <span class="event-date">Aug 15</span>
-                                <span class="event-text">John Doe - Submit revised draft</span>
-                                <button class="event-edit">Edit</button>
-                            </div>
-                            <div class="event-item admin-event">
-                                <span class="event-date">Aug 20</span>
-                                <span class="event-text">Jane Smith - Consultation meeting</span>
-                                <button class="event-edit">Edit</button>
+                            <div id="upcomingEventsList">
+                                <p class="no-events">No upcoming events</p>
                             </div>
                         </div>
                     </div>
@@ -233,61 +1307,33 @@
                     <div class="chat-layout">
                         <div class="chat-sidebar">
                             <h3>Active Chats</h3>
-                            <div class="chat-list">
-                                <div class="chat-item active" data-client="john">
-                                    <div class="chat-avatar">JD</div>
-                                    <div class="chat-info">
-                                        <div class="chat-name">John Doe</div>
-                                        <div class="chat-preview">Thank you for your feedback...</div>
-                                    </div>
-                                    <div class="chat-badge">2</div>
-                                </div>
-                                <div class="chat-item" data-client="jane">
-                                    <div class="chat-avatar">JS</div>
-                                    <div class="chat-info">
-                                        <div class="chat-name">Jane Smith</div>
-                                        <div class="chat-preview">When is the deadline?</div>
-                                    </div>
-                                </div>
-                                <div class="chat-item" data-client="mike">
-                                    <div class="chat-avatar">MJ</div>
-                                    <div class="chat-info">
-                                        <div class="chat-name">Mike Johnson</div>
-                                        <div class="chat-preview">Payment completed</div>
-                                    </div>
-                                </div>
+                            <input type="text" id="chatSearchInput" placeholder="Search clients..." class="chat-search">
+                            <div class="chat-list" id="chatList">
+                                <p class="no-chats">No active chats</p>
                             </div>
                         </div>
                         
                         <div class="chat-main">
-                            <div class="chat-header">
-                                <h3 id="currentChatClient">John Doe</h3>
-                                <div class="chat-status">Online</div>
+                            <div class="chat-header" id="chatHeader">
+                                <h3 id="currentChatClient">Select a client</h3>
+                                <div class="chat-status" id="chatStatus">Offline</div>
                             </div>
                             
                             <div class="chat-messages" id="adminChatMessages">
-                                <div class="message client-message">
-                                    <div class="message-header">
-                                        <strong>John Doe</strong>
-                                        <span class="message-time">2:30 PM</span>
-                                    </div>
-                                    <div class="message-content">Hi! I've submitted my assignment. Could you please review it?</div>
-                                </div>
-                                <div class="message admin-message">
-                                    <div class="message-header">
-                                        <strong>You</strong>
-                                        <span class="message-time">2:45 PM</span>
-                                    </div>
-                                    <div class="message-content">Hello John! I've received your assignment and will review it within 24 hours. I'll provide detailed feedback once complete.</div>
+                                <div class="chat-welcome">
+                                    <p>Select a client from the sidebar to start chatting</p>
                                 </div>
                             </div>
                             
-                            <div class="chat-input-container">
+                            <div class="chat-input-container" id="chatInputContainer" style="display: none;">
                                 <div class="chat-input-area">
                                     <input type="text" id="adminChatInput" placeholder="Type your message...">
                                     <input type="file" id="adminFileInput" style="display: none;" multiple accept=".pdf,.doc,.docx,.jpg,.png,.gif">
                                     <button id="adminAttachBtn" title="Attach files">📎</button>
                                     <button id="adminSendBtn">Send</button>
+                                </div>
+                                <div id="adminTypingIndicator" class="typing-indicator" style="display: none;">
+                                    <span></span><span></span><span></span>
                                 </div>
                             </div>
                         </div>
@@ -300,47 +1346,47 @@
                         <div class="analytics-cards">
                             <div class="analytics-card">
                                 <h3>Monthly Revenue</h3>
-                                <div class="analytics-value">R18,500</div>
-                                <div class="analytics-change positive">+12% from last month</div>
+                                <div class="analytics-value" id="analyticsRevenue">R0</div>
+                                <div class="analytics-change positive" id="revenueChange">+0% from last month</div>
                             </div>
                             <div class="analytics-card">
                                 <h3>Client Satisfaction</h3>
-                                <div class="analytics-value">94%</div>
-                                <div class="analytics-change positive">+2% from last month</div>
+                                <div class="analytics-value" id="clientSatisfaction">0%</div>
+                                <div class="analytics-change positive" id="satisfactionChange">+0% from last month</div>
                             </div>
                             <div class="analytics-card">
                                 <h3>Project Completion Rate</h3>
-                                <div class="analytics-value">87%</div>
-                                <div class="analytics-change negative">-3% from last month</div>
+                                <div class="analytics-value" id="completionRate">0%</div>
+                                <div class="analytics-change positive" id="completionChange">+0% from last month</div>
                             </div>
                         </div>
                         
                         <div class="charts-section">
                             <div class="chart-container">
-                                <h3>Revenue Trend</h3>
-                                <div class="chart-placeholder">
-                                    <canvas id="revenueChart" width="400" height="200"></canvas>
+                                <h3>Revenue Trend (Last 6 Months)</h3>
+                                <div class="chart-placeholder" id="revenueChart">
+                                    <canvas id="revenueCanvas" width="400" height="200"></canvas>
                                 </div>
                             </div>
                             
                             <div class="chart-container">
                                 <h3>Service Distribution</h3>
-                                <div class="service-stats">
+                                <div class="service-stats" id="serviceStats">
                                     <div class="service-stat">
                                         <span class="service-name">Assignment Review</span>
-                                        <span class="service-count">45%</span>
+                                        <span class="service-count">0%</span>
                                     </div>
                                     <div class="service-stat">
                                         <span class="service-name">Dissertation Help</span>
-                                        <span class="service-count">30%</span>
+                                        <span class="service-count">0%</span>
                                     </div>
                                     <div class="service-stat">
                                         <span class="service-name">Proofreading</span>
-                                        <span class="service-count">15%</span>
+                                        <span class="service-count">0%</span>
                                     </div>
                                     <div class="service-stat">
                                         <span class="service-name">Tutoring</span>
-                                        <span class="service-count">10%</span>
+                                        <span class="service-count">0%</span>
                                     </div>
                                 </div>
                             </div>
@@ -357,19 +1403,19 @@
                 <form id="settingsForm">
                     <div class="form-group">
                         <label for="profileName">Full Name</label>
-                        <input type="text" id="profileName" value="Admin User">
+                        <input type="text" id="profileName">
                     </div>
                     <div class="form-group">
                         <label for="profileEmail">Email</label>
-                        <input type="email" id="profileEmail" value="admin@demo.com">
+                        <input type="email" id="profileEmail" readonly>
                     </div>
                     <div class="form-group">
                         <label for="profilePhone">Phone</label>
-                        <input type="tel" id="profilePhone" value="+27 123 456 789">
+                        <input type="tel" id="profilePhone">
                     </div>
                     <div class="form-group">
                         <label for="businessHours">Business Hours</label>
-                        <input type="text" id="businessHours" value="Mon-Fri: 9AM-5PM">
+                        <input type="text" id="businessHours" placeholder="Mon-Fri: 9AM-5PM">
                     </div>
                     <button type="submit" class="btn-primary">Save Changes</button>
                 </form>
@@ -385,9 +1431,6 @@
                         <label for="eventClient">Client</label>
                         <select id="eventClient" required>
                             <option value="">Select Client</option>
-                            <option value="john">John Doe</option>
-                            <option value="jane">Jane Smith</option>
-                            <option value="mike">Mike Johnson</option>
                         </select>
                     </div>
                     <div class="form-group">
@@ -410,357 +1453,45 @@
                 </form>
             </div>
         </div>
+
+        <div id="addClientModal" class="modal">
+            <div class="modal-content">
+                <span class="close" id="closeAddClientModal">&times;</span>
+                <h2>Add New Client</h2>
+                <form id="addClientForm">
+                    <div class="form-group">
+                        <label for="newClientName">Full Name</label>
+                        <input type="text" id="newClientName" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="newClientEmail">Email</label>
+                        <input type="email" id="newClientEmail" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="newClientPhone">Phone</label>
+                        <input type="tel" id="newClientPhone" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="newClientPassword">Initial Password</label>
+                        <input type="password" id="newClientPassword" required minlength="6">
+                        <small>Minimum 6 characters</small>
+                    </div>
+                    <button type="submit" class="btn-primary">Add Client</button>
+                </form>
+            </div>
+        </div>
+
+        <div id="viewClientModal" class="modal">
+            <div class="modal-content">
+                <span class="close" id="closeViewClientModal">&times;</span>
+                <h2>Client Details</h2>
+                <div id="clientDetailsContent">
+                    <p>Loading...</p>
+                </div>
+            </div>
+        </div>
     </div>
 
-    <script>
-        const currentUser = JSON.parse(localStorage.getItem('currentUser') || '{}');
-        if (!currentUser.isLoggedIn || currentUser.userType !== 'admin') {
-            window.location.href = 'login.html';
-        }
-
-        document.getElementById('welcomeMessage').textContent = `Welcome, ${currentUser.name}!`;
-
-        document.querySelectorAll('.nav-item').forEach(item => {
-            item.addEventListener('click', () => {
-                showSection(item.getAttribute('data-section'));
-            });
-        });
-
-        function showSection(sectionId) {
-
-            document.querySelectorAll('.nav-item').forEach(nav => nav.classList.remove('active'));
-            document.querySelectorAll('.content-section').forEach(section => section.classList.remove('active'));
-            
-            document.querySelector(`[data-section="${sectionId}"]`).classList.add('active');
-            document.getElementById(sectionId).classList.add('active');
-        }
-
-        document.getElementById('logoutBtn').addEventListener('click', () => {
-            localStorage.removeItem('currentUser');
-            window.location.href = 'login.html';
-        });
-
-        const settingsModal = document.getElementById('settingsModal');
-        const eventModal = document.getElementById('eventModal');
-        const settingsBtn = document.getElementById('accountSettings');
-        const addEventBtn = document.getElementById('addEventBtn');
-
-        settingsBtn.addEventListener('click', () => {
-            settingsModal.style.display = 'block';
-        });
-
-        addEventBtn.addEventListener('click', () => {
-            eventModal.style.display = 'block';
-        });
-
-        document.querySelectorAll('.close').forEach(closeBtn => {
-            closeBtn.addEventListener('click', (e) => {
-                e.target.closest('.modal').style.display = 'none';
-            });
-        });
-
-        window.addEventListener('click', (e) => {
-            if (e.target === settingsModal) settingsModal.style.display = 'none';
-            if (e.target === eventModal) eventModal.style.display = 'none';
-        });
-
-        const progressClient = document.getElementById('progressClient');
-        const clientProjects = document.getElementById('clientProjects');
-        const progressUpdateForm = document.getElementById('progressUpdateForm');
-        const progressPercentage = document.getElementById('progressPercentage');
-        const progressValue = document.getElementById('progressValue');
-
-        progressPercentage.addEventListener('input', (e) => {
-            progressValue.textContent = e.target.value + '%';
-        });
-
-        progressClient.addEventListener('change', (e) => {
-            const clientId = e.target.value;
-            if (clientId) {
-                loadClientProjects(clientId);
-            } else {
-                clientProjects.innerHTML = '';
-                progressUpdateForm.style.display = 'none';
-            }
-        });
-
-        function loadClientProjects(clientId) {
-      
-            const projectsData = {
-                john: [
-                    { id: 1, title: 'Research Paper - Psychology', progress: 75, status: 'Under Review' },
-                    { id: 2, title: 'Assignment Review - Statistics', progress: 90, status: 'Awaiting Feedback' }
-                ],
-                jane: [
-                    { id: 3, title: 'Dissertation Skeleton - Business', progress: 40, status: 'In Progress' }
-                ],
-                mike: [
-                    { id: 4, title: 'Assignment Proofreading - Literature', progress: 100, status: 'Completed' }
-                ]
-            };
-
-            const projects = projectsData[clientId] || [];
-            
-            clientProjects.innerHTML = '<h3>Client Projects</h3>';
-            
-            projects.forEach(project => {
-                const projectDiv = document.createElement('div');
-                projectDiv.className = 'project-item';
-                projectDiv.innerHTML = `
-                    <div class="project-info">
-                        <h4>${project.title}</h4>
-                        <div class="progress-bar">
-                            <div class="progress-fill" style="width: ${project.progress}%"></div>
-                        </div>
-                        <span class="progress-text">${project.progress}% - ${project.status}</span>
-                    </div>
-                    <button class="btn-small" onclick="editProjectProgress(${project.id}, '${project.title}', ${project.progress}, '${project.status}')">Update</button>
-                `;
-                clientProjects.appendChild(projectDiv);
-            });
-        }
-
-        function editProjectProgress(id, title, progress, status) {
-            document.getElementById('projectTitle').value = title;
-            document.getElementById('progressPercentage').value = progress;
-            document.getElementById('progressValue').textContent = progress + '%';
-            document.getElementById('progressStatus').value = status;
-            progressUpdateForm.style.display = 'block';
-        }
-
-        document.getElementById('progressForm').addEventListener('submit', (e) => {
-            e.preventDefault();
-            alert('Progress updated successfully!');
-            progressUpdateForm.style.display = 'none';
-           
-            const selectedClient = progressClient.value;
-            if (selectedClient) {
-                loadClientProjects(selectedClient);
-            }
-        });
-
-        let currentDate = new Date();
-        
-        function generateCalendar(date) {
-            const year = date.getFullYear();
-            const month = date.getMonth();
-            const firstDay = new Date(year, month, 1);
-            const lastDay = new Date(year, month + 1, 0);
-            const startingDayOfWeek = firstDay.getDay();
-            const daysInMonth = lastDay.getDate();
-            
-            const monthNames = ["January", "February", "March", "April", "May", "June",
-                "July", "August", "September", "October", "November", "December"];
-            
-            document.getElementById('currentMonth').textContent = `${monthNames[month]} ${year}`;
-            
-            const calendarGrid = document.getElementById('calendarGrid');
-            calendarGrid.innerHTML = '';
-            
-            const dayHeaders = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
-            dayHeaders.forEach(day => {
-                const dayHeader = document.createElement('div');
-                dayHeader.className = 'calendar-day-header';
-                dayHeader.textContent = day;
-                calendarGrid.appendChild(dayHeader);
-            });
-            
-            for (let i = 0; i < startingDayOfWeek; i++) {
-                const emptyDay = document.createElement('div');
-                emptyDay.className = 'calendar-day empty';
-                calendarGrid.appendChild(emptyDay);
-            }
-            
-            for (let day = 1; day <= daysInMonth; day++) {
-                const dayElement = document.createElement('div');
-                dayElement.className = 'calendar-day';
-                dayElement.textContent = day;
-                
-                const today = new Date();
-                if (year === today.getFullYear() && month === today.getMonth() && day === today.getDate()) {
-                    dayElement.classList.add('today');
-                }
-                
-                if (day === 15 || day === 20) {
-                    dayElement.classList.add('has-event');
-                }
-                
-                calendarGrid.appendChild(dayElement);
-            }
-        }
-        
-        document.getElementById('prevMonth').addEventListener('click', () => {
-            currentDate.setMonth(currentDate.getMonth() - 1);
-            generateCalendar(currentDate);
-        });
-        
-        document.getElementById('nextMonth').addEventListener('click', () => {
-            currentDate.setMonth(currentDate.getMonth() + 1);
-            generateCalendar(currentDate);
-        });
-        
-        generateCalendar(currentDate);
-
-        const adminChatInput = document.getElementById('adminChatInput');
-        const adminSendBtn = document.getElementById('adminSendBtn');
-        const adminChatMessages = document.getElementById('adminChatMessages');
-        const adminAttachBtn = document.getElementById('adminAttachBtn');
-        const adminFileInput = document.getElementById('adminFileInput');
-
-        adminSendBtn.addEventListener('click', sendAdminMessage);
-        adminChatInput.addEventListener('keypress', (e) => {
-            if (e.key === 'Enter') sendAdminMessage();
-        });
-
-        adminAttachBtn.addEventListener('click', () => {
-            adminFileInput.click();
-        });
-
-        adminFileInput.addEventListener('change', (e) => {
-            const files = Array.from(e.target.files);
-            files.forEach(file => {
-                addAdminFileMessage(file.name);
-            });
-        });
-
-        function sendAdminMessage() {
-            const message = adminChatInput.value.trim();
-            if (message) {
-                addAdminMessage(message, 'admin');
-                adminChatInput.value = '';
-                
-                setTimeout(() => {
-                    const responses = [
-                        "Thank you for the update!",
-                        "I understand. I'll work on that.",
-                        "When should I expect the next feedback?"
-                    ];
-                    const randomResponse = responses[Math.floor(Math.random() * responses.length)];
-                    addAdminMessage(randomResponse, 'client');
-                }, 1500);
-            }
-        }
-
-        function addAdminMessage(content, sender) {
-            const messageDiv = document.createElement('div');
-            messageDiv.className = `message ${sender}-message`;
-            const now = new Date();
-            const time = now.toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'});
-            
-            messageDiv.innerHTML = `
-                <div class="message-header">
-                    <strong>${sender === 'admin' ? 'You' : 'John Doe'}</strong>
-                    <span class="message-time">${time}</span>
-                </div>
-                <div class="message-content">${content}</div>
-            `;
-            
-            adminChatMessages.appendChild(messageDiv);
-            adminChatMessages.scrollTop = adminChatMessages.scrollHeight;
-        }
-
-        function addAdminFileMessage(fileName) {
-            const messageDiv = document.createElement('div');
-            messageDiv.className = 'message admin-message';
-            const now = new Date();
-            const time = now.toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'});
-            
-            messageDiv.innerHTML = `
-                <div class="message-header">
-                    <strong>You</strong>
-                    <span class="message-time">${time}</span>
-                </div>
-                <div class="message-content">📎 Sent file: ${fileName}</div>
-            `;
-            
-            adminChatMessages.appendChild(messageDiv);
-            adminChatMessages.scrollTop = adminChatMessages.scrollHeight;
-        }
-
-        document.querySelectorAll('.chat-item').forEach(item => {
-            item.addEventListener('click', () => {
-                document.querySelectorAll('.chat-item').forEach(chat => chat.classList.remove('active'));
-                item.classList.add('active');
-                
-                const clientName = item.querySelector('.chat-name').textContent;
-                document.getElementById('currentChatClient').textContent = clientName;
-                
-                adminChatMessages.innerHTML = `
-                    <div class="message client-message">
-                        <div class="message-header">
-                            <strong>${clientName}</strong>
-                            <span class="message-time">2:30 PM</span>
-                        </div>
-                        <div class="message-content">Hi! I have a question about my assignment.</div>
-                    </div>
-                `;
-            });
-        });
-
-        function viewClient(clientId) {
-            alert(`Viewing details for client: ${clientId}`);
-        }
-
-        function editClient(clientId) {
-            alert(`Editing client: ${clientId}`);
-        }
-
-        document.getElementById('eventForm').addEventListener('submit', (e) => {
-            e.preventDefault();
-            const eventTitle = document.getElementById('eventTitle').value;
-            const eventDate = document.getElementById('eventDate').value;
-            alert(`Event "${eventTitle}" scheduled for ${eventDate}`);
-            eventModal.style.display = 'none';
-            document.getElementById('eventForm').reset();
-        });
-
-        document.getElementById('settingsForm').addEventListener('submit', (e) => {
-            e.preventDefault();
-            alert('Admin settings saved successfully!');
-            settingsModal.style.display = 'none';
-        });
-
-        document.getElementById('notificationIcon').addEventListener('click', () => {
-            alert('Admin Notifications:\n• New client registration\n• Payment received\n• Assignment submitted\n• Review deadline approaching\n• Client message pending');
-        });
-
-        document.getElementById('clientSearch').addEventListener('input', (e) => {
-            const searchTerm = e.target.value.toLowerCase();
-            const rows = document.querySelectorAll('#clientsTableBody tr');
-            
-            rows.forEach(row => {
-                const name = row.cells[0].textContent.toLowerCase();
-                const email = row.cells[1].textContent.toLowerCase();
-                
-                if (name.includes(searchTerm) || email.includes(searchTerm)) {
-                    row.style.display = '';
-                } else {
-                    row.style.display = 'none';
-                }
-            });
-        });
-
-        document.getElementById('addClientBtn').addEventListener('click', () => {
-            const name = prompt('Enter client name:');
-            const email = prompt('Enter client email:');
-            
-            if (name && email) {
-                const tableBody = document.getElementById('clientsTableBody');
-                const newRow = document.createElement('tr');
-                newRow.innerHTML = `
-                    <td>${name}</td>
-                    <td>${email}</td>
-                    <td>0</td>
-                    <td><span class="status-active">Active</span></td>
-                    <td>
-                        <button class="btn-small" onclick="viewClient('${name.toLowerCase().replace(' ', '')}')">View</button>
-                        <button class="btn-small" onclick="editClient('${name.toLowerCase().replace(' ', '')}')">Edit</button>
-                    </td>
-                `;
-                tableBody.appendChild(newRow);
-                alert('Client added successfully!');
-            }
-        });
-    </script>
+    <script type="module" src="adminportal.js"></script>
 </body>
 </html>

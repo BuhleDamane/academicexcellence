@@ -1,0 +1,61 @@
+# Firebase Private Configuration
+firebase-config.private.js
+
+# Environment Variables
+.env
+.env.local
+.env.development
+.env.production
+.env.*.local
+
+# Firebase
+.firebase/
+.firebaserc
+firebase-debug.log
+firestore-debug.log
+ui-debug.log
+firebase-debug.*.log
+
+# Dependencies
+node_modules/
+package-lock.json
+yarn.lock
+
+# IDE and Editors
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+
+# Operating System
+Thumbs.db
+desktop.ini
+
+# Logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+lerna-debug.log*
+
+# Build outputs
+dist/
+build/
+.cache/
+out/
+
+# Temporary files
+tmp/
+temp/
+*.tmp
+
+# Testing
+coverage/
+.nyc_output/
+
+# Personal notes
+notes.txt
+TODO.md
+.notes/
