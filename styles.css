@@ -6492,10 +6492,23 @@ ul {
     width: 320px;
   }
 
-  .hero-text .resources-hero-text p{
-    font-size: 14rem !important;
+  .resources-hero .hero-content h1{
+    font-size: 2rem;
   }
+  .resources-hero .hero-content p{
+    font-size: 1.2rem;
+  }
+
+  .resources-hero .hero-stats .stat-item{
+  margin-left: -25px;
+    height: 60px;
+    width: 320px;
+  }
+.resources-hero .hero-stats .stat-item .stat-label{
+  padding: 20px 20px
 }
+}
+
 
 /* Tiny Mobile (360px and below) */
 @media (max-width: 359px) {
