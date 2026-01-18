@@ -6082,11 +6082,7 @@ ul {
     font-size: 1rem;
   }
   
-  .resources-hero {
-    padding: 80px 15px 60px;
-    height: 80vh;
-    min-height: 500px;
-  }
+  
   
   .hero-title {
     font-size: 2rem;
@@ -6494,6 +6490,10 @@ ul {
   .hero-content .hero-stats .stat {
     height: 50px;
     width: 320px;
+  }
+
+  .hero-text .resources-hero-text p{
+    font-size: 14rem !important;
   }
 }
 
