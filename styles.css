@@ -6295,7 +6295,7 @@ ul {
   }
   
   .hero-subtitle {
-    font-size: 0.95rem;
+    font-size: 1.3rem;
   }
   
   .cta-primary,
@@ -6361,7 +6361,7 @@ ul {
   }
   
   .about-hero .hero-subtitle {
-    font-size: 1rem;
+    font-size: 1.3rem;
   }
   
   .about-hero .stat-item {
@@ -6471,39 +6471,27 @@ ul {
     font-size: 1rem;
   }
   
-  .services-hero .hero-content h1 {
-    font-size: 1.6rem;
-  }
   
   .services-hero-text h1 {
-    font-size: 1.8rem !important;
+    font-size: 2rem;
   }
   
   .services-hero-text p {
-    font-size: 1.1rem;
+    font-size: 1.3rem;
   }
   
   .services-hero {
-    min-height: 100vh;
-    height: 100vh;
-    padding: 150px 20px 60px;
+    height: 50vh;
+   
   }
   
   .services-hero .hero-content h1 {
-    font-size: 1.6rem;
-  }
-  
-  .services-hero-text h1 {
-    font-size: 1.8rem !important;
-  }
-  
-  .services-hero-text p {
-    font-size: 1.1rem;
+    font-size: 2rem;
   }
   
   .hero-content .hero-stats .stat {
     height: 50px;
-    width: 350px;
+    width: 320px;
   }
 }
 
