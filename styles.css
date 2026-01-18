@@ -6340,7 +6340,7 @@ ul {
   
   .about-hero {
     padding: 500px 15px 40px;
-    min-height: 50vh !important;
+   height: 90vh;
   }
   
   .hero-content {
