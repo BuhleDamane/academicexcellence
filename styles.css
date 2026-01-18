@@ -6286,13 +6286,12 @@ ul {
     margin-left: 8px;
   }
   
-  .hero {
-    min-height: 450px;
-    
-  }
   
+ .index h1{
+    margin-top: -80px ;
+  }
   .hero-title {
-    font-size: 2.8rem;
+    font-size: 2rem;
   }
   
   .hero-subtitle {
@@ -6357,7 +6356,7 @@ ul {
   }
   
   .about-hero .hero-content h1 {
-    font-size: 1.8rem;
+    font-size: 2rem;
     margin-top: 50px;
   }
   
@@ -6368,7 +6367,7 @@ ul {
   .about-hero .stat-item {
     font-size: 1.4rem;
     height: 50px;
-    width: 350px;
+    width: 320px;
   }
   
   .about-hero .stat-item .stat-number {
