@@ -6521,8 +6521,19 @@ ul {
 .portfolio-hero .stat-item p{
 font-size: 0.95rem;
 }
+
+.contact-hero {
+  height: 45vh;
+}
+.contact-hero .hero-content h1{
+  font-size: 2rem;
+margin-top: 60px;
 }
 
+.contact-hero .hero-content p{
+  font-size: 1.3rem;
+}
+}
 /* Tiny Mobile (360px and below) */
 @media (max-width: 359px) {
   html {
