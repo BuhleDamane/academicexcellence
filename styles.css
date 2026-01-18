@@ -6506,9 +6506,22 @@ ul {
   }
 .resources-hero .stat-number {
   margin-bottom: -5px;
-}
+  font-size: 1.9rem;
 }
 
+.portfolio-hero .stats-grid .stat-item{
+    height: 60px;
+    width: 320px;
+}
+.portfolio-hero .stat-item h3{
+  margin-top: -15px;
+  margin-bottom: -10px;
+  font-size: 1.7rem;
+}
+.portfolio-hero .stat-item p{
+font-size: 0.95rem;
+}
+}
 
 /* Tiny Mobile (360px and below) */
 @media (max-width: 359px) {
