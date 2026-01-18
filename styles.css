@@ -6504,8 +6504,8 @@ ul {
     height: 60px;
     width: 320px;
   }
-.resources-hero .hero-stats .stat-item .stat-label{
-  padding: 20px 20px
+.resources-hero .stat-number {
+  margin-bottom: -5px;
 }
 }
 
