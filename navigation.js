@@ -1,14 +1,19 @@
+
 document.addEventListener('DOMContentLoaded', function() {
     initializeNavigation();
     initializeMobileMenu();
     initializeSearch();
+    addScrollToTop(); 
 });
 
-
+/**
+ * Initialize main navigation functionality
+ */
 function initializeNavigation() {
     const navbar = document.getElementById('navbar');
     const navLinks = document.querySelectorAll('.nav-link');
     
+    if (!navbar) return; 
     window.addEventListener('scroll', () => {
         if (window.scrollY > 100) {
             navbar.classList.add('scrolled');
@@ -35,7 +40,9 @@ function initializeNavigation() {
     });
 }
 
-
+/**
+ * Initialize mobile hamburger menu
+ */
 function initializeMobileMenu() {
     const hamburger = document.getElementById('hamburger');
     const navMenu = document.getElementById('nav-menu');
@@ -75,6 +82,9 @@ function initializeMobileMenu() {
     });
 }
 
+/**
+ * Initialize search functionality
+ */
 function initializeSearch() {
     const searchBtn = document.getElementById('search-btn');
     const searchDropdown = document.getElementById('search-dropdown');
@@ -123,7 +133,7 @@ function initializeSearch() {
 function handleSearch(query) {
     if (query) {
         console.log('Searching for:', query);
-       
+        
         const searchDropdown = document.getElementById('search-dropdown');
         if (searchDropdown) {
             searchDropdown.classList.remove('active');
@@ -141,10 +151,11 @@ function isValidEmail(email) {
     return emailRegex.test(email);
 }
 
-/**
- * Add scroll to top button
- */
 function addScrollToTop() {
+    if (document.querySelector('.scroll-to-top')) {
+        return;
+    }
+    
     const scrollButton = document.createElement('button');
     scrollButton.innerHTML = '<i class="fas fa-arrow-up"></i>';
     scrollButton.className = 'scroll-to-top';
@@ -196,16 +207,11 @@ function addScrollToTop() {
     });
 }
 
-if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', addScrollToTop);
-} else {
-    addScrollToTop();
-}
-
 window.NavigationUtils = {
     handleSearch,
     isValidEmail,
     initializeNavigation,
     initializeMobileMenu,
-    initializeSearch
+    initializeSearch,
+    addScrollToTop
 };
