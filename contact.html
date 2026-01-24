@@ -321,20 +321,114 @@
     </footer>
    
 <script>
+function initializeMobileMenu() {
+    const hamburger = document.getElementById('hamburger');
+    const navMenu = document.getElementById('nav-menu');
+    const navLinks = document.querySelectorAll('.nav-link');
+    
+    if (!hamburger || !navMenu) {
+        console.log('Mobile menu elements not found');
+        return;
+    }
+    
+    console.log('Mobile menu elements found:', hamburger, navMenu);
+    
+    hamburger.addEventListener('click', (e) => {
+        e.stopPropagation();
+        console.log('Hamburger clicked');
+        hamburger.classList.toggle('active');
+        navMenu.classList.toggle('active');
+        document.body.classList.toggle('menu-open');
+        const isExpanded = hamburger.classList.contains('active');
+        hamburger.setAttribute('aria-expanded', isExpanded);
+    });
+    
+    navLinks.forEach(link => {
+        link.addEventListener('click', () => {
+            console.log('Nav link clicked, closing menu');
+            hamburger.classList.remove('active');
+            navMenu.classList.remove('active');
+            document.body.classList.remove('menu-open');
+            hamburger.setAttribute('aria-expanded', 'false');
+        });
+    });
+    
+    document.addEventListener('click', (e) => {
+        if (!navMenu.contains(e.target) && !hamburger.contains(e.target)) {
+            if (navMenu.classList.contains('active')) {
+                console.log('Click outside, closing menu');
+                hamburger.classList.remove('active');
+                navMenu.classList.remove('active');
+                document.body.classList.remove('menu-open');
+                hamburger.setAttribute('aria-expanded', 'false');
+            }
+        }
+    });
+    
+    window.addEventListener('resize', () => {
+        if (window.innerWidth > 768) {
+            if (navMenu.classList.contains('active')) {
+                console.log('Window resized to desktop, closing menu');
+                hamburger.classList.remove('active');
+                navMenu.classList.remove('active');
+                document.body.classList.remove('menu-open');
+                hamburger.setAttribute('aria-expanded', 'false');
+            }
+        }
+    });
+    
+    hamburger.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            hamburger.click();
+        }
+    });
+    
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && navMenu.classList.contains('active')) {
+            hamburger.classList.remove('active');
+            navMenu.classList.remove('active');
+            document.body.classList.remove('menu-open');
+            hamburger.setAttribute('aria-expanded', 'false');
+        }
+    });
+    
+    hamburger.setAttribute('aria-label', 'Toggle navigation menu');
+    hamburger.setAttribute('aria-controls', 'nav-menu');
+    hamburger.setAttribute('aria-expanded', 'false');
+    navMenu.setAttribute('aria-hidden', 'true');
+    
+    const observer = new MutationObserver(() => {
+        const isActive = navMenu.classList.contains('active');
+        navMenu.setAttribute('aria-hidden', !isActive);
+    });
+    
+    observer.observe(navMenu, { attributes: true, attributeFilter: ['class'] });
+}
 
 document.addEventListener('DOMContentLoaded', function() {
+    console.log('Contact page - DOM loaded, initializing...');
+    
+    initializeMobileMenu();
+    
     initializeContactPage();
 });
 
 function initializeContactPage() {
-
-    if (!document.getElementById('contactForm')) return;
+    if (!document.getElementById('contactForm')) {
+        console.log('Contact form not found');
+        return;
+    }
     
     initializeFormValidation();
     initializeQuickCalculator();
     initializeFAQ();
     initializeCharacterCounter();
     initializeFormSubmission();
+    initializeFormInteractions();
+    initializeGetQuoteButton();
+    
+    console.log('Contact page initialized successfully!');
 }
 
 function initializeFormValidation() {
@@ -563,6 +657,13 @@ function initializeFAQ() {
                 item.classList.add('active');
             }
         });
+        
+        question.addEventListener('keydown', function(e) {
+            if (e.key === 'Enter' || e.key === ' ') {
+                e.preventDefault();
+                this.click();
+            }
+        });
     });
 }
 
@@ -651,7 +752,6 @@ function resetFormState() {
 function simulateFormSubmission(formData) {
     return new Promise((resolve, reject) => {
         setTimeout(() => {
-       
             if (Math.random() > 0.1) { 
                 resolve({ success: true, message: 'Form submitted successfully' });
             } else {
@@ -689,7 +789,6 @@ window.addEventListener('click', function(event) {
 });
 
 function showNotification(message, type = 'info') {
-
     const notification = document.createElement('div');
     notification.className = `notification notification-${type}`;
     notification.innerHTML = `
@@ -778,21 +877,7 @@ function showNotification(message, type = 'info') {
     }, 5000);
 }
 
-document.addEventListener('click', function(event) {
-    if (event.target.matches('a[href^="#"]')) {
-        event.preventDefault();
-        const targetId = event.target.getAttribute('href').substring(1);
-        const targetElement = document.getElementById(targetId);
-        
-        if (targetElement) {
-            targetElement.scrollIntoView({
-                behavior: 'smooth',
-                block: 'start'
-            });
-        }
-    }
-});
-document.addEventListener('DOMContentLoaded', function() {
+function initializeFormInteractions() {
     const formGroups = document.querySelectorAll('.form-group');
     
     formGroups.forEach(group => {
@@ -810,31 +895,39 @@ document.addEventListener('DOMContentLoaded', function() {
                     group.classList.add('filled');
                 }
             });
+            
             if (input.value) {
                 group.classList.add('filled');
             }
         }
     });
-});
-
-document.addEventListener('keydown', function(event) {
-
-    if (event.key === 'Escape') {
-        const modal = document.getElementById('successModal');
-        if (modal && modal.style.display === 'block') {
-            closeModal();
-        }
-    }
     
-    if (event.target.classList.contains('faq-question')) {
-        if (event.key === 'Enter' || event.key === ' ') {
+    document.addEventListener('click', function(event) {
+        if (event.target.matches('a[href^="#"]')) {
             event.preventDefault();
-            event.target.click();
+            const targetId = event.target.getAttribute('href').substring(1);
+            const targetElement = document.getElementById(targetId);
+            
+            if (targetElement) {
+                targetElement.scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'start'
+                });
+            }
         }
-    }
-});
+    });
+    
+    document.addEventListener('keydown', function(event) {
+        if (event.key === 'Escape') {
+            const modal = document.getElementById('successModal');
+            if (modal && modal.style.display === 'block') {
+                closeModal();
+            }
+        }
+    });
+}
 
-document.addEventListener('DOMContentLoaded', function() {
+function initializeGetQuoteButton() {
     const getQuoteBtn = document.querySelector('.get-quote-btn');
     if (getQuoteBtn) {
         getQuoteBtn.addEventListener('click', function() {
@@ -852,7 +945,97 @@ document.addEventListener('DOMContentLoaded', function() {
             }, 1500);
         });
     }
-});
+}
+
+function initializeNavigation() {
+    const navbar = document.getElementById('navbar');
+    const navLinks = document.querySelectorAll('.nav-link');
+    
+    if (!navbar) return;
+    
+    window.addEventListener('scroll', () => {
+        if (window.scrollY > 100) {
+            navbar.classList.add('scrolled');
+        } else {
+            navbar.classList.remove('scrolled');
+        }
+    });
+    
+    navLinks.forEach(link => {
+        link.addEventListener('click', (e) => {
+            const href = link.getAttribute('href');
+            if (href.startsWith('#')) {
+                e.preventDefault();
+                const targetSection = document.querySelector(href);
+                if (targetSection) {
+                    const offsetTop = targetSection.offsetTop - 80;
+                    window.scrollTo({
+                        top: offsetTop,
+                        behavior: 'smooth'
+                    });
+                }
+            }
+        });
+    });
+}
+
+function initializeSearch() {
+    const searchBtn = document.getElementById('search-btn');
+    const searchDropdown = document.getElementById('search-dropdown');
+    const searchInput = document.getElementById('search-input');
+    const searchSubmit = document.getElementById('search-submit');
+    
+    if (!searchBtn || !searchDropdown || !searchInput) return;
+    
+    searchBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        searchDropdown.classList.toggle('active');
+        if (searchDropdown.classList.contains('active')) {
+            searchInput.focus();
+        }
+    });
+    
+    if (searchSubmit) {
+        searchSubmit.addEventListener('click', (e) => {
+            e.preventDefault();
+            const query = searchInput.value.trim();
+            if (query) {
+                console.log('Searching for:', query);
+                searchDropdown.classList.remove('active');
+            }
+        });
+        
+        searchInput.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') {
+                e.preventDefault();
+                const query = searchInput.value.trim();
+                if (query) {
+                    console.log('Searching for:', query);
+                    searchDropdown.classList.remove('active');
+                }
+            }
+        });
+    }
+    
+    document.addEventListener('click', (e) => {
+        if (!searchDropdown.contains(e.target) && !searchBtn.contains(e.target)) {
+            searchDropdown.classList.remove('active');
+        }
+    });
+    
+    searchDropdown.addEventListener('click', (e) => {
+        e.stopPropagation();
+    });
+}
+
+window.ContactUtils = {
+    initializeMobileMenu,
+    initializeNavigation,
+    initializeSearch,
+    isValidEmail,
+    showNotification,
+    closeModal
+};
 </script>
     <script src="script.js"></script>
 </body>
