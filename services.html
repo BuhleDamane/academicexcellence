@@ -498,14 +498,13 @@
             </div>
         </div>
     </footer>
-<script src="navigation.js"></script>
+
     <script src="script.js"></script>
     <script>
-// Hamburger Menu Functionality
+
 document.addEventListener('DOMContentLoaded', function() {
     initializeMobileMenu();
     
-    // Existing services page code
     function animateCounter(element, target, suffix = '') {
         let current = 0;
         const increment = target / 50;
@@ -675,7 +674,6 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 });
 
-// Hamburger Menu Implementation
 function initializeMobileMenu() {
     const hamburger = document.getElementById('hamburger');
     const navMenu = document.getElementById('nav-menu');
@@ -688,7 +686,6 @@ function initializeMobileMenu() {
     
     console.log('Mobile menu elements found:', hamburger, navMenu);
     
-    // Toggle menu on hamburger click
     hamburger.addEventListener('click', (e) => {
         e.stopPropagation();
         console.log('Hamburger clicked');
@@ -696,12 +693,10 @@ function initializeMobileMenu() {
         navMenu.classList.toggle('active');
         document.body.classList.toggle('menu-open');
         
-        // Toggle aria-expanded for accessibility
         const isExpanded = hamburger.classList.contains('active');
         hamburger.setAttribute('aria-expanded', isExpanded);
     });
     
-    // Close menu when clicking on a nav link
     navLinks.forEach(link => {
         link.addEventListener('click', () => {
             console.log('Nav link clicked, closing menu');
@@ -712,7 +707,6 @@ function initializeMobileMenu() {
         });
     });
     
-    // Close menu when clicking outside
     document.addEventListener('click', (e) => {
         if (!navMenu.contains(e.target) && !hamburger.contains(e.target)) {
             if (navMenu.classList.contains('active')) {
@@ -725,7 +719,6 @@ function initializeMobileMenu() {
         }
     });
     
-    // Close menu on window resize (for desktop)
     window.addEventListener('resize', () => {
         if (window.innerWidth > 768) {
             if (navMenu.classList.contains('active')) {
@@ -738,7 +731,6 @@ function initializeMobileMenu() {
         }
     });
     
-    // Add keyboard navigation support
     hamburger.addEventListener('keydown', (e) => {
         if (e.key === 'Enter' || e.key === ' ') {
             e.preventDefault();
@@ -746,7 +738,6 @@ function initializeMobileMenu() {
         }
     });
     
-    // Close menu with Escape key
     document.addEventListener('keydown', (e) => {
         if (e.key === 'Escape' && navMenu.classList.contains('active')) {
             hamburger.classList.remove('active');
@@ -756,13 +747,11 @@ function initializeMobileMenu() {
         }
     });
     
-    // Initialize aria attributes
     hamburger.setAttribute('aria-label', 'Toggle navigation menu');
     hamburger.setAttribute('aria-controls', 'nav-menu');
     hamburger.setAttribute('aria-expanded', 'false');
     navMenu.setAttribute('aria-hidden', 'true');
     
-    // Update aria attributes when menu opens/closes
     const observer = new MutationObserver(() => {
         const isActive = navMenu.classList.contains('active');
         navMenu.setAttribute('aria-hidden', !isActive);
@@ -771,14 +760,12 @@ function initializeMobileMenu() {
     observer.observe(navMenu, { attributes: true, attributeFilter: ['class'] });
 }
 
-// Optional: Add navigation scrolling functionality if needed
 function initializeNavigation() {
     const navbar = document.getElementById('navbar');
     const navLinks = document.querySelectorAll('.nav-link');
     
     if (!navbar) return;
     
-    // Add scroll effect to navbar
     window.addEventListener('scroll', () => {
         if (window.scrollY > 100) {
             navbar.classList.add('scrolled');
@@ -787,7 +774,6 @@ function initializeNavigation() {
         }
     });
     
-    // Smooth scrolling for anchor links
     navLinks.forEach(link => {
         link.addEventListener('click', (e) => {
             const href = link.getAttribute('href');
@@ -806,7 +792,6 @@ function initializeNavigation() {
     });
 }
 
-// Optional: Add search functionality if needed
 function initializeSearch() {
     const searchBtn = document.getElementById('search-btn');
     const searchDropdown = document.getElementById('search-dropdown');
@@ -865,13 +850,11 @@ function handleSearch(query) {
     }
 }
 
-// Utility function to validate email
 function isValidEmail(email) {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     return emailRegex.test(email);
 }
 
-// Optional: Add scroll to top button
 function addScrollToTop() {
     if (document.querySelector('.scroll-to-top')) {
         return;
@@ -928,7 +911,6 @@ function addScrollToTop() {
     });
 }
 
-// Make functions available globally if needed
 window.NavigationUtils = {
     initializeMobileMenu,
     initializeNavigation,
