@@ -556,124 +556,246 @@
     </footer>
     <script src="script.js"></script>
 
-    <script>
-    document.addEventListener('DOMContentLoaded', function() {
+   <script>
+function initializeMobileMenu() {
+    const hamburger = document.getElementById('hamburger');
+    const navMenu = document.getElementById('nav-menu');
+    const navLinks = document.querySelectorAll('.nav-link');
+    
+    if (!hamburger || !navMenu) {
+        console.log('Mobile menu elements not found');
+        return;
+    }
+    
+    console.log('Mobile menu elements found:', hamburger, navMenu);
+    
+    hamburger.addEventListener('click', (e) => {
+        e.stopPropagation();
+        console.log('Hamburger clicked');
+        hamburger.classList.toggle('active');
+        navMenu.classList.toggle('active');
+        document.body.classList.toggle('menu-open');
         
-        const tabButtons = document.querySelectorAll('.tab-btn');
-        const categoryPanels = document.querySelectorAll('.category-panel');
-        
-        tabButtons.forEach(button => {
-            button.addEventListener('click', function() {
-                const targetCategory = this.getAttribute('data-category');
-                
-                tabButtons.forEach(btn => btn.classList.remove('active'));
-                categoryPanels.forEach(panel => panel.classList.remove('active'));
-                
-                this.classList.add('active');
-                document.getElementById(targetCategory).classList.add('active');
-                
-                const activePanel = document.getElementById(targetCategory);
-                activePanel.style.opacity = '0';
-                activePanel.style.transform = 'translateY(20px)';
-                
-                setTimeout(() => {
-                    activePanel.style.opacity = '1';
-                    activePanel.style.transform = 'translateY(0)';
-                }, 50);
-            });
+        const isExpanded = hamburger.classList.contains('active');
+        hamburger.setAttribute('aria-expanded', isExpanded);
+    });
+    
+    navLinks.forEach(link => {
+        link.addEventListener('click', () => {
+            console.log('Nav link clicked, closing menu');
+            hamburger.classList.remove('active');
+            navMenu.classList.remove('active');
+            document.body.classList.remove('menu-open');
+            hamburger.setAttribute('aria-expanded', 'false');
         });
-        
-        const toolCards = document.querySelectorAll('.tool-card');
-        toolCards.forEach(card => {
-            card.addEventListener('click', function() {
-                const toolType = this.getAttribute('data-tool');
-                handleToolClick(toolType);
-            });
-        });
-        
-        function handleToolClick(toolType) {
-            const button = event.target.closest('.tool-card').querySelector('.tool-btn');
-            const originalText = button.textContent;
-            
-            button.classList.add('loading');
-            button.textContent = 'Loading...';
-            
-            setTimeout(() => {
-                button.classList.remove('loading');
-                button.classList.add('success');
-                button.textContent = 'Opened!';
-                
-                setTimeout(() => {
-                    button.classList.remove('success');
-                    button.textContent = originalText;
-                }, 2000);
-            }, 1500);
-            
-            switch(toolType) {
-                case 'citation':
-                    console.log('Opening Citation Generator...');
-                    break;
-                case 'plagiarism':
-                    console.log('Opening Plagiarism Checker...');
-                    break;
-                case 'grammar':
-                    console.log('Opening Grammar Assistant...');
-                    break;
-                case 'calculator':
-                    console.log('Opening GPA Calculator...');
-                    break;
+    });
+    
+    document.addEventListener('click', (e) => {
+        if (!navMenu.contains(e.target) && !hamburger.contains(e.target)) {
+            if (navMenu.classList.contains('active')) {
+                console.log('Click outside, closing menu');
+                hamburger.classList.remove('active');
+                navMenu.classList.remove('active');
+                document.body.classList.remove('menu-open');
+                hamburger.setAttribute('aria-expanded', 'false');
             }
         }
+    });
+    
+    window.addEventListener('resize', () => {
+        if (window.innerWidth > 768) {
+            if (navMenu.classList.contains('active')) {
+                console.log('Window resized to desktop, closing menu');
+                hamburger.classList.remove('active');
+                navMenu.classList.remove('active');
+                document.body.classList.remove('menu-open');
+                hamburger.setAttribute('aria-expanded', 'false');
+            }
+        }
+    });
+    
+    hamburger.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            hamburger.click();
+        }
+    });
+    
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && navMenu.classList.contains('active')) {
+            hamburger.classList.remove('active');
+            navMenu.classList.remove('active');
+            document.body.classList.remove('menu-open');
+            hamburger.setAttribute('aria-expanded', 'false');
+        }
+    });
+    
+    hamburger.setAttribute('aria-label', 'Toggle navigation menu');
+    hamburger.setAttribute('aria-controls', 'nav-menu');
+    hamburger.setAttribute('aria-expanded', 'false');
+    navMenu.setAttribute('aria-hidden', 'true');
+    
+    const observer = new MutationObserver(() => {
+        const isActive = navMenu.classList.contains('active');
+        navMenu.setAttribute('aria-hidden', !isActive);
+    });
+    
+    observer.observe(navMenu, { attributes: true, attributeFilter: ['class'] });
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+    console.log('Resources page - DOM loaded, initializing...');
+    
+    initializeMobileMenu();
+    
+    initializeTabs();
+    initializeTools();
+    initializeResources();
+    initializeDownloads();
+    initializeVideos();
+    initializeNewsletter();
+    initializeAnimations();
+    initializeScrollToTop();
+    
+    console.log('Resources page initialized successfully!');
+});
+
+function initializeTabs() {
+    const tabButtons = document.querySelectorAll('.tab-btn');
+    const categoryPanels = document.querySelectorAll('.category-panel');
+    
+    if (tabButtons.length === 0) {
+        console.log('No tab buttons found');
+        return;
+    }
+    
+    tabButtons.forEach(button => {
+        button.addEventListener('click', function() {
+            const targetCategory = this.getAttribute('data-category');
+            
+            tabButtons.forEach(btn => btn.classList.remove('active'));
+            categoryPanels.forEach(panel => panel.classList.remove('active'));
+            
+            this.classList.add('active');
+            document.getElementById(targetCategory).classList.add('active');
+            
+            const activePanel = document.getElementById(targetCategory);
+            activePanel.style.opacity = '0';
+            activePanel.style.transform = 'translateY(20px)';
+            
+            setTimeout(() => {
+                activePanel.style.opacity = '1';
+                activePanel.style.transform = 'translateY(0)';
+            }, 50);
+        });
+    });
+}
+
+function initializeTools() {
+    const toolCards = document.querySelectorAll('.tool-card');
+    
+    toolCards.forEach(card => {
+        card.addEventListener('click', function() {
+            const toolType = this.getAttribute('data-tool');
+            handleToolClick(toolType, this);
+        });
+    });
+    
+    function handleToolClick(toolType, card) {
+        const button = card.querySelector('.tool-btn');
+        if (!button) return;
         
-        const resourceButtons = document.querySelectorAll('.resource-btn');
-        resourceButtons.forEach(button => {
-            button.addEventListener('click', function() {
-                const originalText = this.textContent;
-                
-                this.classList.add('loading');
-                this.textContent = 'Loading...';
+        const originalText = button.textContent;
+        
+        button.classList.add('loading');
+        button.textContent = 'Loading...';
+        
+        setTimeout(() => {
+            button.classList.remove('loading');
+            button.classList.add('success');
+            button.textContent = 'Opened!';
+            
+            setTimeout(() => {
+                button.classList.remove('success');
+                button.textContent = originalText;
+            }, 2000);
+        }, 1500);
+        
+        switch(toolType) {
+            case 'citation':
+                console.log('Opening Citation Generator...');
+                break;
+            case 'plagiarism':
+                console.log('Opening Plagiarism Checker...');
+                break;
+            case 'grammar':
+                console.log('Opening Grammar Assistant...');
+                break;
+            case 'calculator':
+                console.log('Opening GPA Calculator...');
+                break;
+        }
+    }
+}
+
+function initializeResources() {
+    const resourceButtons = document.querySelectorAll('.resource-btn');
+    
+    resourceButtons.forEach(button => {
+        button.addEventListener('click', function() {
+            const originalText = this.textContent;
+            
+            this.classList.add('loading');
+            this.textContent = 'Loading...';
+            
+            setTimeout(() => {
+                this.classList.remove('loading');
+                this.classList.add('success');
+                this.textContent = 'Accessed!';
                 
                 setTimeout(() => {
-                    this.classList.remove('loading');
-                    this.classList.add('success');
-                    this.textContent = 'Accessed!';
-                    
-                    setTimeout(() => {
-                        this.classList.remove('success');
-                        this.textContent = originalText;
-                    }, 2000);
-                }, 1000);
-            });
+                    this.classList.remove('success');
+                    this.textContent = originalText;
+                }, 2000);
+            }, 1000);
         });
-        
-        const downloadButtons = document.querySelectorAll('.download-btn');
-        downloadButtons.forEach(button => {
-            button.addEventListener('click', function() {
-                const originalText = this.textContent;
-                
-                this.classList.add('loading');
-                this.textContent = 'Preparing...';
+    });
+}
+
+function initializeDownloads() {
+    const downloadButtons = document.querySelectorAll('.download-btn');
+    
+    downloadButtons.forEach(button => {
+        button.addEventListener('click', function() {
+            const originalText = this.textContent;
+            
+            this.classList.add('loading');
+            this.textContent = 'Preparing...';
+            
+            setTimeout(() => {
+                this.classList.remove('loading');
+                this.classList.add('success');
+                this.textContent = 'Downloaded!';
                 
                 setTimeout(() => {
-                    this.classList.remove('loading');
-                    this.classList.add('success');
-                    this.textContent = 'Downloaded!';
-                    
-                    setTimeout(() => {
-                        this.classList.remove('success');
-                        this.textContent = originalText;
-                    }, 3000);
-                }, 1500);
-            });
+                    this.classList.remove('success');
+                    this.textContent = originalText;
+                }, 3000);
+            }, 1500);
         });
-        
-        const videoCards = document.querySelectorAll('.video-card');
-        videoCards.forEach(card => {
-            card.addEventListener('click', function() {
-                const videoTitle = this.querySelector('h3').textContent;
-                console.log(`Playing video: ${videoTitle}`);
-                
-                const playButton = this.querySelector('.play-button');
+    });
+}
+
+function initializeVideos() {
+    const videoCards = document.querySelectorAll('.video-card');
+    
+    videoCards.forEach(card => {
+        card.addEventListener('click', function() {
+            const videoTitle = this.querySelector('h3').textContent;
+            console.log(`Playing video: ${videoTitle}`);
+            
+            const playButton = this.querySelector('.play-button');
+            if (playButton) {
                 playButton.style.transform = 'translate(-50%, -50%) scale(1.2)';
                 playButton.innerHTML = '<i class="fas fa-pause"></i>';
                 
@@ -681,163 +803,277 @@
                     playButton.style.transform = 'translate(-50%, -50%) scale(1)';
                     playButton.innerHTML = '<i class="fas fa-play"></i>';
                 }, 1000);
-            });
-        });
-        
-        const newsletterForm = document.getElementById('newsletter-form');
-        newsletterForm.addEventListener('submit', function(e) {
-            e.preventDefault();
-            
-            const email = this.querySelector('input[type="email"]').value;
-            const checkbox = this.querySelector('input[type="checkbox"]').checked;
-            const submitButton = this.querySelector('button[type="submit"]');
-            
-            if (!email || !checkbox) {
-                alert('Please fill in all fields and accept the terms.');
-                return;
             }
+        });
+    });
+}
+
+function initializeNewsletter() {
+    const newsletterForm = document.getElementById('newsletter-form');
+    
+    if (!newsletterForm) {
+        console.log('Newsletter form not found');
+        return;
+    }
+    
+    newsletterForm.addEventListener('submit', function(e) {
+        e.preventDefault();
+        
+        const email = this.querySelector('input[type="email"]').value;
+        const checkbox = this.querySelector('input[type="checkbox"]');
+        const submitButton = this.querySelector('button[type="submit"]');
+        
+        if (!email || !checkbox?.checked) {
+            alert('Please fill in all fields and accept the terms.');
+            return;
+        }
+        
+        submitButton.classList.add('loading');
+        submitButton.textContent = 'Subscribing...';
+        
+        setTimeout(() => {
+            submitButton.classList.remove('loading');
+            submitButton.classList.add('success');
+            submitButton.textContent = 'Subscribed!';
             
-            submitButton.classList.add('loading');
-            submitButton.textContent = 'Subscribing...';
+            this.querySelector('input[type="email"]').value = '';
+            checkbox.checked = false;
             
             setTimeout(() => {
-                submitButton.classList.remove('loading');
-                submitButton.classList.add('success');
-                submitButton.textContent = 'Subscribed!';
-                
-                this.querySelector('input[type="email"]').value = '';
-                this.querySelector('input[type="checkbox"]').checked = false;
-                
-                setTimeout(() => {
-                    submitButton.classList.remove('success');
-                    submitButton.textContent = 'Subscribe';
-                }, 3000);
-            }, 2000);
+                submitButton.classList.remove('success');
+                submitButton.textContent = 'Subscribe';
+            }, 3000);
+        }, 2000);
+    });
+}
+
+function initializeAnimations() {
+    const observerOptions = {
+        threshold: 0.1,
+        rootMargin: '0px 0px -50px 0px'
+    };
+    
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('fade-in');
+                observer.unobserve(entry.target);
+            }
         });
-        
-        const observerOptions = {
-            threshold: 0.1,
-            rootMargin: '0px 0px -50px 0px'
-        };
-        
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('fade-in');
-                    observer.unobserve(entry.target);
-                }
-            });
-        }, observerOptions);
-        
-        const animateElements = document.querySelectorAll('.tool-card, .resource-item, .download-card, .video-card');
-        animateElements.forEach(el => observer.observe(el));
-        
-        function animateCounters() {
-            const counters = document.querySelectorAll('.stat-number');
-            
-            counters.forEach(counter => {
-                const target = parseInt(counter.textContent.replace(/\D/g, ''));
-                const increment = target / 100;
-                let current = 0;
-                
-                const timer = setInterval(() => {
-                    current += increment;
-                    if (current >= target) {
-                        counter.textContent = counter.textContent.replace(/\d+/, target);
-                        clearInterval(timer);
-                    } else {
-                        const value = Math.floor(current);
-                        counter.textContent = counter.textContent.replace(/\d+/, value);
-                    }
-                }, 20);
-            });
-        }
-        
-        const heroObserver = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    animateCounters();
-                    heroObserver.unobserve(entry.target);
-                }
-            });
+    }, observerOptions);
+    
+    const animateElements = document.querySelectorAll('.tool-card, .resource-item, .download-card, .video-card');
+    animateElements.forEach(el => observer.observe(el));
+    
+    const heroObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                animateCounters();
+                heroObserver.unobserve(entry.target);
+            }
         });
+    });
+    
+    const heroSection = document.querySelector('.resources-hero');
+    if (heroSection) {
+        heroObserver.observe(heroSection);
+    }
+}
+
+function animateCounters() {
+    const counters = document.querySelectorAll('.stat-number');
+    
+    counters.forEach(counter => {
+        const originalText = counter.textContent;
+        const target = parseInt(counter.textContent.replace(/\D/g, ''));
+        const suffix = originalText.replace(target, '');
+        const increment = target / 100;
+        let current = 0;
         
-        const heroSection = document.querySelector('.resources-hero');
-        if (heroSection) {
-            heroObserver.observe(heroSection);
+        const timer = setInterval(() => {
+            current += increment;
+            if (current >= target) {
+                counter.textContent = target + suffix;
+                clearInterval(timer);
+            } else {
+                const value = Math.floor(current);
+                counter.textContent = value + suffix;
+            }
+        }, 20);
+    });
+}
+
+function initializeScrollToTop() {
+    if (document.querySelector('.scroll-to-top')) {
+        return;
+    }
+    
+    const scrollButton = document.createElement('button');
+    scrollButton.innerHTML = '<i class="fas fa-arrow-up"></i>';
+    scrollButton.className = 'scroll-to-top';
+    scrollButton.setAttribute('aria-label', 'Scroll to top');
+    scrollButton.style.cssText = `
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        width: 50px;
+        height: 50px;
+        background: #0057A0;
+        color: #FFFFFF;
+        border: none;
+        border-radius: 50%;
+        cursor: pointer;
+        display: none;
+        align-items: center;
+        justify-content: center;
+        z-index: 1000;
+        transition: all 0.3s ease;
+        box-shadow: 0 4px 15px rgba(0,87,160,0.3);
+    `;
+    
+    document.body.appendChild(scrollButton);
+    
+    window.addEventListener('scroll', () => {
+        if (window.pageYOffset > 300) {
+            scrollButton.style.display = 'flex';
+        } else {
+            scrollButton.style.display = 'none';
         }
+    });
+    
+    scrollButton.addEventListener('click', () => {
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+        });
+    });
+    
+    scrollButton.addEventListener('mouseenter', () => {
+        scrollButton.style.transform = 'scale(1.1)';
+        scrollButton.style.boxShadow = '0 6px 20px rgba(0,87,160,0.4)';
+    });
+    
+    scrollButton.addEventListener('mouseleave', () => {
+        scrollButton.style.transform = 'scale(1)';
+        scrollButton.style.boxShadow = '0 4px 15px rgba(0,87,160,0.3)';
+    });
+}
+
+document.addEventListener('keydown', function(e) {
+    if (e.key === 'Tab') {
+        document.body.classList.add('keyboard-navigation');
+    }
+});
+
+document.addEventListener('mousedown', function() {
+    document.body.classList.remove('keyboard-navigation');
+});
+function handleSearch(query) {
+    const searchableElements = document.querySelectorAll('.resource-item, .tool-card, .download-card');
+    
+    searchableElements.forEach(element => {
+        const text = element.textContent.toLowerCase();
+        const matches = text.includes(query.toLowerCase());
         
-        document.addEventListener('keydown', function(e) {
-            if (e.key === 'Tab') {
-                document.body.classList.add('keyboard-navigation');
+        if (matches || query === '') {
+            element.style.display = 'block';
+            element.classList.add('fade-in');
+        } else {
+            element.style.display = 'none';
+        }
+    });
+}
+
+function initializeNavigation() {
+    const navbar = document.getElementById('navbar');
+    const navLinks = document.querySelectorAll('.nav-link');
+    
+    if (!navbar) return;
+    window.addEventListener('scroll', () => {
+        if (window.scrollY > 100) {
+            navbar.classList.add('scrolled');
+        } else {
+            navbar.classList.remove('scrolled');
+        }
+    });
+    
+    navLinks.forEach(link => {
+        link.addEventListener('click', (e) => {
+            const href = link.getAttribute('href');
+            if (href.startsWith('#')) {
+                e.preventDefault();
+                const targetSection = document.querySelector(href);
+                if (targetSection) {
+                    const offsetTop = targetSection.offsetTop - 80;
+                    window.scrollTo({
+                        top: offsetTop,
+                        behavior: 'smooth'
+                    });
+                }
+            }
+        });
+    });
+}
+
+function initializeSearch() {
+    const searchBtn = document.getElementById('search-btn');
+    const searchDropdown = document.getElementById('search-dropdown');
+    const searchInput = document.getElementById('search-input');
+    const searchSubmit = document.getElementById('search-submit');
+    
+    if (!searchBtn || !searchDropdown || !searchInput) return;
+    
+    searchBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        searchDropdown.classList.toggle('active');
+        if (searchDropdown.classList.contains('active')) {
+            searchInput.focus();
+        }
+    });
+    
+    if (searchSubmit) {
+        searchSubmit.addEventListener('click', (e) => {
+            e.preventDefault();
+            const query = searchInput.value.trim();
+            if (query) {
+                handleSearch(query);
             }
         });
         
-        document.addEventListener('mousedown', function() {
-            document.body.classList.remove('keyboard-navigation');
+        searchInput.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') {
+                e.preventDefault();
+                const query = searchInput.value.trim();
+                if (query) {
+                    handleSearch(query);
+                }
+            }
         });
-        
-        function handleSearch(query) {
-            const searchableElements = document.querySelectorAll('.resource-item, .tool-card, .download-card');
-            
-            searchableElements.forEach(element => {
-                const text = element.textContent.toLowerCase();
-                const matches = text.includes(query.toLowerCase());
-                
-                if (matches || query === '') {
-                    element.style.display = 'block';
-                    element.classList.add('fade-in');
-                } else {
-                    element.style.display = 'none';
-                }
-            });
+    }
+    
+    document.addEventListener('click', (e) => {
+        if (!searchDropdown.contains(e.target) && !searchBtn.contains(e.target)) {
+            searchDropdown.classList.remove('active');
         }
-        
-        function addScrollToTop() {
-            const scrollButton = document.createElement('button');
-            scrollButton.innerHTML = '<i class="fas fa-arrow-up"></i>';
-            scrollButton.className = 'scroll-to-top';
-            scrollButton.style.cssText = `
-                position: fixed;
-                bottom: 20px;
-                right: 20px;
-                width: 50px;
-                height: 50px;
-                background: #0057A0;
-                color: #FFFFFF;
-                border: none;
-                border-radius: 50%;
-                cursor: pointer;
-                display: none;
-                z-index: 1000;
-                transition: all 0.3s ease;
-                box-shadow: 0 4px 15px rgba(0,87,160,0.3);
-            `;
-            
-            document.body.appendChild(scrollButton);
-            
-            window.addEventListener('scroll', () => {
-                if (window.pageYOffset > 300) {
-                    scrollButton.style.display = 'flex';
-                    scrollButton.style.alignItems = 'center';
-                    scrollButton.style.justifyContent = 'center';
-                } else {
-                    scrollButton.style.display = 'none';
-                }
-            });
-            
-            scrollButton.addEventListener('click', () => {
-                window.scrollTo({
-                    top: 0,
-                    behavior: 'smooth'
-                });
-            });
-        }
-        
-        addScrollToTop();
-        
-        console.log('Resources page initialized successfully!');
     });
-    </script>
+    
+    searchDropdown.addEventListener('click', (e) => {
+        e.stopPropagation();
+    });
+}
+
+function isValidEmail(email) {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(email);
+}
+
+window.ResourcesUtils = {
+    initializeMobileMenu,
+    initializeNavigation,
+    initializeSearch,
+    handleSearch,
+    isValidEmail
+};
+</script>
 </body>
 </html>
