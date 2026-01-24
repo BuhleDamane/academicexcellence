@@ -501,173 +501,442 @@
 <script src="navigation.js"></script>
     <script src="script.js"></script>
     <script>
-        function animateCounter(element, target, suffix = '') {
-            let current = 0;
-            const increment = target / 50;
-            const duration = 2000;
-            const stepTime = duration / 50;
-            const statCard = element.closest('.stat');
-            
-            statCard.classList.add('counting');
-            
-            const counter = setInterval(() => {
-                current += increment;
-                if (current >= target) {
-                    element.textContent = target + suffix;
-                    clearInterval(counter);
-                    statCard.classList.remove('counting');
-                } else {
-                    element.textContent = Math.floor(current) + suffix;
-                }
-            }, stepTime);
-        }
+// Hamburger Menu Functionality
+document.addEventListener('DOMContentLoaded', function() {
+    initializeMobileMenu();
+    
+    // Existing services page code
+    function animateCounter(element, target, suffix = '') {
+        let current = 0;
+        const increment = target / 50;
+        const duration = 2000;
+        const stepTime = duration / 50;
+        const statCard = element.closest('.stat');
+        
+        statCard.classList.add('counting');
+        
+        const counter = setInterval(() => {
+            current += increment;
+            if (current >= target) {
+                element.textContent = target + suffix;
+                clearInterval(counter);
+                statCard.classList.remove('counting');
+            } else {
+                element.textContent = Math.floor(current) + suffix;
+            }
+        }, stepTime);
+    }
 
-        const statsObserver = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting && !entry.target.classList.contains('animated')) {
-                    const target = parseInt(entry.target.dataset.target);
-                    const numberElement = entry.target.querySelector('.stat-number');
-                    
-                    if (entry.target.dataset.target === '24') {
-                        animateCounter(numberElement, target, '/7');
-                    } else if (entry.target.dataset.target === '95') {
-                        animateCounter(numberElement, target, '%');
-                    } else if (entry.target.dataset.target === '500') {
-                        animateCounter(numberElement, target, '+');
-                    }
-                    
-                    entry.target.classList.add('animated');
+    const statsObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting && !entry.target.classList.contains('animated')) {
+                const target = parseInt(entry.target.dataset.target);
+                const numberElement = entry.target.querySelector('.stat-number');
+                
+                if (entry.target.dataset.target === '24') {
+                    animateCounter(numberElement, target, '/7');
+                } else if (entry.target.dataset.target === '95') {
+                    animateCounter(numberElement, target, '%');
+                } else if (entry.target.dataset.target === '500') {
+                    animateCounter(numberElement, target, '+');
                 }
-            });
-        }, { threshold: 0.5 });
-
-        document.querySelectorAll('.services-hero .stat').forEach(stat => {
-            statsObserver.observe(stat);
+                
+                entry.target.classList.add('animated');
+            }
         });
+    }, { threshold: 0.5 });
 
-        let selectedServices = [];
-        let totalCost = 50; 
+    document.querySelectorAll('.services-hero .stat').forEach(stat => {
+        statsObserver.observe(stat);
+    });
 
-        document.querySelectorAll('.select-service-btn').forEach(btn => {
-            btn.addEventListener('click', function() {
-                const serviceName = this.dataset.service;
-                const basePrice = parseInt(this.dataset.basePrice);
-                const serviceCard = this.closest('.service-card');
-                const serviceTitle = serviceCard.querySelector('h3').textContent;
+    let selectedServices = [];
+    let totalCost = 50; 
 
-                if (this.classList.contains('selected')) {
-                    this.classList.remove('selected');
-                    this.textContent = 'Select Service';
-                    serviceCard.classList.remove('selected');
-                    selectedServices = selectedServices.filter(s => s.name !== serviceName);
-                } else {
-                    this.classList.add('selected');
-                    this.textContent = 'Selected ✓';
-                    serviceCard.classList.add('selected');
-                    selectedServices.push({
-                        name: serviceName,
-                        title: serviceTitle,
-                        basePrice: basePrice
-                    });
-                }
+    document.querySelectorAll('.select-service-btn').forEach(btn => {
+        btn.addEventListener('click', function() {
+            const serviceName = this.dataset.service;
+            const basePrice = parseInt(this.dataset.basePrice);
+            const serviceCard = this.closest('.service-card');
+            const serviceTitle = serviceCard.querySelector('h3').textContent;
 
-                updateSelectedServicesList();
-                calculateCost();
-            });
-        });
-
-        function updateSelectedServicesList() {
-            const listContainer = document.getElementById('selected-services-list');
-            
-            if (selectedServices.length === 0) {
-                listContainer.innerHTML = '<p class="no-services">No services selected yet. Choose from the services above.</p>';
-                return;
+            if (this.classList.contains('selected')) {
+                this.classList.remove('selected');
+                this.textContent = 'Select Service';
+                serviceCard.classList.remove('selected');
+                selectedServices = selectedServices.filter(s => s.name !== serviceName);
+            } else {
+                this.classList.add('selected');
+                this.textContent = 'Selected ✓';
+                serviceCard.classList.add('selected');
+                selectedServices.push({
+                    name: serviceName,
+                    title: serviceTitle,
+                    basePrice: basePrice
+                });
             }
 
-            let html = '';
-            selectedServices.forEach(service => {
-                html += `
-                    <div class="selected-service-item">
-                        <span class="service-name">${service.title}</span>
-                        <span class="service-price">R${service.basePrice}</span>
-                    </div>
-                `;
-            });
-            listContainer.innerHTML = html;
+            updateSelectedServicesList();
+            calculateCost();
+        });
+    });
+
+    function updateSelectedServicesList() {
+        const listContainer = document.getElementById('selected-services-list');
+        
+        if (selectedServices.length === 0) {
+            listContainer.innerHTML = '<p class="no-services">No services selected yet. Choose from the services above.</p>';
+            return;
         }
 
-        function calculateCost() {
-            const urgencyMultiplier = parseFloat(document.getElementById('urgency').value);
-            const complexityMultiplier = parseFloat(document.getElementById('complexity').value);
-            const wordCount = parseInt(document.getElementById('word-count').value) || 0;
+        let html = '';
+        selectedServices.forEach(service => {
+            html += `
+                <div class="selected-service-item">
+                    <span class="service-name">${service.title}</span>
+                    <span class="service-price">R${service.basePrice}</span>
+                </div>
+            `;
+        });
+        listContainer.innerHTML = html;
+    }
 
-            let servicesSubtotal = selectedServices.reduce((sum, service) => sum + service.basePrice, 0);
-            
-            const writingServices = ['assignment-skeleton', 'dissertation-skeleton', 'assignment-mapping'];
-            const hasWritingService = selectedServices.some(s => writingServices.includes(s.name));
-            if (hasWritingService && wordCount > 0) {
-                servicesSubtotal += wordCount * 0.5;
-            }
+    function calculateCost() {
+        const urgencyMultiplier = parseFloat(document.getElementById('urgency').value);
+        const complexityMultiplier = parseFloat(document.getElementById('complexity').value);
+        const wordCount = parseInt(document.getElementById('word-count').value) || 0;
 
-            const adjustments = servicesSubtotal * (urgencyMultiplier - 1) + servicesSubtotal * (complexityMultiplier - 1);
-            const adjustedServicesTotal = servicesSubtotal + adjustments;
-            const totalCost = 50 + adjustedServicesTotal; 
-            const depositAmount = totalCost * 0.3;
-
-            document.getElementById('consultation-fee').textContent = `R50.00`;
-            document.getElementById('services-subtotal').textContent = `R${servicesSubtotal.toFixed(2)}`;
-            document.getElementById('adjustments').textContent = `R${adjustments.toFixed(2)}`;
-            document.getElementById('total-cost').textContent = `R${totalCost.toFixed(2)}`;
-            document.getElementById('deposit-amount').textContent = `R${depositAmount.toFixed(2)}`;
+        let servicesSubtotal = selectedServices.reduce((sum, service) => sum + service.basePrice, 0);
+        
+        const writingServices = ['assignment-skeleton', 'dissertation-skeleton', 'assignment-mapping'];
+        const hasWritingService = selectedServices.some(s => writingServices.includes(s.name));
+        if (hasWritingService && wordCount > 0) {
+            servicesSubtotal += wordCount * 0.5;
         }
 
-        document.getElementById('calculate-cost').addEventListener('click', calculateCost);
+        const adjustments = servicesSubtotal * (urgencyMultiplier - 1) + servicesSubtotal * (complexityMultiplier - 1);
+        const adjustedServicesTotal = servicesSubtotal + adjustments;
+        const totalCost = 50 + adjustedServicesTotal; 
+        const depositAmount = totalCost * 0.3;
 
-        document.getElementById('urgency').addEventListener('change', calculateCost);
-        document.getElementById('complexity').addEventListener('change', calculateCost);
-        document.getElementById('word-count').addEventListener('input', calculateCost);
+        document.getElementById('consultation-fee').textContent = `R50.00`;
+        document.getElementById('services-subtotal').textContent = `R${servicesSubtotal.toFixed(2)}`;
+        document.getElementById('adjustments').textContent = `R${adjustments.toFixed(2)}`;
+        document.getElementById('total-cost').textContent = `R${totalCost.toFixed(2)}`;
+        document.getElementById('deposit-amount').textContent = `R${depositAmount.toFixed(2)}`;
+    }
 
-        document.getElementById('proceed-payment').addEventListener('click', function() {
-            if (selectedServices.length === 0) {
-                alert('Please select at least one service before proceeding.');
-                return;
+    document.getElementById('calculate-cost').addEventListener('click', calculateCost);
+
+    document.getElementById('urgency').addEventListener('change', calculateCost);
+    document.getElementById('complexity').addEventListener('change', calculateCost);
+    document.getElementById('word-count').addEventListener('input', calculateCost);
+
+    document.getElementById('proceed-payment').addEventListener('click', function() {
+        if (selectedServices.length === 0) {
+            alert('Please select at least one service before proceeding.');
+            return;
+        }
+        window.location.href = 'login.html';
+    });
+
+    document.getElementById('contact-discuss').addEventListener('click', function() {
+        window.location.href = '#contact';
+    });
+
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            e.preventDefault();
+            const target = document.querySelector(this.getAttribute('href'));
+            if (target) {
+                target.scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'start'
+                });
             }
-            window.location.href = 'login.html';
         });
+    });
 
-        document.getElementById('contact-discuss').addEventListener('click', function() {
-            window.location.href = '#contact';
+    const observerOptions = {
+        threshold: 0.1,
+        rootMargin: '0px 0px -50px 0px'
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('animate-in');
+            }
         });
+    }, observerOptions);
 
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
+    document.querySelectorAll('.service-card, .benefit-item, .testimonial-card').forEach(el => {
+        observer.observe(el);
+    });
+});
+
+// Hamburger Menu Implementation
+function initializeMobileMenu() {
+    const hamburger = document.getElementById('hamburger');
+    const navMenu = document.getElementById('nav-menu');
+    const navLinks = document.querySelectorAll('.nav-link');
+    
+    if (!hamburger || !navMenu) {
+        console.log('Mobile menu elements not found');
+        return;
+    }
+    
+    console.log('Mobile menu elements found:', hamburger, navMenu);
+    
+    // Toggle menu on hamburger click
+    hamburger.addEventListener('click', (e) => {
+        e.stopPropagation();
+        console.log('Hamburger clicked');
+        hamburger.classList.toggle('active');
+        navMenu.classList.toggle('active');
+        document.body.classList.toggle('menu-open');
+        
+        // Toggle aria-expanded for accessibility
+        const isExpanded = hamburger.classList.contains('active');
+        hamburger.setAttribute('aria-expanded', isExpanded);
+    });
+    
+    // Close menu when clicking on a nav link
+    navLinks.forEach(link => {
+        link.addEventListener('click', () => {
+            console.log('Nav link clicked, closing menu');
+            hamburger.classList.remove('active');
+            navMenu.classList.remove('active');
+            document.body.classList.remove('menu-open');
+            hamburger.setAttribute('aria-expanded', 'false');
+        });
+    });
+    
+    // Close menu when clicking outside
+    document.addEventListener('click', (e) => {
+        if (!navMenu.contains(e.target) && !hamburger.contains(e.target)) {
+            if (navMenu.classList.contains('active')) {
+                console.log('Click outside, closing menu');
+                hamburger.classList.remove('active');
+                navMenu.classList.remove('active');
+                document.body.classList.remove('menu-open');
+                hamburger.setAttribute('aria-expanded', 'false');
+            }
+        }
+    });
+    
+    // Close menu on window resize (for desktop)
+    window.addEventListener('resize', () => {
+        if (window.innerWidth > 768) {
+            if (navMenu.classList.contains('active')) {
+                console.log('Window resized to desktop, closing menu');
+                hamburger.classList.remove('active');
+                navMenu.classList.remove('active');
+                document.body.classList.remove('menu-open');
+                hamburger.setAttribute('aria-expanded', 'false');
+            }
+        }
+    });
+    
+    // Add keyboard navigation support
+    hamburger.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            hamburger.click();
+        }
+    });
+    
+    // Close menu with Escape key
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && navMenu.classList.contains('active')) {
+            hamburger.classList.remove('active');
+            navMenu.classList.remove('active');
+            document.body.classList.remove('menu-open');
+            hamburger.setAttribute('aria-expanded', 'false');
+        }
+    });
+    
+    // Initialize aria attributes
+    hamburger.setAttribute('aria-label', 'Toggle navigation menu');
+    hamburger.setAttribute('aria-controls', 'nav-menu');
+    hamburger.setAttribute('aria-expanded', 'false');
+    navMenu.setAttribute('aria-hidden', 'true');
+    
+    // Update aria attributes when menu opens/closes
+    const observer = new MutationObserver(() => {
+        const isActive = navMenu.classList.contains('active');
+        navMenu.setAttribute('aria-hidden', !isActive);
+    });
+    
+    observer.observe(navMenu, { attributes: true, attributeFilter: ['class'] });
+}
+
+// Optional: Add navigation scrolling functionality if needed
+function initializeNavigation() {
+    const navbar = document.getElementById('navbar');
+    const navLinks = document.querySelectorAll('.nav-link');
+    
+    if (!navbar) return;
+    
+    // Add scroll effect to navbar
+    window.addEventListener('scroll', () => {
+        if (window.scrollY > 100) {
+            navbar.classList.add('scrolled');
+        } else {
+            navbar.classList.remove('scrolled');
+        }
+    });
+    
+    // Smooth scrolling for anchor links
+    navLinks.forEach(link => {
+        link.addEventListener('click', (e) => {
+            const href = link.getAttribute('href');
+            if (href.startsWith('#')) {
                 e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    target.scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'start'
+                const targetSection = document.querySelector(href);
+                if (targetSection) {
+                    const offsetTop = targetSection.offsetTop - 80;
+                    window.scrollTo({
+                        top: offsetTop,
+                        behavior: 'smooth'
                     });
                 }
-            });
+            }
         });
+    });
+}
 
-        const observerOptions = {
-            threshold: 0.1,
-            rootMargin: '0px 0px -50px 0px'
-        };
-
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('animate-in');
+// Optional: Add search functionality if needed
+function initializeSearch() {
+    const searchBtn = document.getElementById('search-btn');
+    const searchDropdown = document.getElementById('search-dropdown');
+    const searchInput = document.getElementById('search-input');
+    const searchSubmit = document.getElementById('search-submit');
+    
+    if (!searchBtn || !searchDropdown || !searchInput) return;
+    
+    searchBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        searchDropdown.classList.toggle('active');
+        if (searchDropdown.classList.contains('active')) {
+            searchInput.focus();
+        }
+    });
+    
+    if (searchSubmit) {
+        searchSubmit.addEventListener('click', (e) => {
+            e.preventDefault();
+            const query = searchInput.value.trim();
+            if (query) {
+                handleSearch(query);
+            }
+        });
+        
+        searchInput.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') {
+                e.preventDefault();
+                const query = searchInput.value.trim();
+                if (query) {
+                    handleSearch(query);
                 }
-            });
-        }, observerOptions);
-
-        document.querySelectorAll('.service-card, .benefit-item, .testimonial-card').forEach(el => {
-            observer.observe(el);
+            }
         });
-    </script>
+    }
+    
+    document.addEventListener('click', (e) => {
+        if (!searchDropdown.contains(e.target) && !searchBtn.contains(e.target)) {
+            searchDropdown.classList.remove('active');
+        }
+    });
+    
+    searchDropdown.addEventListener('click', (e) => {
+        e.stopPropagation();
+    });
+}
+
+function handleSearch(query) {
+    if (query) {
+        console.log('Searching for:', query);
+        
+        const searchDropdown = document.getElementById('search-dropdown');
+        if (searchDropdown) {
+            searchDropdown.classList.remove('active');
+        }
+    }
+}
+
+// Utility function to validate email
+function isValidEmail(email) {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(email);
+}
+
+// Optional: Add scroll to top button
+function addScrollToTop() {
+    if (document.querySelector('.scroll-to-top')) {
+        return;
+    }
+    
+    const scrollButton = document.createElement('button');
+    scrollButton.innerHTML = '<i class="fas fa-arrow-up"></i>';
+    scrollButton.className = 'scroll-to-top';
+    scrollButton.setAttribute('aria-label', 'Scroll to top');
+    scrollButton.style.cssText = `
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        width: 50px;
+        height: 50px;
+        background: #0057A0;
+        color: #FFFFFF;
+        border: none;
+        border-radius: 50%;
+        cursor: pointer;
+        display: none;
+        align-items: center;
+        justify-content: center;
+        z-index: 1000;
+        transition: all 0.3s ease;
+        box-shadow: 0 4px 15px rgba(0,87,160,0.3);
+    `;
+    
+    document.body.appendChild(scrollButton);
+    
+    window.addEventListener('scroll', () => {
+        if (window.pageYOffset > 300) {
+            scrollButton.style.display = 'flex';
+        } else {
+            scrollButton.style.display = 'none';
+        }
+    });
+    
+    scrollButton.addEventListener('click', () => {
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+        });
+    });
+    
+    scrollButton.addEventListener('mouseenter', () => {
+        scrollButton.style.transform = 'scale(1.1)';
+        scrollButton.style.boxShadow = '0 6px 20px rgba(0,87,160,0.4)';
+    });
+    
+    scrollButton.addEventListener('mouseleave', () => {
+        scrollButton.style.transform = 'scale(1)';
+        scrollButton.style.boxShadow = '0 4px 15px rgba(0,87,160,0.3)';
+    });
+}
+
+// Make functions available globally if needed
+window.NavigationUtils = {
+    initializeMobileMenu,
+    initializeNavigation,
+    initializeSearch,
+    handleSearch,
+    isValidEmail,
+    addScrollToTop
+};
+</script>
 </body>
 </html>
