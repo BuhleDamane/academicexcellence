@@ -10,15 +10,24 @@ import {
     setDoc, 
     getDoc 
 } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+
+let isSigningUp = false;
+let authReady = false;
+
 onAuthStateChanged(auth, async (user) => {
-    if (user) {
-        const userDoc = await getDoc(doc(db, 'users', user.uid));
-        if (userDoc.exists()) {
-            const userData = userDoc.data();
-            if (userData.userType === 'admin') {
-                window.location.href = 'adminportal.html';
-            } else {
-                window.location.href = 'clientportal.html';
+    if (!authReady) {
+        authReady = true; 
+        if (user && !isSigningUp) {
+            try {
+                const userDoc = await getDoc(doc(db, 'users', user.uid));
+                if (userDoc.exists()) {
+                    const userData = userDoc.data();
+                    window.location.href = userData.userType === 'admin'
+                        ? 'adminportal.html'
+                        : 'clientportal.html';
+                }
+            } catch (err) {
+                console.error('Auth state error:', err);
             }
         }
     }
@@ -62,12 +71,12 @@ document.querySelectorAll('.toggle-password').forEach(btn => {
 loginFormElement.addEventListener('submit', async (e) => {
     e.preventDefault();
 
-    const email      = document.getElementById('loginEmail').value.trim();
-    const password   = document.getElementById('loginPassword').value;
-    const loginBtn   = document.getElementById('loginBtn');
-    const btnText    = loginBtn.querySelector('.btn-text');
-    const btnLoader  = loginBtn.querySelector('.btn-loader');
-    const errorDiv   = document.getElementById('loginError');
+    const email     = document.getElementById('loginEmail').value.trim();
+    const password  = document.getElementById('loginPassword').value;
+    const loginBtn  = document.getElementById('loginBtn');
+    const btnText   = loginBtn.querySelector('.btn-text');
+    const btnLoader = loginBtn.querySelector('.btn-loader');
+    const errorDiv  = document.getElementById('loginError');
 
     setLoading(loginBtn, btnText, btnLoader, true);
     errorDiv.classList.remove('show');
@@ -98,11 +107,11 @@ if (forgotPasswordLink) {
     forgotPasswordLink.addEventListener('click', async (e) => {
         e.preventDefault();
 
-        const email = document.getElementById('loginEmail').value.trim();
+        const email    = document.getElementById('loginEmail').value.trim();
         const errorDiv = document.getElementById('loginError');
 
         if (!email) {
-            errorDiv.textContent = 'Please enter your email address above, then click "Forgot password?".';
+            errorDiv.textContent = 'Enter your email address above first, then click "Forgot password?".';
             errorDiv.classList.add('show');
             document.getElementById('loginEmail').focus();
             return;
@@ -122,10 +131,8 @@ if (forgotPasswordLink) {
         try {
             await sendPasswordResetEmail(auth, email);
 
-            errorDiv.style.background = '#d4edda';
-            errorDiv.style.borderColor = '#c3e6cb';
-            errorDiv.style.color = '#155724';
-            errorDiv.textContent = `✅ Password reset email sent to ${email}. Check your inbox (and spam folder).`;
+            errorDiv.style.cssText = 'background:#d4edda;border-color:#c3e6cb;color:#155724;display:block;';
+            errorDiv.textContent = `✅ Reset email sent to ${email}. Check your inbox and spam folder.`;
             errorDiv.classList.add('show');
 
             setTimeout(() => {
@@ -134,18 +141,12 @@ if (forgotPasswordLink) {
             }, 6000);
 
         } catch (error) {
-            console.error('Password reset error:', error);
             errorDiv.removeAttribute('style');
-
-            if (error.code === 'auth/user-not-found') {
-                errorDiv.textContent = 'No account found with that email address.';
-            } else if (error.code === 'auth/invalid-email') {
-                errorDiv.textContent = 'Invalid email address format.';
-            } else if (error.code === 'auth/too-many-requests') {
-                errorDiv.textContent = 'Too many requests. Please wait a moment and try again.';
-            } else {
-                errorDiv.textContent = 'Failed to send reset email. Please try again.';
-            }
+            errorDiv.textContent = error.code === 'auth/user-not-found'
+                ? 'No account found with that email address.'
+                : error.code === 'auth/too-many-requests'
+                ? 'Too many requests. Please wait and try again.'
+                : 'Failed to send reset email. Please try again.';
             errorDiv.classList.add('show');
         } finally {
             forgotPasswordLink.innerHTML = originalText;
@@ -183,6 +184,7 @@ signupFormElement.addEventListener('submit', async (e) => {
         return;
     }
 
+    isSigningUp = true;
     setLoading(signupBtn, btnText, btnLoader, true);
 
     try {
@@ -203,29 +205,32 @@ signupFormElement.addEventListener('submit', async (e) => {
             notificationCount: 0
         });
 
-        successDiv.textContent = 'Account created successfully! Redirecting to sign in...';
+        successDiv.textContent = '✅ Account created! Please sign in with your new credentials.';
         successDiv.classList.add('show');
 
         setTimeout(() => {
+            isSigningUp = false;
             signupFormElement.reset();
             signupForm.classList.remove('active');
             loginForm.classList.add('active');
             successDiv.classList.remove('show');
             clearErrors();
+
+            document.getElementById('loginEmail').value = email;
         }, 2000);
 
     } catch (error) {
         console.error('Signup error:', error);
+        isSigningUp = false;
         errorDiv.textContent = friendlyAuthError(error);
         errorDiv.classList.add('show');
-    } finally {
         setLoading(signupBtn, btnText, btnLoader, false);
     }
 });
 
 function setLoading(btn, btnText, btnLoader, isLoading) {
-    btn.disabled          = isLoading;
-    btnText.style.display = isLoading ? 'none' : 'flex';
+    btn.disabled            = isLoading;
+    btnText.style.display   = isLoading ? 'none' : 'flex';
     btnLoader.style.display = isLoading ? 'flex' : 'none';
 }
 
