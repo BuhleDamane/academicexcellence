@@ -2,14 +2,14 @@ import { auth, db } from './firebase-config.js';
 import { 
     signInWithEmailAndPassword, 
     createUserWithEmailAndPassword,
-    onAuthStateChanged 
+    onAuthStateChanged,
+    sendPasswordResetEmail
 } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
 import { 
     doc, 
     setDoc, 
     getDoc 
 } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
-
 onAuthStateChanged(auth, async (user) => {
     if (user) {
         const userDoc = await getDoc(doc(db, 'users', user.uid));
@@ -24,12 +24,12 @@ onAuthStateChanged(auth, async (user) => {
     }
 });
 
-const loginFormElement = document.getElementById('loginFormElement');
+const loginFormElement  = document.getElementById('loginFormElement');
 const signupFormElement = document.getElementById('signupFormElement');
-const showSignupBtn = document.getElementById('showSignup');
-const showLoginBtn = document.getElementById('showLogin');
-const loginForm = document.getElementById('loginForm');
-const signupForm = document.getElementById('signupForm');
+const showSignupBtn     = document.getElementById('showSignup');
+const showLoginBtn      = document.getElementById('showLogin');
+const loginForm         = document.getElementById('loginForm');
+const signupForm        = document.getElementById('signupForm');
 
 showSignupBtn.addEventListener('click', (e) => {
     e.preventDefault();
@@ -46,100 +46,130 @@ showLoginBtn.addEventListener('click', (e) => {
 });
 
 document.querySelectorAll('.toggle-password').forEach(btn => {
-    btn.addEventListener('click', function() {
+    btn.addEventListener('click', function () {
         const input = this.parentElement.querySelector('input');
-        const icon = this.querySelector('i');
-        
+        const icon  = this.querySelector('i');
         if (input.type === 'password') {
             input.type = 'text';
-            icon.classList.remove('fa-eye');
-            icon.classList.add('fa-eye-slash');
+            icon.classList.replace('fa-eye', 'fa-eye-slash');
         } else {
             input.type = 'password';
-            icon.classList.remove('fa-eye-slash');
-            icon.classList.add('fa-eye');
+            icon.classList.replace('fa-eye-slash', 'fa-eye');
         }
     });
 });
 
 loginFormElement.addEventListener('submit', async (e) => {
     e.preventDefault();
-    
-    const email = document.getElementById('loginEmail').value.trim();
-    const password = document.getElementById('loginPassword').value;
-    const loginBtn = document.getElementById('loginBtn');
-    const btnText = loginBtn.querySelector('.btn-text');
-    const btnLoader = loginBtn.querySelector('.btn-loader');
-    const errorDiv = document.getElementById('loginError');
 
-    btnText.style.display = 'none';
-    btnLoader.style.display = 'flex';
-    loginBtn.disabled = true;
+    const email      = document.getElementById('loginEmail').value.trim();
+    const password   = document.getElementById('loginPassword').value;
+    const loginBtn   = document.getElementById('loginBtn');
+    const btnText    = loginBtn.querySelector('.btn-text');
+    const btnLoader  = loginBtn.querySelector('.btn-loader');
+    const errorDiv   = document.getElementById('loginError');
+
+    setLoading(loginBtn, btnText, btnLoader, true);
     errorDiv.classList.remove('show');
 
     try {
         const userCredential = await signInWithEmailAndPassword(auth, email, password);
-        const user = userCredential.user;
-        
-        const userDoc = await getDoc(doc(db, 'users', user.uid));
-        
+        const userDoc = await getDoc(doc(db, 'users', userCredential.user.uid));
+
         if (!userDoc.exists()) {
             throw new Error('User profile not found. Please contact support.');
         }
-        
+
         const userData = userDoc.data();
-        
-        if (userData.userType === 'admin') {
-            window.location.href = 'adminportal.html';
-        } else {
-            window.location.href = 'clientportal.html';
-        }
+        window.location.href = userData.userType === 'admin'
+            ? 'adminportal.html'
+            : 'clientportal.html';
 
     } catch (error) {
         console.error('Login error:', error);
-        let errorMessage = 'An error occurred. Please try again.';
-        
-        switch (error.code) {
-            case 'auth/user-not-found':
-            case 'auth/wrong-password':
-                errorMessage = 'Invalid email or password.';
-                break;
-            case 'auth/invalid-email':
-                errorMessage = 'Invalid email address format.';
-                break;
-            case 'auth/user-disabled':
-                errorMessage = 'This account has been disabled.';
-                break;
-            case 'auth/too-many-requests':
-                errorMessage = 'Too many failed attempts. Please try again later.';
-                break;
-            default:
-                errorMessage = error.message;
-        }
-        
-        errorDiv.textContent = errorMessage;
+        errorDiv.textContent = friendlyAuthError(error);
         errorDiv.classList.add('show');
-
-        btnText.style.display = 'flex';
-        btnLoader.style.display = 'none';
-        loginBtn.disabled = false;
+        setLoading(loginBtn, btnText, btnLoader, false);
     }
 });
 
+const forgotPasswordLink = document.querySelector('.forgot-password');
+if (forgotPasswordLink) {
+    forgotPasswordLink.addEventListener('click', async (e) => {
+        e.preventDefault();
+
+        const email = document.getElementById('loginEmail').value.trim();
+        const errorDiv = document.getElementById('loginError');
+
+        if (!email) {
+            errorDiv.textContent = 'Please enter your email address above, then click "Forgot password?".';
+            errorDiv.classList.add('show');
+            document.getElementById('loginEmail').focus();
+            return;
+        }
+
+        if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+            errorDiv.textContent = 'Please enter a valid email address.';
+            errorDiv.classList.add('show');
+            return;
+        }
+
+        const originalText = forgotPasswordLink.innerHTML;
+        forgotPasswordLink.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending...';
+        forgotPasswordLink.style.pointerEvents = 'none';
+        errorDiv.classList.remove('show');
+
+        try {
+            await sendPasswordResetEmail(auth, email);
+
+            errorDiv.style.background = '#d4edda';
+            errorDiv.style.borderColor = '#c3e6cb';
+            errorDiv.style.color = '#155724';
+            errorDiv.textContent = `✅ Password reset email sent to ${email}. Check your inbox (and spam folder).`;
+            errorDiv.classList.add('show');
+
+            setTimeout(() => {
+                errorDiv.classList.remove('show');
+                errorDiv.removeAttribute('style');
+            }, 6000);
+
+        } catch (error) {
+            console.error('Password reset error:', error);
+            errorDiv.removeAttribute('style');
+
+            if (error.code === 'auth/user-not-found') {
+                errorDiv.textContent = 'No account found with that email address.';
+            } else if (error.code === 'auth/invalid-email') {
+                errorDiv.textContent = 'Invalid email address format.';
+            } else if (error.code === 'auth/too-many-requests') {
+                errorDiv.textContent = 'Too many requests. Please wait a moment and try again.';
+            } else {
+                errorDiv.textContent = 'Failed to send reset email. Please try again.';
+            }
+            errorDiv.classList.add('show');
+        } finally {
+            forgotPasswordLink.innerHTML = originalText;
+            forgotPasswordLink.style.pointerEvents = '';
+        }
+    });
+}
 
 signupFormElement.addEventListener('submit', async (e) => {
     e.preventDefault();
-    
-    const name = document.getElementById('signupName').value.trim();
-    const email = document.getElementById('signupEmail').value.trim();
-    const phone = document.getElementById('signupPhone').value.trim();
-    const password = document.getElementById('signupPassword').value;
+
+    const name            = document.getElementById('signupName').value.trim();
+    const email           = document.getElementById('signupEmail').value.trim();
+    const phone           = document.getElementById('signupPhone').value.trim();
+    const password        = document.getElementById('signupPassword').value;
     const confirmPassword = document.getElementById('confirmPassword').value;
-    const signupBtn = document.getElementById('signupBtn');
-    const btnText = signupBtn.querySelector('.btn-text');
-    const btnLoader = signupBtn.querySelector('.btn-loader');
-    const errorDiv = document.getElementById('signupError');
-    const successDiv = document.getElementById('signupSuccess');
+    const signupBtn       = document.getElementById('signupBtn');
+    const btnText         = signupBtn.querySelector('.btn-text');
+    const btnLoader       = signupBtn.querySelector('.btn-loader');
+    const errorDiv        = document.getElementById('signupError');
+    const successDiv      = document.getElementById('signupSuccess');
+
+    errorDiv.classList.remove('show');
+    successDiv.classList.remove('show');
 
     if (password !== confirmPassword) {
         errorDiv.textContent = 'Passwords do not match!';
@@ -153,20 +183,16 @@ signupFormElement.addEventListener('submit', async (e) => {
         return;
     }
 
-    btnText.style.display = 'none';
-    btnLoader.style.display = 'flex';
-    signupBtn.disabled = true;
-    errorDiv.classList.remove('show');
-    successDiv.classList.remove('show');
+    setLoading(signupBtn, btnText, btnLoader, true);
 
     try {
         const userCredential = await createUserWithEmailAndPassword(auth, email, password);
         const user = userCredential.user;
-        
+
         await setDoc(doc(db, 'users', user.uid), {
-            name: name,
-            email: email,
-            phone: phone,
+            name,
+            email,
+            phone,
             userType: 'client',
             createdAt: new Date().toISOString(),
             activeProjects: [],
@@ -176,46 +202,59 @@ signupFormElement.addEventListener('submit', async (e) => {
             totalSpent: 0,
             notificationCount: 0
         });
-        
-        successDiv.textContent = 'Account created successfully! Redirecting to login...';
+
+        successDiv.textContent = 'Account created successfully! Redirecting to sign in...';
         successDiv.classList.add('show');
-        
+
         setTimeout(() => {
             signupFormElement.reset();
             signupForm.classList.remove('active');
             loginForm.classList.add('active');
             successDiv.classList.remove('show');
+            clearErrors();
         }, 2000);
 
     } catch (error) {
         console.error('Signup error:', error);
-        let errorMessage = 'An error occurred. Please try again.';
-        
-        switch (error.code) {
-            case 'auth/email-already-in-use':
-                errorMessage = 'This email is already registered.';
-                break;
-            case 'auth/invalid-email':
-                errorMessage = 'Invalid email address format.';
-                break;
-            case 'auth/weak-password':
-                errorMessage = 'Password is too weak. Please use a stronger password.';
-                break;
-            default:
-                errorMessage = error.message;
-        }
-        
-        errorDiv.textContent = errorMessage;
+        errorDiv.textContent = friendlyAuthError(error);
         errorDiv.classList.add('show');
     } finally {
-        btnText.style.display = 'flex';
-        btnLoader.style.display = 'none';
-        signupBtn.disabled = false;
+        setLoading(signupBtn, btnText, btnLoader, false);
     }
 });
+
+function setLoading(btn, btnText, btnLoader, isLoading) {
+    btn.disabled          = isLoading;
+    btnText.style.display = isLoading ? 'none' : 'flex';
+    btnLoader.style.display = isLoading ? 'flex' : 'none';
+}
+
+function friendlyAuthError(error) {
+    switch (error.code) {
+        case 'auth/user-not-found':
+        case 'auth/wrong-password':
+        case 'auth/invalid-credential':
+            return 'Invalid email or password.';
+        case 'auth/invalid-email':
+            return 'Invalid email address format.';
+        case 'auth/user-disabled':
+            return 'This account has been disabled. Please contact support.';
+        case 'auth/too-many-requests':
+            return 'Too many failed attempts. Please try again later.';
+        case 'auth/email-already-in-use':
+            return 'This email is already registered. Try signing in instead.';
+        case 'auth/weak-password':
+            return 'Password is too weak. Please use a stronger password.';
+        case 'auth/network-request-failed':
+            return 'Network error. Please check your connection and try again.';
+        default:
+            return error.message || 'An unexpected error occurred. Please try again.';
+    }
+}
 
 function clearErrors() {
     document.querySelectorAll('.error-message, .success-message').forEach(msg => {
         msg.classList.remove('show');
+        msg.removeAttribute('style');
     });
 }
