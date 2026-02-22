@@ -1,6 +1,3 @@
-# Firebase Private Configuration
-firebase-config.private.js
-
 # Environment Variables
 .env
 .env.local
