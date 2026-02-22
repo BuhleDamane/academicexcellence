@@ -3,7 +3,8 @@ import {
     signInWithEmailAndPassword, 
     createUserWithEmailAndPassword,
     onAuthStateChanged,
-    sendPasswordResetEmail
+    sendPasswordResetEmail,
+    sendEmailVerification
 } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
 import { 
     doc, 
@@ -12,12 +13,13 @@ import {
 } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
 
 let isSigningUp = false;
-let authReady = false;
+let authReady   = false;
 
 onAuthStateChanged(auth, async (user) => {
     if (!authReady) {
-        authReady = true; 
+        authReady = true;
         if (user && !isSigningUp) {
+            if (!user.emailVerified) return;
             try {
                 const userDoc = await getDoc(doc(db, 'users', user.uid));
                 if (userDoc.exists()) {
@@ -83,8 +85,37 @@ loginFormElement.addEventListener('submit', async (e) => {
 
     try {
         const userCredential = await signInWithEmailAndPassword(auth, email, password);
-        const userDoc = await getDoc(doc(db, 'users', userCredential.user.uid));
+        const user = userCredential.user;
 
+        if (!user.emailVerified) {
+            await auth.signOut();
+
+            errorDiv.innerHTML = `
+                ✉️ Please verify your email before signing in.<br>
+                <small>Check your inbox for the verification link.</small><br><br>
+                <a href="#" id="resendVerification" style="color:#0057A0;font-weight:600;">
+                    Resend verification email
+                </a>
+            `;
+            errorDiv.classList.add('show');
+
+            document.getElementById('resendVerification').addEventListener('click', async (e) => {
+                e.preventDefault();
+                try {
+                    const tempCred = await signInWithEmailAndPassword(auth, email, password);
+                    await sendEmailVerification(tempCred.user);
+                    await auth.signOut();
+                    errorDiv.innerHTML = '✅ Verification email resent! Check your inbox and spam folder.';
+                } catch (err) {
+                    errorDiv.innerHTML = 'Could not resend email. Please try again shortly.';
+                }
+            });
+
+            setLoading(loginBtn, btnText, btnLoader, false);
+            return;
+        }
+
+        const userDoc = await getDoc(doc(db, 'users', user.uid));
         if (!userDoc.exists()) {
             throw new Error('User profile not found. Please contact support.');
         }
@@ -95,9 +126,11 @@ loginFormElement.addEventListener('submit', async (e) => {
             : 'clientportal.html';
 
     } catch (error) {
-        console.error('Login error:', error);
-        errorDiv.textContent = friendlyAuthError(error);
-        errorDiv.classList.add('show');
+        if (error.code) {
+            console.error('Login error:', error);
+            errorDiv.textContent = friendlyAuthError(error);
+            errorDiv.classList.add('show');
+        }
         setLoading(loginBtn, btnText, btnLoader, false);
     }
 });
@@ -130,16 +163,13 @@ if (forgotPasswordLink) {
 
         try {
             await sendPasswordResetEmail(auth, email);
-
             errorDiv.style.cssText = 'background:#d4edda;border-color:#c3e6cb;color:#155724;display:block;';
             errorDiv.textContent = `✅ Reset email sent to ${email}. Check your inbox and spam folder.`;
             errorDiv.classList.add('show');
-
             setTimeout(() => {
                 errorDiv.classList.remove('show');
                 errorDiv.removeAttribute('style');
             }, 6000);
-
         } catch (error) {
             errorDiv.removeAttribute('style');
             errorDiv.textContent = error.code === 'auth/user-not-found'
@@ -191,12 +221,15 @@ signupFormElement.addEventListener('submit', async (e) => {
         const userCredential = await createUserWithEmailAndPassword(auth, email, password);
         const user = userCredential.user;
 
+        await sendEmailVerification(user);
+
         await setDoc(doc(db, 'users', user.uid), {
             name,
             email,
             phone,
             userType: 'client',
             createdAt: new Date().toISOString(),
+            emailVerified: false,
             activeProjects: [],
             completedProjects: [],
             balance: 0,
@@ -205,7 +238,12 @@ signupFormElement.addEventListener('submit', async (e) => {
             notificationCount: 0
         });
 
-        successDiv.textContent = '✅ Account created! Please sign in with your new credentials.';
+        await auth.signOut();
+
+        successDiv.innerHTML = `
+            ✅ Account created! We've sent a verification email to <strong>${email}</strong>.<br><br>
+            Please check your inbox (and spam folder) and click the verification link before signing in.
+        `;
         successDiv.classList.add('show');
 
         setTimeout(() => {
@@ -215,9 +253,8 @@ signupFormElement.addEventListener('submit', async (e) => {
             loginForm.classList.add('active');
             successDiv.classList.remove('show');
             clearErrors();
-
             document.getElementById('loginEmail').value = email;
-        }, 2000);
+        }, 4000);
 
     } catch (error) {
         console.error('Signup error:', error);
