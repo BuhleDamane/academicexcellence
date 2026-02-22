@@ -1,12 +1,6 @@
-/**
- * navigation.js
- * 
- * Handles Firebase auth state and updates the navbar Login button dynamically.
- * Does NOT touch the hamburger menu — each page handles its own hamburger logic.
- */
 
 (async function () {
-    // ── 1. Import Firebase ──────────────────────────────────────────────────
+   
     const { initializeApp, getApps } = await import(
         "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js"
     );
@@ -17,7 +11,6 @@
         "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js"
     );
 
-    // ── 2. Firebase config ──────────────────────────────────────────────────
     const firebaseConfig = {
         apiKey: "AIzaSyB49ShVVKQmef4w68JLa9p0_KZVMMEzEYg",
         authDomain: "academic-excellence-hub.firebaseapp.com",
@@ -27,31 +20,25 @@
         appId: "1:967792268188:web:7dfd9f4ab5757205ae2e59"
     };
 
-    // Reuse existing Firebase app instance if already initialized
     const app = getApps().length ? getApps()[0] : initializeApp(firebaseConfig);
     const auth = getAuth(app);
     const db   = getFirestore(app);
 
-    // ── 3. Wait for DOM to be ready ─────────────────────────────────────────
     await domReady();
 
-    // ── 4. Watch auth state and update nav ──────────────────────────────────
     onAuthStateChanged(auth, async (user) => {
         if (user) {
             let userData = { name: user.email, userType: 'client' };
             try {
                 const snap = await getDoc(doc(db, 'users', user.uid));
                 if (snap.exists()) userData = snap.data();
-            } catch (_) { /* silent fail — nav still updates */ }
+            } catch (_) { }
 
             updateNavForLoggedInUser(auth, user, userData);
         } else {
             updateNavForGuest();
         }
     });
-
-    // ── Helpers ─────────────────────────────────────────────────────────────
-
     function domReady() {
         return new Promise(resolve => {
             if (document.readyState !== 'loading') resolve();
@@ -63,7 +50,6 @@
         const navActions = document.querySelector('.nav-actions');
         if (!navActions) return;
 
-        // Remove existing login btn or user menu
         const existing = navActions.querySelector('.login-btn, .user-menu');
         if (existing) existing.remove();
 
@@ -96,8 +82,6 @@
 
         injectUserMenuStyles();
         navActions.appendChild(menu);
-
-        // Toggle dropdown open/close
         const toggle = menu.querySelector('.user-menu-toggle');
         toggle.addEventListener('click', (e) => {
             e.stopPropagation();
@@ -105,7 +89,6 @@
             toggle.setAttribute('aria-expanded', isOpen);
         });
 
-        // Close dropdown when clicking anywhere outside it
         document.addEventListener('click', (e) => {
             if (!menu.contains(e.target)) {
                 menu.classList.remove('open');
@@ -113,7 +96,6 @@
             }
         });
 
-        // Sign out
         menu.querySelector('#nav-logout-btn').addEventListener('click', async () => {
             try {
                 await signOut(auth);
@@ -128,10 +110,8 @@
         const navActions = document.querySelector('.nav-actions');
         if (!navActions) return;
 
-        // Already showing login button — nothing to do
         if (navActions.querySelector('.login-btn')) return;
 
-        // Remove user menu if present
         const userMenu = navActions.querySelector('.user-menu');
         if (userMenu) userMenu.remove();
 
