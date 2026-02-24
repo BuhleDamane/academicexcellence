@@ -16,9 +16,9 @@ The platform features **dual portals** (Admin and Client) with **real-time messa
  | <img width="960" height="568" alt="founder" src="https://github.com/user-attachments/assets/3e63643d-6a31-4218-bda6-4687439d11c5" />
  |
 
-| Calculator System | Login |
+| login System | Login |
 |:---:|:---:|
-| ![Screenshot_24-2-2026_162140_dynamic-eclair-0ae219 netlify app](https://github.com/user-attachments/assets/b0adc122-0bf3-4ed9-83be-b90325f52c66)
+| 
  | <img width="960" height="568" alt="login" src="https://github.com/user-attachments/assets/b445e2f8-f9a3-4858-aa0e-6fdd616af08a" />
  |
 
