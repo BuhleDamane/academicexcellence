@@ -10,13 +10,17 @@ The platform features **dual portals** (Admin and Client) with **real-time messa
 
 ## 📸 Project Snapshots
 
-| Admin Dashboard | Client Portal |
+| Home Page | Founder |
 |:---:|:---:|
-| ![Admin Dashboard](link-to-admin-dashboard-screenshot) | ![Client Portal](link-to-client-portal-screenshot) |
+| <img width="960" height="568" alt="ae1" src="https://github.com/user-attachments/assets/d7925b1b-0030-4a32-b287-b967632813be" />
+ | <img width="960" height="568" alt="founder" src="https://github.com/user-attachments/assets/3e63643d-6a31-4218-bda6-4687439d11c5" />
+ |
 
-| Real-time Chat Interface | Project Progress Tracking |
+| Calculator System | Login |
 |:---:|:---:|
-| ![Chat Interface](link-to-chat-screenshot) | ![Project Tracking](link-to-project-tracking-screenshot) |
+| ![Screenshot_24-2-2026_162140_dynamic-eclair-0ae219 netlify app](https://github.com/user-attachments/assets/b0adc122-0bf3-4ed9-83be-b90325f52c66)
+ | <img width="960" height="568" alt="login" src="https://github.com/user-attachments/assets/b445e2f8-f9a3-4858-aa0e-6fdd616af08a" />
+ |
 
 ---
 
